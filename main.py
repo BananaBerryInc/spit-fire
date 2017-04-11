@@ -33,7 +33,6 @@ def display_text(text,color,size,xloc,yloc):
 screen.blit(TextSurf, TextRect)
 
 #Colours
-
 black = (0,0,0)
 white = (255,255,255)
 brown = (100,42,42)
