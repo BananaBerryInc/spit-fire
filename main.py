@@ -7,6 +7,9 @@ import subprocess
 
 #Settin' up the window!
 pygame.init()
+font = pygame.font.SysFont("monospace", 15)
+pygame.font.init()
+font = pygame.font.SysFont("monospace", 15)
 screen = pygame.display.set_mode((700, 450))
 done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
@@ -18,19 +21,9 @@ pygame.display.flip()
 clock = pygame.time.Clock()
 x = 30
 y = 30
-option1 = "Start the Race!"
-option2 = "Exit"
 
 
-# Text Functions 
-def text_objects(text,color, font):
-    textSurface = font.render(text, True, color)
-    return textSurface, textSurface.get_rect()
-def display_text(text,color,size,xloc,yloc):
-    largeText = pygame.font.Font('freesansbold.ttf',size)
-    TextSurf, TextRect = text_objects(text,color,largeText)
-    TextRect.topleft = (xloc,yloc)
-screen.blit(TextSurf, TextRect)
+
 
 #Colours
 black = (0,0,0)
@@ -84,10 +77,10 @@ while not done:
 		y = 430
         if y <= 1:
 		y = 2
-        display_text("Start the race!", white, 15, 300, 300)
-        display_text("Exit", white, 15, 30, 125)
+        label = font.render("Exit", 1, white)
         screen.fill((0, 0, 0))
         pygame.draw.rect(screen, blue, pygame.Rect(x, y, 60, 60))
+        screen.blit(label, (665, 350))
         pygame.display.flip()
         clock.tick(100)
 
