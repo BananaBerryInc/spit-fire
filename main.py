@@ -10,7 +10,7 @@ pygame.init()
 font = pygame.font.SysFont("monospace", 15)
 pygame.font.init()
 font = pygame.font.SysFont("monospace", 15)
-screen = pygame.display.set_mode((700, 450))
+screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
 pygame.display.flip()
@@ -65,22 +65,35 @@ while not done:
                         done = True
         #Mainloop...?
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_UP]: y -= 3
-        if pressed[pygame.K_DOWN]: y += 3
-        if pressed[pygame.K_LEFT]: x -= 3
-        if pressed[pygame.K_RIGHT]: x += 3
-        if x >=690:
-		x = 689
-        if x <= 10:
-		x = 11
-        if y >= 440:
-		y = 430
-        if y <= 1:
-		y = 2
+        if pressed[pygame.K_UP]:
+            y -= 3
+        if pressed[pygame.K_DOWN]:
+            y += 3
+        if pressed[pygame.K_LEFT]:
+            x -= 3
+        if pressed[pygame.K_RIGHT]:
+            x += 3
+        if pressed[pygame.K_SPACE]:
+            if x >= 1175:
+                if y >= 615:
+                    done = True 
+        if x >=1270:
+            x = 1268
+        if x <= -1:
+            x = 2
+        if y >= 710:
+            y = 708
+        if y <= -1:
+            y = 2
         label = font.render("Exit", 1, white)
+        labelstart = font.render("Start the Race!", 10, white)
         screen.fill((0, 0, 0))
+        pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
+        pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
+        pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 130, 70))
         pygame.draw.rect(screen, blue, pygame.Rect(x, y, 60, 60))
-        screen.blit(label, (665, 350))
+        screen.blit(label, (1185, 625))
+        screen.blit(labelstart, (10, 10))
         pygame.display.flip()
         clock.tick(100)
 
