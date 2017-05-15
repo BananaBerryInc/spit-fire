@@ -77,6 +77,9 @@ while not done:
             if x >= 1175:
                 if y >= 615:
                     done = True 
+            if x <= 163:
+                if y <= 87:
+                    print("do you GEdit the Conky Joke?")
         if x >=1270:
             x = 1268
         if x <= -1:
@@ -90,7 +93,7 @@ while not done:
         screen.fill((0, 0, 0))
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
-        pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 130, 70))
+        pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
         pygame.draw.rect(screen, blue, pygame.Rect(x, y, 60, 60))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
