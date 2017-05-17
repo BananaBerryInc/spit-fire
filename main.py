@@ -17,10 +17,12 @@ pygame.display.flip()
 
 
 
+
 #Variables
 clock = pygame.time.Clock()
 x = 30
 y = 30
+carimage = pygame.image.load("res/placeholder_arrow.png")
 
 
 
@@ -67,12 +69,16 @@ while not done:
         pressed = pygame.key.get_pressed()
         if pressed[pygame.K_UP]:
             y -= 3
+            carimage = pygame.image.load("res/placeholder_arrow.png")
         if pressed[pygame.K_DOWN]:
             y += 3
+            carimage = pygame.image.load("res/placeholder_arrow_down.png")
         if pressed[pygame.K_LEFT]:
             x -= 3
+            carimage = pygame.image.load("res/placeholder_arrow_left.png")
         if pressed[pygame.K_RIGHT]:
             x += 3
+            carimage = pygame.image.load("res/placeholder_arrow_right.png")
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
                 if y >= 615:
@@ -94,7 +100,7 @@ while not done:
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
-        pygame.draw.rect(screen, blue, pygame.Rect(x, y, 60, 60))
+        screen.blit(carimage, (x,y))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
         pygame.display.flip()
