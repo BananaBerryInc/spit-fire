@@ -74,15 +74,29 @@ while not done:
         if pressed[pygame.K_DOWN]:
             y += 3
             carimage = pygame.image.load("res/ford_gt.png")
-            carimage2 =pygame.transform.rotate(carimage, 180)
+            carimage2 = pygame.transform.rotate(carimage, 180)
         if pressed[pygame.K_LEFT]:
             x -= 3
+            pressed = pygame.key.get_pressed()
             carimage = pygame.image.load("res/ford_gt.png")
-            carimage2 =pygame.transform.rotate(carimage, 90)
+            carimage2 = pygame.transform.rotate(carimage, 90)
+            if pressed[pygame.K_UP]: 
+                carimage = pygame.image.load("res/ford_gt.png")
+                carimage2 = pygame.transform.rotate(carimage, 45)
+            if pressed[pygame.K_DOWN]: 
+                carimage = pygame.image.load("res/ford_gt.png")
+                carimage2 = pygame.transform.rotate(carimage, 135)
         if pressed[pygame.K_RIGHT]:
             x += 3
+            pressed = pygame.key.get_pressed()
             carimage = pygame.image.load("res/ford_gt.png")
             carimage2 =pygame.transform.rotate(carimage, 270)
+            if pressed[pygame.K_UP]: 
+                carimage = pygame.image.load("res/ford_gt.png")
+                carimage2 = pygame.transform.rotate(carimage, 315)
+            if pressed[pygame.K_DOWN]: 
+                carimage = pygame.image.load("res/ford_gt.png")
+                carimage2 = pygame.transform.rotate(carimage, 225)
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
                 if y >= 615:
