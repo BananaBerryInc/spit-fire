@@ -24,7 +24,8 @@ x = 30
 y = 30
 carimage = pygame.image.load("res/ford_gt.png")
 carimage2 = pygame.image.load("res/ford_gt.png")
-
+currentcar = "ford_gt"
+cartext = "Car: "
 
 
 #Colours
@@ -59,6 +60,8 @@ darklightmagenta = (255,0,192)
 pink = (255,0,128)
 lightred = (255,0,64)
 
+label = font.render("Exit", 1, white)
+labelstart = font.render("Start the Race!", 10, white)
 
 #Exit Control
 while not done:
@@ -97,6 +100,13 @@ while not done:
             if pressed[pygame.K_DOWN]: 
                 carimage = pygame.image.load("res/ford_gt.png")
                 carimage2 = pygame.transform.rotate(carimage, 225)
+        if pressed[pygame.K_C]: 
+            if currentcar == "test_car":
+                currentcar = "ford_gt"
+                change = 1
+            if currentcar == "ford_gt":
+                if change == 0:
+                    currentcar = "test_car"
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
                 if y >= 615:
@@ -112,8 +122,9 @@ while not done:
             y = 708
         if y <= -1:
             y = 2
-        label = font.render("Exit", 1, white)
-        labelstart = font.render("Start the Race!", 10, white)
+        change = 0 
+        carlabel = cartext + currentcar
+        carlabel = font.render(carlabel, 10, white)
         screen.fill((0, 0, 0))
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
@@ -121,6 +132,7 @@ while not done:
         screen.blit(carimage2, (x,y))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
+        screen.blit(carlabel, (100, 100))
         pygame.display.flip()
         clock.tick(100)
 
