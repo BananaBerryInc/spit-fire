@@ -15,9 +15,6 @@ done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
 pygame.display.flip()
 
-
-
-
 #Variables
 clock = pygame.time.Clock()
 x = 30
@@ -26,9 +23,12 @@ carimage = pygame.image.load("res/ford_gt.png")
 carimage2 = pygame.image.load("res/ford_gt.png")
 currentcar = "ford_gt"
 cartext = "Car: "
+track = 1
+trackname = "First_track"
+clockspeed = 100
 
 
-#Colours
+#Colours (Thanks to atmatm6 for the code in this section!)
 black = (0,0,0)
 white = (255,255,255)
 brown = (100,42,42)
@@ -69,51 +69,55 @@ while not done:
                 if event.type == pygame.QUIT:
                         done = True
         #Mainloop...?
-        pressed = pygame.key.get_pressed()
+        #Key detection!
         if pressed[pygame.K_UP]:
             y -= 3
-            carimage = pygame.image.load("res/ford_gt.png")
             carimage2 = carimage
         if pressed[pygame.K_DOWN]:
             y += 3
-            carimage = pygame.image.load("res/ford_gt.png")
             carimage2 = pygame.transform.rotate(carimage, 180)
         if pressed[pygame.K_LEFT]:
             x -= 3
-            pressed = pygame.key.get_pressed()
-            carimage = pygame.image.load("res/ford_gt.png")
             carimage2 = pygame.transform.rotate(carimage, 90)
-            if pressed[pygame.K_UP]: 
-                carimage = pygame.image.load("res/ford_gt.png")
+            if pressed[pygame.K_UP]:
                 carimage2 = pygame.transform.rotate(carimage, 45)
-            if pressed[pygame.K_DOWN]: 
-                carimage = pygame.image.load("res/ford_gt.png")
+            if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 135)
         if pressed[pygame.K_RIGHT]:
             x += 3
-            pressed = pygame.key.get_pressed()
-            carimage = pygame.image.load("res/ford_gt.png")
-            carimage2 =pygame.transform.rotate(carimage, 270)
-            if pressed[pygame.K_UP]: 
-                carimage = pygame.image.load("res/ford_gt.png")
+            carimage2 = pygame.transform.rotate(carimage, 270)
+            if pressed[pygame.K_UP]:
                 carimage2 = pygame.transform.rotate(carimage, 315)
-            if pressed[pygame.K_DOWN]: 
-                carimage = pygame.image.load("res/ford_gt.png")
+            if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 225)
-        if pressed[pygame.K_C]: 
-            if currentcar == "test_car":
+        if pressed[pygame.K_C]:
+            if currentcar == "Ferrari_F40":
                 currentcar = "ford_gt"
+                carimage = pygame.image.load("res/ford_gt.png")
                 change = 1
             if currentcar == "ford_gt":
                 if change == 0:
-                    currentcar = "test_car"
+                    currentcar = "Ferrari_F40"
+                    carimage = pygame.image.load("res/Ferrari_F40.png")
+        if pressed[pygame.K_T]:
+            track = += 1
+            if track >= 2:
+                track = 1
+                trackname = "Test_track"
+            if track == 1:
+                trackname = "First_track"
+        if pressed[pygame.K_S]:
+            clockspeed = clockspeed + 50
+            if clockspeed >> 200:
+                clockspeed = 50
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
                 if y >= 615:
-                    done = True 
+                    done = True
             if x <= 163:
                 if y <= 87:
                     print("do you GEdit the Conky Joke?")
+        #Collision/OOB detection
         if x >=1270:
             x = 1268
         if x <= -1:
@@ -122,17 +126,24 @@ while not done:
             y = 708
         if y <= -1:
             y = 2
-        change = 0 
+        #Other Variables
+        change = 0
         carlabel = cartext + currentcar
-        carlabel = font.render(carlabel, 10, white)
-        screen.fill((0, 0, 0))
+        carlabel2 = font.render(carlabel, 10, white)
+        tracklabel = "Track " + str(track) + ": " + trackname
+        tracklabel2 = font.render(tracklabel, 10 ,white)
+        clockspeedlabel = clockspeed + " CC"
+        clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
+        #Drawing/rendering
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
+        screen.blit(tracklabel2, (200,200))
+        screen.blit(clockspeedlabel2, (300, 300))
         screen.blit(carimage2, (x,y))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
-        screen.blit(carlabel, (100, 100))
+        screen.blit(carlabel2, (100, 100))
+        #ANND, GO!
         pygame.display.flip()
-        clock.tick(100)
-
+        clock.tick(clockspeed)
