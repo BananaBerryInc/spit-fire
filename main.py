@@ -4,6 +4,7 @@ import sys
 import pygame
 import io
 import subprocess
+from ConfigParser import SafeConfigParser
 
 #Settin' up the window!
 pygame.init()
@@ -26,6 +27,7 @@ cartext = "Car: "
 track = 1
 trackname = "First_track"
 clockspeed = 100
+parser = SafeConfigParser()
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -99,8 +101,9 @@ while not done:
                 if change == 0:
                     currentcar = "Ferrari_F40"
                     carimage = pygame.image.load("res/Ferrari_F40.png")
+                    change = 1
         if pressed[pygame.K_T]:
-            track = += 1
+            track += 1
             if track >= 2:
                 track = 1
                 trackname = "Test_track"
