@@ -8,7 +8,6 @@ from ConfigParser import SafeConfigParser
 
 #Settin' up the window!
 pygame.init()
-font = pygame.font.SysFont("monospace", 15)
 pygame.font.init()
 font = pygame.font.SysFont("monospace", 15)
 screen = pygame.display.set_mode((1280, 720))
@@ -62,6 +61,8 @@ darklightmagenta = (255,0,192)
 pink = (255,0,128)
 lightred = (255,0,64)
 
+
+#Labels that don't change will go here
 label = font.render("Exit", 1, white)
 labelstart = font.render("Start the Race!", 10, white)
 
@@ -88,6 +89,7 @@ while not done:
                         done = True
         #Mainloop...?
         #Key detection!
+        pressed = pygame.key.get_pressed()
         if pressed[pygame.K_UP]:
             y -= 3
             carimage2 = carimage
@@ -108,24 +110,36 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 315)
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 225)
-        if pressed[pygame.K_C]:
+        if pressed[pygame.K_c]:
+            if currentcar == "Dodge_Challenger":
+                if change == 0:
+                    currentcar = "Koenigsegg_One"
+                    carimage = pygame.image.load("res/Koenigsegg_One.png")
+                    change = 1
             if currentcar == "Ferrari_F40":
-                currentcar = "ford_gt"
-                carimage = pygame.image.load("res/ford_gt.png")
-                change = 1
+                if change == 0:
+                    currentcar = "Dodge_Challenger"
+                    carimage = pygame.image.load("res/Dodge_Challenger.png")
+                    change = 1
             if currentcar == "ford_gt":
                 if change == 0:
                     currentcar = "Ferrari_F40"
                     carimage = pygame.image.load("res/Ferrari_F40.png")
                     change = 1
-        if pressed[pygame.K_T]:
+            if currentcar == "Koenigsegg_One":
+                if change == 0:
+                    currentcar = "ford_gt"
+                    carimage = pygame.image.load("res/ford_gt.png")
+                    change = 1
+        if pressed[pygame.K_t]:
             track += 1
-            if track >= 2:
+            if track >> 2:
                 track = 1
+            if track == 2:
                 trackname = "Test_track"
             if track == 1:
                 trackname = "First_track"
-        if pressed[pygame.K_S]:
+        if pressed[pygame.K_s]:
             clockspeed = clockspeed + 50
             if clockspeed >> 200:
                 clockspeed = 50
@@ -135,7 +149,7 @@ while not done:
                     done = True
             if x <= 163:
                 if y <= 87:
-                    print("do you GEdit the Conky Joke?")
+                    sendtomain()
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -151,7 +165,7 @@ while not done:
         carlabel2 = font.render(carlabel, 10, white)
         tracklabel = "Track " + str(track) + ": " + trackname
         tracklabel2 = font.render(tracklabel, 10 ,white)
-        clockspeedlabel = clockspeed + " CC"
+        clockspeedlabel = str(clockspeed) + " CC"
         clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
         #Drawing/rendering
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
