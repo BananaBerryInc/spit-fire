@@ -65,6 +65,22 @@ lightred = (255,0,64)
 label = font.render("Exit", 1, white)
 labelstart = font.render("Start the Race!", 10, white)
 
+#Passoff to the main python script
+def sendtomain():
+    global parser
+    global carimage
+    global currentcar
+    global track
+    global trackname
+    global clockspeed
+    parser.read("res/options.ini")
+    parser.set("Options", "track", track)
+    parser.set("Options", "car", currentcar)
+    parser.set("Options", "carimage", carimage)
+    parser.set("Options", "speed", clockspeed)
+    execfile("res/race.py")
+
+
 #Exit Control
 while not done:
         for event in pygame.event.get():
