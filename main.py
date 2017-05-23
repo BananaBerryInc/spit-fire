@@ -21,11 +21,13 @@ x = 30
 y = 30
 carimage = pygame.image.load("res/ford_gt.png")
 carimage2 = pygame.image.load("res/ford_gt.png")
+carimagepath = "res/ford_gt.png"
 currentcar = "ford_gt"
 cartext = "Car: "
 track = 1
 trackname = "First_track"
 clockspeed = 100
+change = 0
 parser = SafeConfigParser()
 
 
@@ -75,10 +77,12 @@ def sendtomain():
     global trackname
     global clockspeed
     parser.read("res/options.ini")
-    parser.set("Options", "track", track)
-    parser.set("Options", "car", currentcar)
-    parser.set("Options", "carimage", carimage)
-    parser.set("Options", "speed", clockspeed)
+    parser.set("options", "track", str(track))
+    parser.set("options", "car", currentcar)
+    parser.set("options", "carimage", carimagepath)
+    parser.set("options", "speed", str(clockspeed))
+    with open('res/options.ini', 'w') as configfile:
+        parser.write(configfile)
     execfile("res/race.py")
 
 
@@ -114,35 +118,43 @@ while not done:
             if currentcar == "Dodge_Challenger":
                 if change == 0:
                     currentcar = "Koenigsegg_One"
+                    carimagepath = "res/Koenigsegg_One.png"
                     carimage = pygame.image.load("res/Koenigsegg_One.png")
-                    change = 1
+                    change = 10
             if currentcar == "Ferrari_F40":
                 if change == 0:
                     currentcar = "Dodge_Challenger"
+                    carimagepath = "res/Dodge_Challenger.png"
                     carimage = pygame.image.load("res/Dodge_Challenger.png")
-                    change = 1
+                    change = 10
             if currentcar == "ford_gt":
                 if change == 0:
                     currentcar = "Ferrari_F40"
+                    carimagepath = "res/Ferrari_F40.png"
                     carimage = pygame.image.load("res/Ferrari_F40.png")
-                    change = 1
+                    change = 10
             if currentcar == "Koenigsegg_One":
                 if change == 0:
                     currentcar = "ford_gt"
+                    carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")
-                    change = 1
+                    change = 10
         if pressed[pygame.K_t]:
-            track += 1
-            if track >> 2:
-                track = 1
-            if track == 2:
-                trackname = "Test_track"
-            if track == 1:
-                trackname = "First_track"
+            if change == 0:
+                change = 10
+                track += 1
+                if track >> 2:
+                    track = 1
+                if track == 2:
+                    trackname = "Test_track"
+                if track == 1:
+                    trackname = "First_track"
         if pressed[pygame.K_s]:
-            clockspeed = clockspeed + 50
-            if clockspeed >> 200:
-                clockspeed = 50
+            if change == 0:
+                change = 10
+                clockspeed = clockspeed + 50
+                if clockspeed >> 200:
+                    clockspeed = 50
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
                 if y >= 615:
@@ -160,7 +172,8 @@ while not done:
         if y <= -1:
             y = 2
         #Other Variables
-        change = 0
+        if change >> 0:
+            change -= 1
         carlabel = cartext + currentcar
         carlabel2 = font.render(carlabel, 10, white)
         tracklabel = "Track " + str(track) + ": " + trackname
