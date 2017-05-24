@@ -4,7 +4,7 @@ import sys
 import pygame
 import io
 import subprocess
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 #Settin' up the window!
 pygame.init()
