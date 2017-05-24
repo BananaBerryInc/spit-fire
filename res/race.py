@@ -15,6 +15,19 @@ done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
 pygame.display.flip()
 
+#Re-collecting those settings!
+parser = SafeConfigParser()
+parser.read("settings.ini")
+carimagepath = parser.get("options", "carimage")
+trackstring = parser.get("options", "track")
+track = int(trackstring)
+car = parser.get("options", "car")
+clockspeedstring = parser.get("options", "speed")
+clockspeed = int(clockspeedstring)
+
+#Variables
+carimage = pygame.image.load(carimagepath)
+
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -56,3 +69,6 @@ while not done:
                 if event.type == pygame.QUIT:
                         done = True
         print("HI, this is racing!")
+        #ANND, GO!
+        pygame.display.flip()
+        clock.tick(clockspeed)

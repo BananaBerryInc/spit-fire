@@ -76,6 +76,7 @@ def sendtomain():
     global track
     global trackname
     global clockspeed
+    #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
     parser.set("options", "car", currentcar)
@@ -94,6 +95,7 @@ while not done:
         #Mainloop...?
         #Key detection!
         pressed = pygame.key.get_pressed()
+        #Movement
         if pressed[pygame.K_UP]:
             y -= 3
             carimage2 = carimage
@@ -114,6 +116,7 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 315)
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 225)
+        #Change Cars
         if pressed[pygame.K_c]:
             if currentcar == "Dodge_Challenger":
                 if change == 0:
@@ -139,6 +142,7 @@ while not done:
                     carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")
                     change = 10
+        #Change Tracks
         if pressed[pygame.K_t]:
             if change == 0:
                 change = 10
@@ -149,12 +153,14 @@ while not done:
                     trackname = "Test_track"
                 if track == 1:
                     trackname = "First_track"
+        #Change Speed
         if pressed[pygame.K_s]:
             if change == 0:
                 change = 10
                 clockspeed = clockspeed + 50
                 if clockspeed >> 200:
                     clockspeed = 50
+        #Selecting things
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
                 if y >= 615:
