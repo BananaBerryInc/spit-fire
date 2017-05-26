@@ -150,9 +150,11 @@ while not done:
                 if track >> 2:
                     track = 1
                 if track == 2:
-                    trackname = "Test_track"
+                    trackname = "PolarBear_Track"
+                    trackpath = ""
                 if track == 1:
                     trackname = "First_track"
+                    trackpath = ""
         #Change Speed
         if pressed[pygame.K_s]:
             if change == 0:

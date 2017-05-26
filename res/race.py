@@ -20,6 +20,8 @@ parser = SafeConfigParser()
 parser.read("settings.ini")
 carimagepath = parser.get("options", "carimage")
 trackstring = parser.get("options", "track")
+trackpath = parser.get("options", "trackpath")
+trackimage = pygame.image.load(trackpath)
 track = int(trackstring)
 car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
@@ -27,7 +29,9 @@ clockspeed = int(clockspeedstring)
 
 #Variables
 carimage = pygame.image.load(carimagepath)
-
+clock = pygame.time.Clock()
+x = 30
+y = 30
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -69,6 +73,18 @@ while not done:
                 if event.type == pygame.QUIT:
                         done = True
         print("HI, this is racing!")
+        #Collision/OOB detection
+        if x >=1270:
+            x = 1268
+        if x <= -1:
+            x = 2
+        if y >= 710:
+            y = 708
+        if y <= -1:
+            y = 2
+        #Drawing and rendering
+        screen.blit(trackimage(0,0))
+        screen.blit(carimage (x,y))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
