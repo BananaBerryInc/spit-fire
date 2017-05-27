@@ -81,6 +81,7 @@ carnos = parser.get(car, "nos")
 parser.read("res/tracks.ini")
 startx = parser.get(trackkey, "startlinex")
 starty = parser.get(trackkey, "startliney")
+mostnos = int(nos)
 nosleft = int(nos)
 cartopspeed = int(carspeed) / 32
 topspeed = int(carspeed) / 32
@@ -147,7 +148,8 @@ while not done:
             if topspeed >> cartopspeed:
                 topspeed -= 1.1
             if not nosinuse:
-                nos += 0.5
+                if nos << mostnos:
+                    nosleft += 0.2
         if not pressed[pygame.K_RIGHT]:
             if not pressed[pygame.K_LEFT]:
                 if not pressed[pygame.K_DOWN]:
