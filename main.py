@@ -4,7 +4,7 @@ import sys
 import pygame
 import io
 import subprocess
-from configparser import SafeConfigParser
+from ConfigParser import SafeConfigParser
 
 #Settin' up the window!
 pygame.init()
@@ -29,6 +29,8 @@ trackname = "First_track"
 clockspeed = 100
 change = 0
 parser = SafeConfigParser()
+parser.read("res/tracks.ini")
+
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -73,6 +75,8 @@ def sendtomain():
     global parser
     global carimage
     global currentcar
+    global tracktotal
+    global trackpath
     global track
     global trackname
     global clockspeed
@@ -80,11 +84,12 @@ def sendtomain():
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
     parser.set("options", "car", currentcar)
+    parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-    execfile("res/race.py")
+    execfile("race.py")
 
 
 #Exit Control
@@ -147,14 +152,25 @@ while not done:
             if change == 0:
                 change = 10
                 track += 1
-                if track >> 2:
+                tracktotalstr = parser.get("info", "tracktotal")
+                tracktotal = int(tracktotalstr)
+                if track >> tracktotal:
                     track = 1
                 if track == 2:
-                    trackname = "PolarBear_Track"
-                    trackpath = ""
+                    trackname = parser.get("track2", "trackname")
+                    trackpath = parser.get("track2", "trackpath")
                 if track == 1:
-                    trackname = "First_track"
-                    trackpath = ""
+                    trackname = parser.get("track1", "trackname")
+                    trackpath = parser.get("track1", "trackpath")
+                if track == 3:
+                    trackname = parser.get("track3", "trackname")
+                    trackpath = parser.get("track3", "trackpath")
+                if track == 4:
+                    trackname = parser.get("track4", "trackname")
+                    trackpath = parser.get("track4", "trackpath")
+                if track == 5:
+                    trackname = parser.get("track5", "trackname")
+                    trackpath = parser.get("track5", "trackpath")
         #Change Speed
         if pressed[pygame.K_s]:
             if change == 0:

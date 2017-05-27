@@ -17,7 +17,7 @@ pygame.display.flip()
 
 #Re-collecting those settings!
 parser = SafeConfigParser()
-parser.read("settings.ini")
+parser.read("res/options.ini")
 carimagepath = parser.get("options", "carimage")
 trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
@@ -26,6 +26,7 @@ track = int(trackstring)
 car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
 clockspeed = int(clockspeedstring)
+trackimage = pygame.image.load(trackpath)
 
 #Variables
 carimage = pygame.image.load(carimagepath)
@@ -66,12 +67,60 @@ darklightmagenta = (255,0,192)
 pink = (255,0,128)
 lightred = (255,0,64)
 
+#Get car stats from the ini file
+parser.read("res/carstats.ini")
+carspeed = parser.get(car, "speed")
+caraccel = parser.get(car, "accel")
+carbrake = parser.get(car, "brake")
+carhandling = parser.get(car, "handling")
+carbrake = parser.get(car, "brake")
+caraero = parser.get(car, "aero")
+carnos = parser.get(car, "nos")
+topspeed = int(carspeed) / 32
+accel = int(caraccel) / 200
+curspeed = 0
+x = 30
+y = 30
 
 #Exit Control
 while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         done = True
+        #Key Detection
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_UP]:
+            curspeed = curspeed + accel
+            if curspeed >> topspeed:
+                curspeed = topspeed
+            y -= curspeed
+            carimage2 = carimage
+        if pressed[pygame.K_DOWN]:
+            curspeed = curspeed + accel
+            if curspeed >> topspeed:
+                curspeed = topspeed
+            y += curspeed
+            carimage2 = pygame.transform.rotate(carimage, 180)
+        if pressed[pygame.K_LEFT]:
+            curspeed = curspeed + accel
+            if curspeed >> topspeed:
+                curspeed = topspeed
+            x -= curspeed
+            carimage2 = pygame.transform.rotate(carimage, 90)
+            if pressed[pygame.K_UP]:
+                carimage2 = pygame.transform.rotate(carimage, 45)
+            if pressed[pygame.K_DOWN]:
+                carimage2 = pygame.transform.rotate(carimage, 135)
+        if pressed[pygame.K_RIGHT]:
+            curspeed = curspeed + accel
+            if curspeed >> topspeed:
+                curspeed = topspeed
+            x += curspeed
+            carimage2 = pygame.transform.rotate(carimage, 270)
+            if pressed[pygame.K_UP]:
+                carimage2 = pygame.transform.rotate(carimage, 315)
+            if pressed[pygame.K_DOWN]:
+                carimage2 = pygame.transform.rotate(carimage, 225)
         print("HI, this is racing!")
         #Collision/OOB detection
         if x >=1270:
@@ -83,8 +132,8 @@ while not done:
         if y <= -1:
             y = 2
         #Drawing and rendering
-        screen.blit(trackimage(0,0))
-        screen.blit(carimage (x,y))
+        screen.blit(trackimage, (0,0))
+        screen.blit(carimage2,  (x,y))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
