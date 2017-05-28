@@ -35,6 +35,10 @@ clock = pygame.time.Clock()
 x = 30
 y = 30
 nosinuse = False
+lap = "Lap "
+lapcount = 0
+place = "Place "
+atstart = True
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -81,15 +85,27 @@ carnos = parser.get(car, "nos")
 parser.read("res/tracks.ini")
 startx = parser.get(trackkey, "startlinex")
 starty = parser.get(trackkey, "startliney")
+checkpointy = parser.get(trackkey, "checkpointy")
+checkpointx = parser.get(trackkey, "checkpointx")
+
+#More Variables!!!!
 mostnos = int(nos)
 nosleft = int(nos)
-cartopspeed = int(carspeed) / 32
-topspeed = int(carspeed) / 32
-accel = int(caraccel) / 200
-handling = int(carhandling) / 20
+aero = int(caraero)
+cartopspeed = int(carspeed) / 40 * aero
+topspeed = int(carspeed) / 40 * aero
+accel = int(caraccel) / 300 * aero
+handling = int(carhandling) / 30 * aero
 curspeed = 0
+startlinex = int(startx)
+startliney = int(starty)
+checky = int(checkpointy)
+checkx = int(checkpointx)
 x = startlinex
 y = startliney
+startneg80x = startlinex - 80
+start80x = startlinex + 80
+passstart = startliney + 10
 carimage2 = pygame.transform.rotate(carimage, 180)
 
 
@@ -100,7 +116,22 @@ while not done:
                         done = True
         #Key Detection
         pressed = pygame.key.get_pressed()
-        carimage2 = carimage
+        if atstart = True:
+            if y >> passstart:
+                atstart = False
+        if atstart = False:
+            if newlap = False:
+                if y >= startneg80x:
+                    if y <= start80x:
+                        if x >= startliney:
+                            lap += 1
+                            newlap = True
+            if newlap = True:
+                if y >= startneg10y:
+                    if y <= start10y:
+                        if x >= start10x:
+                            lap += 1
+                            newlap = False
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
             if curspeed >> topspeed:
@@ -154,7 +185,8 @@ while not done:
             if not pressed[pygame.K_LEFT]:
                 if not pressed[pygame.K_DOWN]:
                     if not pressed[pygame.K_UP]:
-                        curspeed = curspeed - 1
+                        if not pressed[pygame.K_SPACE]:
+                            curspeed = curspeed - 0.5
         #Collision/OOB detection
         if x >=1270:
             x = 1268
