@@ -9,7 +9,7 @@ from configparser import SafeConfigParser
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont("freesansbold.ttf", 15)
+font = pygame.font.SysFont("freesansbold.ttf", 30)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
@@ -168,7 +168,7 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 225)
         #Getting that nos working!!!
         if pressed[pygame.K_SPACE]:
-            if nosleft >= 10:
+            if nosleft >= 2:
                 nosleft -= 1
                 topspeed += 0.2
                 nosinuse = True
@@ -198,11 +198,12 @@ while not done:
         #Setting Up the label
         laplabel = lap + str(lapcount)
         font.render(laplabel, 10 ,black)
-        noslabel = "Nos Left: " + str(nosleft)
-        nosl = font.render(noslabel, 10, black)
+        nosleftround = round(nosleft, 1)
+        noslabel = "Nos Left: " + str(nosleftround)
+        nosl = font.render(noslabel, 30, black)
         #Drawing and rendering
-        screen.blit(nosl, (10, 10))
         screen.blit(trackimage, (0,0))
+        screen.blit(nosl, (10, 10))
         screen.blit(carimage2, (x,y))
         #ANND, GO!
         pygame.display.flip()
