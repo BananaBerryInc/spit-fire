@@ -40,6 +40,7 @@ lap = "Lap "
 lapcount = 0
 place = "Place "
 atstart = True
+newlap = True
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -92,9 +93,9 @@ checkpointx = parser.get(trackkey, "checkpointx")
 #More Variables!!!!
 mostnos = int(nos)
 nosleft = int(nos)
-aero = int(caraero)
-cartopspeed = int(carspeed) / 40 * aero
-topspeed = int(carspeed) / 40 * aero
+aero = int(caraero) / 10
+cartopspeed = int(carspeed) / 20 * aero
+topspeed = int(carspeed) / 20 * aero
 accel = int(caraccel) / 300 * aero
 handling = int(carhandling) / 30 * aero
 curspeed = 0
@@ -118,7 +119,7 @@ while not done:
         #Key Detection
         pressed = pygame.key.get_pressed()
         if atstart == True:
-            if y >> passstart:
+            if y >= passstart:
                 atstart = False
         if atstart == False:
             if newlap == False:
@@ -128,27 +129,24 @@ while not done:
                             lapcount += 1
                             newlap = True
             if newlap == True:
-                if y >= startneg10y:
-                    if y <= start10y:
-                        if x >= start10x:
-                            newlap = False
+                print("hi")
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
-            if curspeed >> topspeed:
+            if curspeed >= topspeed:
                 curspeed = topspeed
             ynow = y
             y = ynow - curspeed
-            carimage2 = pygame.transform.rotate(carimage, 0)
+            carimage2 = carimage
         if pressed[pygame.K_DOWN]:
             curspeed = curspeed + accel
-            if curspeed >> topspeed:
+            if curspeed >= topspeed:
                 curspeed = topspeed
             ynow = y
             y = ynow + curspeed
             carimage2 = pygame.transform.rotate(carimage, 180)
         if pressed[pygame.K_LEFT]:
             curspeed = curspeed + accel
-            if curspeed >> topspeed:
+            if curspeed >= topspeed:
                 curspeed = topspeed
             xnow = x
             x = xnow - curspeed
@@ -159,7 +157,7 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 135)
         if pressed[pygame.K_RIGHT]:
             curspeed = curspeed + accel
-            if curspeed >> topspeed:
+            if curspeed >= topspeed:
                 curspeed = topspeed
             xnow = x
             x = xnow + curspeed
@@ -172,21 +170,22 @@ while not done:
         if pressed[pygame.K_SPACE]:
             if nosleft >= 10:
                 nosleft -= 1
-                topspeed += 1.1
+                topspeed += 0.2
                 nosinuse = True
         if not pressed[pygame.K_SPACE]:
             nosinuse = False
-            if topspeed >> cartopspeed:
-                topspeed -= 1.1
+            if topspeed >= cartopspeed:
+                topspeed -= 0.1
             if not nosinuse:
-                if nos << mostnos:
-                    nosleft += 0.2
+                if nos <= mostnos:
+                    nosleft += 0.1
         if not pressed[pygame.K_RIGHT]:
             if not pressed[pygame.K_LEFT]:
                 if not pressed[pygame.K_DOWN]:
                     if not pressed[pygame.K_UP]:
                         if not pressed[pygame.K_SPACE]:
-                            curspeed = curspeed - 0.5
+                            if curspeed >= 0.19:
+                                curspeed = curspeed - 0.1
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -198,8 +197,11 @@ while not done:
             y = 2
         #Setting Up the label
         laplabel = lap + str(lapcount)
-        font.render(laplabel, 10 ,white)
+        font.render(laplabel, 10 ,black)
+        noslabel = "Nos Left: " + str(nosleft)
+        nosl = font.render(noslabel, 10, black)
         #Drawing and rendering
+        screen.blit(nosl, (10, 10))
         screen.blit(trackimage, (0,0))
         screen.blit(carimage2, (x,y))
         #ANND, GO!
