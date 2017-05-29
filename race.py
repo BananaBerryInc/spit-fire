@@ -9,7 +9,7 @@ from ConfigParser import SafeConfigParser
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont("monospace", 15)
+font = pygame.font.SysFont("freesansbold.ttf", 15)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
@@ -124,13 +124,12 @@ while not done:
                 if y >= startneg80x:
                     if y <= start80x:
                         if x >= startliney:
-                            lap += 1
+                            lapcount += 1
                             newlap = True
             if newlap = True:
                 if y >= startneg10y:
                     if y <= start10y:
                         if x >= start10x:
-                            lap += 1
                             newlap = False
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
@@ -196,6 +195,9 @@ while not done:
             y = 708
         if y <= -1:
             y = 2
+        #Setting Up the label
+        laplabel = lap + str(lapcount)
+        font.render(laplabel, 10 ,white)
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
         screen.blit(carimage2, (x,y))
