@@ -4,7 +4,7 @@ import sys
 import pygame
 import io
 import subprocess
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 #Settin' up the window!
 pygame.init()
@@ -89,7 +89,7 @@ def sendtomain():
     parser.set("options", "speed", str(clockspeed))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-    execfile("race.py")
+    exec(open("race.py").read())
 
 
 #Exit Control

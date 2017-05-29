@@ -4,7 +4,7 @@ import sys
 import pygame
 import io
 import subprocess
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 #Settin' up the window!
 pygame.init()
@@ -23,7 +23,7 @@ trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
 trackimage = pygame.image.load(trackpath)
 track = int(trackstring)
-trackkey = "track" + track
+trackkey = "track" + str(track)
 car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
 clockspeed = int(clockspeedstring)
@@ -34,6 +34,7 @@ carimage = pygame.image.load(carimagepath)
 clock = pygame.time.Clock()
 x = 30
 y = 30
+nos = 0
 nosinuse = False
 lap = "Lap "
 lapcount = 0
@@ -116,17 +117,17 @@ while not done:
                         done = True
         #Key Detection
         pressed = pygame.key.get_pressed()
-        if atstart = True:
+        if atstart == True:
             if y >> passstart:
                 atstart = False
-        if atstart = False:
-            if newlap = False:
+        if atstart == False:
+            if newlap == False:
                 if y >= startneg80x:
                     if y <= start80x:
                         if x >= startliney:
                             lapcount += 1
                             newlap = True
-            if newlap = True:
+            if newlap == True:
                 if y >= startneg10y:
                     if y <= start10y:
                         if x >= start10x:
