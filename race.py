@@ -104,8 +104,8 @@ startlinex = int(startx)
 startliney = int(starty)
 checky = int(checkpointy)
 checkx = int(checkpointx)
-x = startlinex
-y = startliney
+x = startliney
+y = startlinex
 startneg80x = startlinex - 80
 start80x = startlinex + 80
 passstart = startliney + 10
@@ -131,7 +131,7 @@ while not done:
                             newlap = True
         if newlap == True:
             laptime += 1
-            if laptime >= 90:
+            if laptime >= 150:
                 newlap = False
                 laptime = 0
         if pressed[pygame.K_UP]:
