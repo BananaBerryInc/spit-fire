@@ -36,11 +36,12 @@ x = 30
 y = 30
 nos = 0
 nosinuse = False
-lap = "Lap "
+lap = "Lap: "
 lapcount = 0
-place = "Place "
+place = "Place: "
 atstart = True
-newlap = True
+newlap = False
+laptime = 0
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -91,8 +92,8 @@ checkpointy = parser.get(trackkey, "checkpointy")
 checkpointx = parser.get(trackkey, "checkpointx")
 
 #More Variables!!!!
-mostnos = int(nos)
-nosleft = int(nos)
+mostnos = int(carnos)
+nosleft = int(carnos)
 aero = int(caraero) / 10
 cartopspeed = int(carspeed) / 20 * aero
 topspeed = int(carspeed) / 20 * aero
@@ -125,11 +126,14 @@ while not done:
             if newlap == False:
                 if y >= startneg80x:
                     if y <= start80x:
-                        if x >= startliney:
+                        if x <= startliney:
                             lapcount += 1
                             newlap = True
-            if newlap == True:
-                print("hi")
+        if newlap == True:
+            laptime += 1
+            if laptime >= 90:
+                newlap = False
+                laptime = 0
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
             if curspeed >= topspeed:
@@ -168,16 +172,23 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 225)
         #Getting that nos working!!!
         if pressed[pygame.K_SPACE]:
-            if nosleft >= 2:
+            if nosleft >= 1:
                 nosleft -= 1
                 topspeed += 0.2
                 nosinuse = True
+            else:
+               nosinuse = False
+               if topspeed >= cartopspeed:
+                   topspeed -= 0.1
+               if not nosinuse:
+                   if nosleft <= mostnos:
+                       nosleft += 0.1
         if not pressed[pygame.K_SPACE]:
             nosinuse = False
             if topspeed >= cartopspeed:
                 topspeed -= 0.1
             if not nosinuse:
-                if nos <= mostnos:
+                if nosleft <= mostnos:
                     nosleft += 0.1
         if not pressed[pygame.K_RIGHT]:
             if not pressed[pygame.K_LEFT]:
@@ -197,13 +208,17 @@ while not done:
             y = 2
         #Setting Up the label
         laplabel = lap + str(lapcount)
-        font.render(laplabel, 10 ,black)
+        lapl = font.render(laplabel, 10 ,black)
         nosleftround = round(nosleft, 1)
         noslabel = "Nos Left: " + str(nosleftround)
         nosl = font.render(noslabel, 30, black)
+        currentlabel = "Speed: " + str(round(curspeed, 2))
+        curspeedl = font.render(currentlabel, 30, black)
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
         screen.blit(nosl, (10, 10))
+        screen.blit(lapl, (10, 40))
+        screen.blit(curspeedl, (10, 70))
         screen.blit(carimage2, (x,y))
         #ANND, GO!
         pygame.display.flip()

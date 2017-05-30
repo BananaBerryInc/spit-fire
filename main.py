@@ -9,7 +9,7 @@ from configparser import SafeConfigParser
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont("monospace", 15)
+font = pygame.font.SysFont("freesansbold.ttf", 30)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Pre-Alpha")
@@ -30,7 +30,8 @@ clockspeed = 100
 change = 0
 parser = SafeConfigParser()
 parser.read("res/tracks.ini")
-
+trackname = parser.get("track1", "trackname")
+trackpath = parser.get("track1", "trackpath")
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -176,8 +177,8 @@ while not done:
             if change == 0:
                 change = 10
                 clockspeed = clockspeed + 50
-                if clockspeed >> 200:
-                    clockspeed = 50
+        if clockspeed >> 200:
+            clockspeed = 50
         #Selecting things
         if pressed[pygame.K_SPACE]:
             if x >= 1175:
@@ -208,12 +209,12 @@ while not done:
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
-        screen.blit(tracklabel2, (200,200))
-        screen.blit(clockspeedlabel2, (300, 300))
+        screen.blit(tracklabel2, (300,300))
+        screen.blit(clockspeedlabel2, (500, 500))
         screen.blit(carimage2, (x,y))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
-        screen.blit(carlabel2, (100, 100))
+        screen.blit(carlabel2, (150, 150))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
