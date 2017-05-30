@@ -42,6 +42,11 @@ place = "Place: "
 atstart = True
 newlap = False
 laptime = 0
+Up = "Up"
+Down = "Down"
+Left = "Left"
+Right = "Right"
+lastdirection = Down
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -97,6 +102,7 @@ nosleft = int(carnos)
 aero = int(caraero) / 10
 cartopspeed = int(carspeed) / 20 * aero
 topspeed = int(carspeed) / 20 * aero
+braking = int(carbrake) / 500 / aero
 accel = int(caraccel) / 300 * aero
 handling = int(carhandling) / 30 * aero
 curspeed = 0
@@ -136,6 +142,7 @@ while not done:
                 laptime = 0
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
+            lastdirection = Up
             if curspeed >= topspeed:
                 curspeed = topspeed
             ynow = y
@@ -143,12 +150,14 @@ while not done:
             carimage2 = carimage
         if pressed[pygame.K_DOWN]:
             curspeed = curspeed + accel
+            lastdirection = Down
             if curspeed >= topspeed:
                 curspeed = topspeed
             ynow = y
             y = ynow + curspeed
             carimage2 = pygame.transform.rotate(carimage, 180)
         if pressed[pygame.K_LEFT]:
+            lastdirection = Left
             curspeed = curspeed + accel
             if curspeed >= topspeed:
                 curspeed = topspeed
@@ -160,6 +169,7 @@ while not done:
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 135)
         if pressed[pygame.K_RIGHT]:
+            lastdirection = Right
             curspeed = curspeed + accel
             if curspeed >= topspeed:
                 curspeed = topspeed
@@ -183,6 +193,12 @@ while not done:
                if not nosinuse:
                    if nosleft <= mostnos:
                        nosleft += 0.1
+        if pressed[pygame.K_b]:
+            curspeed = curspeed - braking
+            if curspeed >= 0.19:
+                curspeed = curspeed - 0.1
+            else:
+                curspeed = 0
         if not pressed[pygame.K_SPACE]:
             nosinuse = False
             if topspeed >= cartopspeed:
@@ -197,6 +213,20 @@ while not done:
                         if not pressed[pygame.K_SPACE]:
                             if curspeed >= 0.19:
                                 curspeed = curspeed - 0.1
+                            else:
+                                curspeed = 0
+                            if lastdirection == Up:
+                                ynow = y
+                                y = ynow - curspeed
+                            if lastdirection == Down:
+                                ynow = y
+                                y = ynow + curspeed
+                            if lastdirection == Left:
+                                xnow = x
+                                x = xnow - curspeed
+                            if lastdirection ==  Right:
+                                xnow = x
+                                x = xnow + curspeed
         #Collision/OOB detection
         if x >=1270:
             x = 1268
