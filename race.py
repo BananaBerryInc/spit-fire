@@ -42,10 +42,15 @@ place = "Place: "
 atstart = True
 newlap = False
 laptime = 0
+score = 0 
 Up = "Up"
 Down = "Down"
 Left = "Left"
 Right = "Right"
+LeftUp = "LeftUp"
+LeftDown = "LeftDown"
+RightUp = "RightUp"
+RightDown = "RightDown"
 lastdirection = Down
 
 
@@ -102,7 +107,7 @@ nosleft = int(carnos)
 aero = int(caraero) / 10
 cartopspeed = int(carspeed) / 20 * aero
 topspeed = int(carspeed) / 20 * aero
-braking = int(carbrake) / 500 / aero
+braking = int(carbrake) / 500 * aero
 accel = int(caraccel) / 300 * aero
 handling = int(carhandling) / 30 * aero
 curspeed = 0
@@ -110,6 +115,10 @@ startlinex = int(startx)
 startliney = int(starty)
 checky = int(checkpointy)
 checkx = int(checkpointx)
+checkplus40x = checkx + 40
+checkminus40x = checkx - 40
+checkplus40y = checkx + 40
+checkminus40y = checkx - 40
 x = startliney
 y = startlinex
 startneg80x = startlinex - 80
@@ -133,6 +142,7 @@ while not done:
                 if y >= startneg80x:
                     if y <= start80x:
                         if x <= startliney:
+                            score += 2000
                             lapcount += 1
                             newlap = True
         if newlap == True:
@@ -166,8 +176,10 @@ while not done:
             carimage2 = pygame.transform.rotate(carimage, 90)
             if pressed[pygame.K_UP]:
                 carimage2 = pygame.transform.rotate(carimage, 45)
+                lastdirection = LeftUp
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 135)
+                lastdirection = LeftDown
         if pressed[pygame.K_RIGHT]:
             lastdirection = Right
             curspeed = curspeed + accel
@@ -178,7 +190,9 @@ while not done:
             carimage2 = pygame.transform.rotate(carimage, 270)
             if pressed[pygame.K_UP]:
                 carimage2 = pygame.transform.rotate(carimage, 315)
+                lastdirection = RightUp
             if pressed[pygame.K_DOWN]:
+                lastdirection = RightDown
                 carimage2 = pygame.transform.rotate(carimage, 225)
         #Getting that nos working!!!
         if pressed[pygame.K_SPACE]:
@@ -215,6 +229,26 @@ while not done:
                                 curspeed = curspeed - 0.1
                             else:
                                 curspeed = 0
+                            if lastdirection == LeftUp:
+                                ynow = y
+                                y = ynow - curspeed
+                                xnow = x
+                                x = xnow - curspeed
+                            if lastdirection == RightDown:
+                                ynow = y
+                                y = ynow + curspeed
+                                xnow = x
+                                x = xnow + curspeed
+                            if lastdirection == LeftDown:
+                                xnow = x
+                                x = xnow - curspeed
+                                ynow = y
+                                y = ynow + curspeed
+                            if lastdirection == RightUp:
+                                xnow = x
+                                x = xnow + curspeed
+                                ynow = y
+                                y = ynow - curspeed
                             if lastdirection == Up:
                                 ynow = y
                                 y = ynow - curspeed
@@ -236,16 +270,20 @@ while not done:
             y = 708
         if y <= -1:
             y = 2
+        score -= 1
         #Setting Up the label
         laplabel = lap + str(lapcount)
         lapl = font.render(laplabel, 10 ,black)
         nosleftround = round(nosleft, 1)
         noslabel = "Nos Left: " + str(nosleftround)
         nosl = font.render(noslabel, 30, black)
+        scorelabel = "Score: " + str(round(score, 1))
+        scorel = font.render(scorelabel, 30 , black)
         currentlabel = "Speed: " + str(round(curspeed, 2))
         curspeedl = font.render(currentlabel, 30, black)
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
+        screen.blit(scorel, (10, 100))
         screen.blit(nosl, (10, 10))
         screen.blit(lapl, (10, 40))
         screen.blit(curspeedl, (10, 70))
