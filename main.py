@@ -144,6 +144,42 @@ while not done:
                     change = 10
             if currentcar == "Koenigsegg_One":
                 if change == 0:
+                    currentcar = "Bugatti Vision GT Gran Turismo"
+                    carimagepath = "res/Bugatti Vision GT Gran Turismo.png"
+                    carimage = pygame.image.load("res/Bugatti Vision GT Gran Turismo.png")
+                    change = 10
+            if currentcar == "Bugatti Vision GT Gran Turismo":
+                if change == 0:
+                    currentcar = "Camaro ZL1 1LE"
+                    carimagepath = "res/Camaro ZL1 1LE.png"
+                    carimage = pygame.image.load("res/Camaro ZL1 1LE.png")
+                    change = 10
+            if currentcar == "Camaro ZL1 1LE":
+                if change == 0:
+                    currentcar = "Mclaren P1"
+                    carimagepath = "res/Mclaren P1.png"
+                    carimage = pygame.image.load("res/Mclaren P1.png")
+                    change = 10
+            if currentcar == "Mclaren P1":
+                if change == 0:
+                    currentcar = "Nissan 240SX"
+                    carimagepath = "res/Nissan 240SX.png"
+                    carimage = pygame.image.load("res/Nissan 240SX.png")
+                    change = 10
+            if currentcar == "Nissan 240SX":
+                if change == 0:
+                    currentcar = "Nissan GTR R35"
+                    carimagepath = "res/Nissan GTR R35.png"
+                    carimage = pygame.image.load("res/Nissan GTR R35.png")
+                    change = 10
+            if currentcar == "Nissan GTR R35":
+                if change == 0:
+                    currentcar = "Porsche 918"
+                    carimagepath = "res/Porsche 918.png"
+                    carimage = pygame.image.load("res/Porsche 918.png")
+                    change = 10
+            if currentcar == "Porsche 918":
+                if change == 0:
                     currentcar = "ford_gt"
                     carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")

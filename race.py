@@ -42,7 +42,7 @@ place = "Place: "
 atstart = True
 newlap = False
 laptime = 0
-score = 0 
+score = 0
 Up = "Up"
 Down = "Down"
 Left = "Left"
@@ -110,6 +110,7 @@ topspeed = int(carspeed) / 20 * aero
 braking = int(carbrake) / 500 * aero
 accel = int(caraccel) / 300 * aero
 handling = int(carhandling) / 30 * aero
+righthandling = 360 - handling
 curspeed = 0
 startlinex = int(startx)
 startliney = int(starty)
@@ -125,7 +126,7 @@ startneg80x = startlinex - 80
 start80x = startlinex + 80
 passstart = startliney + 10
 carimage2 = pygame.transform.rotate(carimage, 180)
-
+rotater = 0
 
 #Exit Control
 while not done:
@@ -155,45 +156,93 @@ while not done:
             lastdirection = Up
             if curspeed >= topspeed:
                 curspeed = topspeed
-            ynow = y
-            y = ynow - curspeed
-            carimage2 = carimage
+            #UP
+            if rotater >= 340:
+                ynow = y
+                y = ynow - curspeed
+            #Up
+            if rotater <= 30:
+                ynow = y
+                y = ynow - curspeed
+            #LeftUp
+            if rotater >= 30:
+                if rotater <= 70:
+                    xnow = x
+                    x = xnow - curspeed
+                    ynow = y
+                    y = ynow - curspeed
+            #Left
+            if rotater >= 70:
+                if rotater <= 110:
+                    xnow = x
+                    x = xnow - curspeed
+            #LeftDown
+            if rotater >= 110:
+                if rotater <= 140:
+                    xnow = x
+                    x = xnow - curspeed
+                    ynow = y
+                    y = ynow + curspeed
+            #Down
+            if rotater >= 140:
+                if rotater <= 210:
+                    ynow = y
+                    y = ynow + curspeed
+            #RightDown
+            if rotater >= 210:
+                if rotater <= 250:
+                    xnow = x
+                    x = xnow + curspeed
+            #Right
+            if rotater >= 250:
+                if rotater <= 300:
+                    ynow = y
+                    y = ynow + curspeed
+                    xnow = x
+                    x = xnow + curspeed
+            #RightUp
+            if rotater >= 300:
+                if rotater <= 340:
+                    ynow = y
+                    y = ynow - curspeed
+                    xnow = x
+                    x = xnow + curspeed
         if pressed[pygame.K_DOWN]:
             curspeed = curspeed + accel
             lastdirection = Down
             if curspeed >= topspeed:
                 curspeed = topspeed
-            ynow = y
-            y = ynow + curspeed
             carimage2 = pygame.transform.rotate(carimage, 180)
         if pressed[pygame.K_LEFT]:
             lastdirection = Left
             curspeed = curspeed + accel
             if curspeed >= topspeed:
                 curspeed = topspeed
-            xnow = x
-            x = xnow - curspeed
-            carimage2 = pygame.transform.rotate(carimage, 90)
+            rotater += handling
+            if rotater >= 360:
+                rotater = 0
+            if rotater <= 0:
+                rotater = 0
+            carimage2 = pygame.transform.rotate(carimage, rotater)
             if pressed[pygame.K_UP]:
-                carimage2 = pygame.transform.rotate(carimage, 45)
                 lastdirection = LeftUp
             if pressed[pygame.K_DOWN]:
-                carimage2 = pygame.transform.rotate(carimage, 135)
                 lastdirection = LeftDown
         if pressed[pygame.K_RIGHT]:
             lastdirection = Right
             curspeed = curspeed + accel
             if curspeed >= topspeed:
                 curspeed = topspeed
-            xnow = x
-            x = xnow + curspeed
-            carimage2 = pygame.transform.rotate(carimage, 270)
+            rotater -= handling
+            if rotater >= 360:
+                rotater = 0
+            if rotater <= 0:
+                rotater = 360
+            carimage2 = pygame.transform.rotate(carimage, rotater)
             if pressed[pygame.K_UP]:
-                carimage2 = pygame.transform.rotate(carimage, 315)
                 lastdirection = RightUp
             if pressed[pygame.K_DOWN]:
                 lastdirection = RightDown
-                carimage2 = pygame.transform.rotate(carimage, 225)
         #Getting that nos working!!!
         if pressed[pygame.K_SPACE]:
             if nosleft >= 1:
@@ -261,6 +310,7 @@ while not done:
                             if lastdirection ==  Right:
                                 xnow = x
                                 x = xnow + curspeed
+        #movement
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -288,6 +338,7 @@ while not done:
         screen.blit(lapl, (10, 40))
         screen.blit(curspeedl, (10, 70))
         screen.blit(carimage2, (x,y))
+        print(rotater)
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
