@@ -201,7 +201,11 @@ while not done:
                 if rotater <= 360:
                     xnow = x
                     rot2 = rotater - 270
-                    amount = rot2 / 90
+                    rot3 = -90 + rot2
+                    if rot3 <= 0:
+                        amount = 1
+                    if rot3 >= 0:
+                        amount = rot2 / -90
                     segspeed = amount * curspeed
                     x = xnow + segspeed
             if rotater >= 270:
@@ -213,19 +217,13 @@ while not done:
                     y = ynow - segspeed
             if rotater <= 90:
                 ynow = y
-                rot2 = rotater - 0
+                rot2 = -90 + rotater
                 if rot2 <= 0:
-                    amount = 90
+                    amount = 1
                 if rot2 >= 0:
-                    amount = rotater / 90
+                    amount = rotater / -90
                 segspeed = amount * curspeed
                 y = ynow - segspeed
-        if pressed[pygame.K_DOWN]:
-            curspeed = curspeed + accel
-            lastdirection = Down
-            if curspeed >= topspeed:
-                curspeed = topspeed
-            carimage2 = pygame.transform.rotate(carimage, 180)
         if pressed[pygame.K_LEFT]:
             lastdirection = Left
             curspeed = curspeed + accel
@@ -269,12 +267,80 @@ while not done:
                if not nosinuse:
                    if nosleft <= mostnos:
                        nosleft += 0.1
-        if pressed[pygame.K_b]:
+        if pressed[pygame.K_DOWN]:
             curspeed = curspeed - braking
-            if curspeed >= 0.19:
+            if curspeed >= -1.6:
                 curspeed = curspeed - 0.1
             else:
-                curspeed = 0
+                curspeed = -1.5
+            segment =  0
+            segmentneg =  0
+            segspeed = 0
+            amount = 0
+            rot2 = 0
+            if rotater <= 90:
+                xnow = x
+                if rot2 <= 0:
+                    amount = 0
+                if rot2 >= 0:
+                    amount = rotater / 90
+                segspeed = amount * curspeed
+                x = xnow - segspeed
+            if rotater >= 90:
+                if rotater <= 180:
+                    xnow = x
+                    rot2 = 180 - rotater
+                    amount = rot2 / 90
+                    segspeed = amount * curspeed
+                    x = xnow - segspeed
+            if rotater >= 90:
+                if rotater <= 180:
+                    ynow = y
+                    rot2 = rotater - 90
+                    amount = rot2 / 90
+                    segspeed = amount * curspeed
+                    y = ynow + segspeed
+            if rotater >= 180:
+                if rotater <= 270:
+                    ynow = y
+                    rot2 = 270 - rotater
+                    amount = rot2 / 90
+                    segspeed = amount * curspeed
+                    y = ynow + segspeed
+            if rotater >= 180:
+                if rotater <= 270:
+                    xnow = x
+                    rot2 = rotater - 180
+                    amount = rot2 / 90
+                    segspeed = amount * curspeed
+                    x = xnow + segspeed
+            if rotater >= 270:
+                if rotater <= 360:
+                    xnow = x
+                    rot2 = rotater - 270
+                    rot3 = -90 + rot2
+                    if rot3 <= 0:
+                        amount = 1
+                    if rot3 >= 0:
+                        amount = rot2 / -90
+                    segspeed = amount * curspeed
+                    x = xnow + segspeed
+            if rotater >= 270:
+                if rotater <= 360:
+                    ynow = y
+                    rot2 = rotater - 270
+                    amount = rot2 / 90
+                    segspeed = amount * curspeed
+                    y = ynow - segspeed
+            if rotater <= 90:
+                ynow = y
+                rot2 = -90 + rotater
+                if rot2 <= 0:
+                    amount = 1
+                if rot2 >= 0:
+                    amount = rotater / -90
+                segspeed = amount * curspeed
+                y = ynow - segspeed
         if not pressed[pygame.K_SPACE]:
             nosinuse = False
             if topspeed >= cartopspeed:
@@ -289,40 +355,74 @@ while not done:
                         if not pressed[pygame.K_SPACE]:
                             if curspeed >= 0.19:
                                 curspeed = curspeed - 0.1
-                            else:
-                                curspeed = 0
-                            if lastdirection == LeftUp:
-                                ynow = y
-                                y = ynow - curspeed
+                            segment =  0
+                            segmentneg =  0
+                            segspeed = 0
+                            amount = 0
+                            rot2 = 0
+                            if rotater <= 90:
                                 xnow = x
-                                x = xnow - curspeed
-                            if lastdirection == RightDown:
+                                if rot2 <= 0:
+                                    amount = 0
+                                if rot2 >= 0:
+                                    amount = rotater / 90
+                                segspeed = amount * curspeed
+                                x = xnow - segspeed
+                            if rotater >= 90:
+                                if rotater <= 180:
+                                    xnow = x
+                                    rot2 = 180 - rotater
+                                    amount = rot2 / 90
+                                    segspeed = amount * curspeed
+                                    x = xnow - segspeed
+                            if rotater >= 90:
+                                if rotater <= 180:
+                                    ynow = y
+                                    rot2 = rotater - 90
+                                    amount = rot2 / 90
+                                    segspeed = amount * curspeed
+                                    y = ynow + segspeed
+                            if rotater >= 180:
+                                if rotater <= 270:
+                                    ynow = y
+                                    rot2 = 270 - rotater
+                                    amount = rot2 / 90
+                                    segspeed = amount * curspeed
+                                    y = ynow + segspeed
+                            if rotater >= 180:
+                                if rotater <= 270:
+                                    xnow = x
+                                    rot2 = rotater - 180
+                                    amount = rot2 / 90
+                                    segspeed = amount * curspeed
+                                    x = xnow + segspeed
+                            if rotater >= 270:
+                                if rotater <= 360:
+                                    xnow = x
+                                    rot2 = rotater - 270
+                                    rot3 = -90 + rot2
+                                    if rot3 <= 0:
+                                        amount = 1
+                                    if rot3 >= 0:
+                                        amount = rot2 / -90
+                                    segspeed = amount * curspeed
+                                    x = xnow + segspeed
+                            if rotater >= 270:
+                                if rotater <= 360:
+                                    ynow = y
+                                    rot2 = rotater - 270
+                                    amount = rot2 / 90
+                                    segspeed = amount * curspeed
+                                    y = ynow - segspeed
+                            if rotater <= 90:
                                 ynow = y
-                                y = ynow + curspeed
-                                xnow = x
-                                x = xnow + curspeed
-                            if lastdirection == LeftDown:
-                                xnow = x
-                                x = xnow - curspeed
-                                ynow = y
-                                y = ynow + curspeed
-                            if lastdirection == RightUp:
-                                xnow = x
-                                x = xnow + curspeed
-                                ynow = y
-                                y = ynow - curspeed
-                            if lastdirection == Up:
-                                ynow = y
-                                y = ynow - curspeed
-                            if lastdirection == Down:
-                                ynow = y
-                                y = ynow + curspeed
-                            if lastdirection == Left:
-                                xnow = x
-                                x = xnow - curspeed
-                            if lastdirection ==  Right:
-                                xnow = x
-                                x = xnow + curspeed
+                                rot2 = -90 + rotater
+                                if rot2 <= 0:
+                                    amount = 1
+                                if rot2 >= 0:
+                                    amount = rotater / -90
+                                segspeed = amount * curspeed
+                                y = ynow - segspeed
         #movement
         #Collision/OOB detection
         if x >=1270:
@@ -342,7 +442,8 @@ while not done:
         nosl = font.render(noslabel, 30, black)
         scorelabel = "Score: " + str(round(score, 1))
         scorel = font.render(scorelabel, 30 , black)
-        currentlabel = "Speed: " + str(round(curspeed, 2))
+        speedlabel = curspeed * 46
+        currentlabel = "Speed: " + str(round(speedlabel, 2)) + " Km/h"
         curspeedl = font.render(currentlabel, 30, black)
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
