@@ -144,6 +144,28 @@ rotater = 0
 pos = 0
 togo = 0
 maxlaps = maxlap + 1
+score = 0
+
+#Passoff to the postrace Python script
+def sendtopost():
+    global parser
+    global carimage
+    global currentcar
+    global tracktotal
+    global trackpath
+    global track
+    global trackname
+    global clockspeed
+    global score
+    global place
+    #send off the settings
+    parser.read("res/options.ini")
+    parser.set("options", "racefinsihed", "Yes")
+    parser.set("options", "score", str(score))
+    parser.set("options", "place", str(place))
+    with open('res/options.ini', 'w') as configfile:
+        parser.write(configfile)
+    exec(open("prepostrace.py").read())
 
 #Exit Control
 while not done:
@@ -372,6 +394,11 @@ while not done:
                         if not pressed[pygame.K_SPACE]:
                             if curspeed >= 0.19:
                                 curspeed = curspeed - 0.1
+                            if curspeed <= -0.1: 
+                                curspeed = curspeed + 0.1
+                            if curspeed >= -0.1:
+                                if curspeed <= 0.19:
+                                    curspeed = 0
                             segment =  0
                             segmentneg =  0
                             segspeed = 0
@@ -489,7 +516,8 @@ while not done:
         if lapcount >= maxlaps:
             #PAssoff scfript here
             finished = True
-        #Setting Up the label
+            sendtopost()
+        #Setting Up the labels
         laplabel = lap + str(lapcount) + "/" + str(maxlap)
         lapl = font.render(laplabel, 10 ,black)
         nosleftround = round(nosleft, 1)

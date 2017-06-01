@@ -88,6 +88,7 @@ def sendtomain():
     parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))
+    parser.set("options", "racefinsihed", "No")
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
     exec(open("race.py").read())
@@ -186,6 +187,7 @@ while not done:
                     change = 10
         #Change Tracks
         if pressed[pygame.K_t]:
+            parser.read("res/tracks.ini")
             if change == 0:
                 change = 10
                 track += 1
