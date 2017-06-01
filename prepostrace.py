@@ -81,11 +81,37 @@ darklightmagenta = (255,0,192)
 pink = (255,0,128)
 lightred = (255,0,64)
 
+def backtostart():
+    global parser
+    global carimage
+    global currentcar
+    global tracktotal
+    global trackpath
+    global track
+    global trackname
+    global clockspeed
+    #send off the settings
+    parser.read("res/options.ini")
+    parser.set("options", "track", str(track))
+    parser.set("options", "car", currentcar)
+    parser.set("options", "trackpath", trackpath)
+    parser.set("options", "carimage", carimagepath)
+    parser.set("options", "speed", str(clockspeed))
+    parser.set("options", "racefinsihed", "No")
+    with open('res/options.ini', 'w') as configfile:
+        parser.write(configfile)
+    exec(open("main.py").read())
+
 #Exit Control
 while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         done = True
+        #Key detection!
+        pressed = pygame.key.get_pressed()
+        #Movement
+        if pressed[pygame.K_SPACE]:
+            backtostart()
         #Setting up the labels
         resultsl = font.render("Results: ", 30, black)
         scorelabel = "Your Score: " + score
@@ -102,28 +128,139 @@ while not done:
         tenthplacelabel = "10th : " + str(p10)
         if place == "1":
             firstplacelabel = "1st (You) :  " + score
+            secondplacelabel = "2nd : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p2)
+            fourthplacelabel = "4th : " + str(p3)
+            fifthplacelabel = "5th : " + str(p4)
+            sixthplacelabel = "6th : " + str(p5)
+            seventhplacelabel = "7th : " + str(p6)
+            eightplacelabel = "8th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "2":
             secondplacelabel = "2nd (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p2)
+            fourthplacelabel = "4th : " + str(p3)
+            fifthplacelabel = "5th : " + str(p4)
+            sixthplacelabel = "6th : " + str(p5)
+            seventhplacelabel = "7th : " + str(p6)
+            eightplacelabel = "8th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "3":
             thirdplacelabel = "3rd (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            secondplacelabel = "2nd : " + str(p2)
+            fourthplacelabel = "4th : " + str(p4)
+            fifthplacelabel = "5th : " + str(p5)
+            sixthplacelabel = "6th : " + str(p6)
+            seventhplacelabel = "7th : " + str(p7)
+            eightplacelabel = "8th : " + str(p8)
+            ninthplacelabel = "9th : " + str(p9)
+            tenthplacelabel = "10th : " + str(p10)
         if place == "4":
             fourthplacelabel = "4th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            secondplacelabel = "2nd : " + str(p2)
+            fifthplacelabel = "5th : " + str(p4)
+            sixthplacelabel = "6th : " + str(p5)
+            seventhplacelabel = "7th : " + str(p6)
+            eightplacelabel = "8th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "5":
             fifthplacelabel = "5th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            fourthplacelabel = "4th : " + str(p4)
+            secondplacelabel = "2nd : " + str(p2)
+            sixthplacelabel = "6th : " + str(p5)
+            seventhplacelabel = "7th : " + str(p6)
+            eightplacelabel = "8th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "6":
             sixthplacelabel = "6th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            fourthplacelabel = "4th : " + str(p4)
+            fifthplacelabel = "5th : " + str(p5)
+            secondplacelabel = "2nd : " + str(p2)
+            seventhplacelabel = "7th : " + str(p6)
+            eightplacelabel = "8th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "7":
             seventhplacelabel = "7th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            fourthplacelabel = "4th : " + str(p4)
+            fifthplacelabel = "5th : " + str(p5)
+            secondplacelabel = "2nd : " + str(p2)
+            sixthplacelabel = "6th : " + str(p6)
+            eightplacelabel = "8th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "8":
             eightplacelabel = "8th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            fourthplacelabel = "4th : " + str(p4)
+            fifthplacelabel = "5th : " + str(p5)
+            secondplacelabel = "2nd : " + str(p2)
+            sixthplacelabel = "6th : " + str(p6)
+            seventhplacelabel = "7th : " + str(p7)
+            ninthplacelabel = "9th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "9":
             ninthplacelabel = "9th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            fourthplacelabel = "4th : " + str(p4)
+            fifthplacelabel = "5th : " + str(p5)
+            secondplacelabel = "2nd : " + str(p2)
+            sixthplacelabel = "6th : " + str(p6)
+            seventhplacelabel = "7th : " + str(p7)
+            ninthplacelabel = "8th : " + str(p8)
+            tenthplacelabel = "10th : " + str(p9)
         if place == "10":
             tenthplacelabel = "10th (You) :  " + score
+            firstplacelabel = "1st : " + str(p1)
+            thirdplacelabel = "3rd : " + str(p3)
+            fourthplacelabel = "4th : " + str(p4)
+            fifthplacelabel = "5th : " + str(p5)
+            secondplacelabel = "2nd : " + str(p2)
+            sixthplacelabel = "6th : " + str(p6)
+            seventhplacelabel = "7th : " + str(p7)
+            ninthplacelabel = "8th : " + str(p8)
+            tenthplacelabel = "9th : " + str(p9)
         firstplacel = font.render(firstplacelabel, 30, black)
+        secondplacel = font.render(secondplacelabel, 30, black)
+        thirdplacel = font.render(thirdplacelabel, 30, black)
+        fourthplacel = font.render(fourthplacelabel, 30, black)
+        fifthplacel = font.render(fifthplacelabel, 30, black)
+        sixthplacel = font.render(sixthplacelabel, 30, black)
+        seventhplacel = font.render(seventhplacelabel, 30, black)
+        eightplacel = font.render(eightplacelabel, 30, black)
+        ninthplacel = font.render(ninthplacelabel, 30, black)
+        tenthplacel = font.render(tenthplacelabel, 30, black)
+        donel = font.render("Press space to continue...", 30, black)
         # Rendering and drawing
         screen.fill(lightblue)
         screen.blit(resultsl, (600, 10))
+        screen.blit(firstplacel, (300, 80))
+        screen.blit(secondplacel, (300, 130))
+        screen.blit(thirdplacel, (300, 180))
+        screen.blit(fourthplacel, (300, 230))
+        screen.blit(fifthplacel, (300, 280))
+        screen.blit(sixthplacel, (300, 330))
+        screen.blit(seventhplacel, (300, 380))
+        screen.blit(eightplacel, (300, 430))
+        screen.blit(ninthplacel, (300, 480))
+        screen.blit(tenthplacel, (300, 530))
+        screen.blit(donel, (300, 600))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
