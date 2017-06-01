@@ -38,7 +38,7 @@ nos = 0
 nosinuse = False
 lap = "Lap: "
 lapcount = 0
-place = "Place: "
+place = 11
 atstart = True
 newlap = False
 laptime = 0
@@ -52,6 +52,7 @@ LeftDown = "LeftDown"
 RightUp = "RightUp"
 RightDown = "RightDown"
 lastdirection = Down
+finished = False
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -86,7 +87,7 @@ darklightmagenta = (255,0,192)
 pink = (255,0,128)
 lightred = (255,0,64)
 
-#Get car stats from the ini file
+#Get all stats from the ini files
 parser.read("res/carstats.ini")
 carspeed = parser.get(car, "speed")
 caraccel = parser.get(car, "accel")
@@ -96,10 +97,23 @@ carbrake = parser.get(car, "brake")
 caraero = parser.get(car, "aero")
 carnos = parser.get(car, "nos")
 parser.read("res/tracks.ini")
+maxlap = int(parser.get(trackkey, "laps"))
 startx = parser.get(trackkey, "startlinex")
 starty = parser.get(trackkey, "startliney")
 checkpointy = parser.get(trackkey, "checkpointy")
 checkpointx = parser.get(trackkey, "checkpointx")
+parser.read("res/highscore.ini")
+p1 = int(parser.get(trackkey, "1"))
+p2 = int(parser.get(trackkey, "2"))
+p3 = int(parser.get(trackkey, "3"))
+p4 = int(parser.get(trackkey, "4"))
+p5 = int(parser.get(trackkey, "5"))
+p6 = int(parser.get(trackkey, "6"))
+p7 = int(parser.get(trackkey, "7"))
+p8 = int(parser.get(trackkey, "8"))
+p9 = int(parser.get(trackkey, "9"))
+p10 = parser.get(trackkey, "10")
+p10 = int(p10)
 
 #More Variables!!!!
 mostnos = int(carnos)
@@ -108,7 +122,7 @@ aero = int(caraero) / 10
 cartopspeed = int(carspeed) / 20 * aero
 topspeed = int(carspeed) / 20 * aero
 braking = int(carbrake) / 500 * aero
-accel = int(caraccel) / 300 * aero
+accel = int(caraccel) / 2100 * aero
 handling = int(carhandling) / 30 * aero
 righthandling = 360 - handling
 curspeed = 0
@@ -125,8 +139,11 @@ y = startlinex
 startneg80x = startlinex - 80
 start80x = startlinex + 80
 passstart = startliney + 10
-carimage2 = pygame.transform.rotate(carimage, 180)
+carimage2 = pygame.transform.rotate(carimage, 0)
 rotater = 0
+pos = 0
+togo = 0
+maxlaps = maxlap + 1
 
 #Exit Control
 while not done:
@@ -434,8 +451,46 @@ while not done:
         if y <= -1:
             y = 2
         score -= 1
+        #Getting the placing
+        if score <= p10:
+            place = 11
+            togo = p10 - score
+        if score >= p10:
+            place = 10
+            togo = p10 - score
+        if score >= p9:
+            place = 9
+            togo = p10 - score
+        if score >= p8:
+            place = 8
+            togo = p10 - score
+        if score >= p7:
+            place = 7
+            togo = p10 - score
+        if score >= p6:
+            place = 6
+            togo = p10 - score
+        if score >= p5:
+            place = 5
+            togo = p10 - score
+        if score >= p4:
+            place = 4
+            togo = p10 - score
+        if score >= p3:
+            place = 3
+            togo = p10 - score
+        if score >= p2:
+            place = 2
+            togo = p10 - score
+        if score >= p1:
+            place = 1
+            togo = p10 - score
+        #Finishing!
+        if lapcount >= maxlaps:
+            #PAssoff scfript here
+            finished = True
         #Setting Up the label
-        laplabel = lap + str(lapcount)
+        laplabel = lap + str(lapcount) + "/" + str(maxlap)
         lapl = font.render(laplabel, 10 ,black)
         nosleftround = round(nosleft, 1)
         noslabel = "Nos Left: " + str(nosleftround)
@@ -445,13 +500,20 @@ while not done:
         speedlabel = curspeed * 46
         currentlabel = "Speed: " + str(round(speedlabel, 2)) + " Km/h"
         curspeedl = font.render(currentlabel, 30, black)
+        placelabel = "Place: " + str(place)
+        placel = font.render(placelabel, 30, black)
+        donelabel = "Finsihed!  ANd more because this is cool!"
+        donel = font.render(donelabel, 30, black)
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
+        screen.blit(placel, (10, 130))
         screen.blit(scorel, (10, 100))
         screen.blit(nosl, (10, 10))
         screen.blit(lapl, (10, 40))
         screen.blit(curspeedl, (10, 70))
         screen.blit(carimage2, (x,y))
+        if finished:
+            screen.blit(donel, (620, 340))
         print(rotater)
         #ANND, GO!
         pygame.display.flip()
