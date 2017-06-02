@@ -19,6 +19,7 @@ pygame.display.flip()
 clock = pygame.time.Clock()
 x = 30
 y = 30
+inhelp = False
 carimage = pygame.image.load("res/ford_gt.png")
 carimage2 = pygame.image.load("res/ford_gt.png")
 carimagepath = "res/ford_gt.png"
@@ -124,6 +125,8 @@ while not done:
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 225)
         #Change Cars
+        if pressed[pygame.K_ESCAPE]:
+            inhelp = False
         if pressed[pygame.K_c]:
             if currentcar == "Dodge_Challenger":
                 if change == 0:
@@ -232,6 +235,9 @@ while not done:
             if x <= 163:
                 if y <= 87:
                     sendtomain()
+            if x >= 1180:
+                if y <= 620:
+                    inhelp = True
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -250,6 +256,28 @@ while not done:
         tracklabel2 = font.render(tracklabel, 10 ,white)
         clockspeedlabel = str(clockspeed) + " CC"
         clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
+        helplabel = "Help"
+        helplabel1 = "On the Menu screen:"
+        helplabel2 = "Press C to change cars"
+        helplabel3 = "Press T to change tracks"
+        helplabel4 = "Press S to change the clockspeed"
+        helplabel5 = "During a race:"
+        helplabel6 = "Left and Right steer"
+        helplabel7 = "Up is the gas pedal"
+        helplabel8 = "Down is the brake"
+        helplabel9 = "Space will use your nos"
+        helplabel10 = "Press escape to get rid of this messsage"
+        helpl = font.render(helplabel, 10 ,white)
+        helpl1 = font.render(helplabel1, 10 ,white)
+        helpl2 = font.render(helplabel2, 10 ,white)
+        helpl3 = font.render(helplabel3, 10 ,white)
+        helpl4 = font.render(helplabel4, 10 ,white)
+        helpl5 = font.render(helplabel5, 10 ,white)
+        helpl6 = font.render(helplabel6, 10 ,white)
+        helpl7 = font.render(helplabel7, 10 ,white)
+        helpl8 = font.render(helplabel8, 10 ,white)
+        helpl9 = font.render(helplabel9, 10 ,white)
+        helpl10 = font.render(helplabel10, 10 ,white)
         #Drawing/rendering
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
@@ -260,6 +288,20 @@ while not done:
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
         screen.blit(carlabel2, (150, 150))
+        if inhelp:
+            screen.fill(darkdarkred)
+            screen.blit(helpl, (505, 10))
+            screen.blit(helpl1, (455, 40))
+            screen.blit(helpl2, (455, 70))
+            screen.blit(helpl3, (455, 100))
+            screen.blit(helpl4, (455, 130))
+            screen.blit(helpl5, (585, 10))
+            screen.blit(helpl6, (585, 40))
+            screen.blit(helpl7, (585, 70))
+            screen.blit(helpl8, (585, 100))
+            screen.blit(helpl9, (585, 130))
+            screen.blit(helpl10, (505, 230))
+
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
