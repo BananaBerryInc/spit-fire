@@ -181,10 +181,17 @@ while not done:
                     change = 10
             if currentcar == "Porsche 918":
                 if change == 0:
+                    currentcar = "Nitro Cart"
+                    carimagepath = "res/Nitro Cart.png"
+                    carimage = pygame.image.load("res/Nitro Cart.png")
+                    change = 10
+            if currentcar == "Nitro Cart":
+                if change == 0:
                     currentcar = "ford_gt"
                     carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")
                     change = 10
+
         #Change Tracks
         if pressed[pygame.K_t]:
             parser.read("res/tracks.ini")

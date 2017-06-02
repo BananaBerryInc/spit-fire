@@ -100,7 +100,8 @@ def backtostart():
     parser.set("options", "racefinsihed", "No")
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-    exec(open("main.py").read())
+    pygame.QUIT
+    quit()
 
 #Exit Control
 while not done:
@@ -246,10 +247,10 @@ while not done:
         eightplacel = font.render(eightplacelabel, 30, black)
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
-        donel = font.render("Press space to continue...", 30, black)
+        donel = font.render("Press space to Exit...", 30, black)
         # Rendering and drawing
         screen.fill(lightblue)
-        screen.blit(resultsl, (600, 10))
+        screen.blit(resultsl, (585, 10))
         screen.blit(firstplacel, (300, 80))
         screen.blit(secondplacel, (300, 130))
         screen.blit(thirdplacel, (300, 180))
