@@ -12,7 +12,7 @@ pygame.font.init()
 font = pygame.font.SysFont("freesansbold.ttf", 30)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Pre-Alpha")
+pygame.display.set_caption("Spitfire Alpha 1")
 pygame.display.flip()
 
 #Variables
@@ -33,6 +33,7 @@ parser = SafeConfigParser()
 parser.read("res/tracks.ini")
 trackname = parser.get("track1", "trackname")
 trackpath = parser.get("track1", "trackpath")
+logo = pygame.image.load("res/Game Logo.png")
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -190,6 +191,12 @@ while not done:
                     change = 10
             if currentcar == "Nitro Cart":
                 if change == 0:
+                    currentcar = "Limited Gold Koenigsegg One"
+                    carimagepath = "res/Limited Gold Koenigsegg One.png"
+                    carimage = pygame.image.load("res/Limited Gold Koenigsegg One.png")
+                    change = 10
+            if currentcar == "Limited Gold Koenigsegg One":
+                if change == 0:
                     currentcar = "ford_gt"
                     carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")
@@ -225,7 +232,7 @@ while not done:
             if change == 0:
                 change = 10
                 clockspeed = clockspeed + 50
-        if clockspeed >> 200:
+        if clockspeed >= 301:
             clockspeed = 50
         #Selecting things
         if pressed[pygame.K_SPACE]:
@@ -236,7 +243,7 @@ while not done:
                 if y <= 87:
                     sendtomain()
             if x >= 1180:
-                if y <= 620:
+                if y <= 100:
                     inhelp = True
         #Collision/OOB detection
         if x >=1270:
@@ -256,6 +263,8 @@ while not done:
         tracklabel2 = font.render(tracklabel, 10 ,white)
         clockspeedlabel = str(clockspeed) + " CC"
         clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
+        help = "Drive to a box, and press space to go!"
+        welcometo = "Welcome to " 
         helplabel = "Help"
         helplabel1 = "On the Menu screen:"
         helplabel2 = "Press C to change cars"
@@ -267,6 +276,7 @@ while not done:
         helplabel8 = "Down is the brake"
         helplabel9 = "Space will use your nos"
         helplabel10 = "Press escape to get rid of this messsage"
+        welcomel = font.render(welcometo, 10 ,white)
         helpl = font.render(helplabel, 10 ,white)
         helpl1 = font.render(helplabel1, 10 ,white)
         helpl2 = font.render(helplabel2, 10 ,white)
@@ -278,30 +288,35 @@ while not done:
         helpl8 = font.render(helplabel8, 10 ,white)
         helpl9 = font.render(helplabel9, 10 ,white)
         helpl10 = font.render(helplabel10, 10 ,white)
+        help10 = font.render(help, 10 ,white)
         #Drawing/rendering
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
-        screen.blit(tracklabel2, (300,300))
-        screen.blit(clockspeedlabel2, (500, 500))
-        screen.blit(carimage2, (x,y))
+        pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
+        screen.blit(helpl, (1180, 0))
+        screen.blit(tracklabel2, (100,200))
+        screen.blit(clockspeedlabel2, (100, 250))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
-        screen.blit(carlabel2, (150, 150))
+        screen.blit(carlabel2, (100, 150))
+        screen.blit(help10, (495, 680))
+        screen.blit(logo, (600, 10))
+        screen.blit(welcomel, (495, 60))
+        screen.blit(carimage2, (x,y))
         if inhelp:
             screen.fill(darkdarkred)
-            screen.blit(helpl, (505, 10))
-            screen.blit(helpl1, (455, 40))
-            screen.blit(helpl2, (455, 70))
-            screen.blit(helpl3, (455, 100))
-            screen.blit(helpl4, (455, 130))
-            screen.blit(helpl5, (585, 10))
-            screen.blit(helpl6, (585, 40))
-            screen.blit(helpl7, (585, 70))
-            screen.blit(helpl8, (585, 100))
-            screen.blit(helpl9, (585, 130))
-            screen.blit(helpl10, (505, 230))
-
+            screen.blit(helpl, (555, 10))
+            screen.blit(helpl1, (320, 40))
+            screen.blit(helpl2, (320, 70))
+            screen.blit(helpl3, (320, 100))
+            screen.blit(helpl4, (320, 130))
+            screen.blit(helpl5, (655, 40))
+            screen.blit(helpl6, (655, 70))
+            screen.blit(helpl7, (655, 100))
+            screen.blit(helpl8, (655, 130))
+            screen.blit(helpl9, (655, 160))
+            screen.blit(helpl10, (490, 230))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
