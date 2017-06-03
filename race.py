@@ -130,10 +130,10 @@ startlinex = int(startx)
 startliney = int(starty)
 checky = int(checkpointy)
 checkx = int(checkpointx)
-checkplus40x = checkx + 40
-checkminus40x = checkx - 40
-checkplus40y = checkx + 40
-checkminus40y = checkx - 40
+checkplus40x = checkx + 80
+checkminus40x = checkx - 80
+checkplus40y = checky + 80
+checkminus40y = checky - 80
 x = startliney
 y = startlinex
 startneg80x = startlinex - 80
@@ -184,19 +184,23 @@ while not done:
             if trackkey == "track3":
                 if x <= passstart:
                     atstart = False
-        if atstart == False:
-            if newlap == False:
+        if not atstart:
+            if not newlap:
                 if y >= startneg80x:
                     if y <= start80x:
                         if x <= startliney:
                             score += 2000
                             lapcount += 1
                             newlap = True
+                            atstart = False
         if newlap == True:
             laptime += 1
-            if laptime >= 150:
-                newlap = False
-                laptime = 0
+            if y >= checkminus40y:
+                if y <= checkplus40y:
+                    if x <= checkplus40y:
+                        if x >= checkminus40y:
+                            newlap = False
+                            laptime = 0
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
             lastdirection = Up
