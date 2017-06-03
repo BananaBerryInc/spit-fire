@@ -178,7 +178,7 @@ while not done:
                         done = True
         #Key Detection
         pressed = pygame.key.get_pressed()
-        if atstart == True:
+        if atstart:
             if y >= passstart:
                 atstart = False
             if trackkey == "track3":
@@ -193,12 +193,13 @@ while not done:
                             lapcount += 1
                             newlap = True
                             atstart = False
-        if newlap == True:
+        if not atstart:
             laptime += 1
             if y >= checkminus40y:
                 if y <= checkplus40y:
-                    if x <= checkplus40y:
-                        if x >= checkminus40y:
+                    if x <= checkplus40x:
+                        if x >= checkminus40x:
+                            atstart = False
                             newlap = False
                             laptime = 0
         if pressed[pygame.K_UP]:
