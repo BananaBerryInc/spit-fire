@@ -5,6 +5,7 @@ import pygame
 import io
 import subprocess
 from configparser import SafeConfigParser
+from PIL import Image
 
 #Settin' up the window!
 pygame.init()
@@ -21,6 +22,9 @@ parser.read("res/options.ini")
 carimagepath = parser.get("options", "carimage")
 trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
+fulscr = parser.get("options", "fulscr")
+if fulscr == "True":
+    screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
 trackimage = pygame.image.load(trackpath)
 track = int(trackstring)
 trackkey = "track" + str(track)
@@ -28,6 +32,8 @@ car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
 clockspeed = int(clockspeedstring)
 trackimage = pygame.image.load(trackpath)
+tim = Image.open(trackpath)
+trackpil = tim.load()
 
 #Variables
 carimage = pygame.image.load(carimagepath)
@@ -114,6 +120,7 @@ p8 = int(parser.get(trackkey, "8"))
 p9 = int(parser.get(trackkey, "9"))
 p10 = parser.get(trackkey, "10")
 p10 = int(p10)
+pixcoloour = (0,0,0)
 
 #More Variables!!!!
 mostnos = int(carnos)
@@ -178,6 +185,15 @@ while not done:
                         done = True
         #Key Detection
         pressed = pygame.key.get_pressed()
+        pixcoloour = trackpil[x,y]
+        print(pixcoloour)
+        if not nosinuse:
+            if pixcoloour == (0, 0, 0, 255):
+                topspeed = int(carspeed) / 20 * aero
+            else:
+                topspeed = int(carspeed) / 25 * aero
+            if pixcoloour == (2, 2, 2, 255):
+                topspeed = int(carspeed) / 20 * aero
         if atstart:
             if y >= passstart:
                 atstart = False
@@ -202,6 +218,9 @@ while not done:
                             atstart = False
                             newlap = False
                             laptime = 0
+        if pressed[pygame.K_ESCAPE]:
+            pygame.QUIT
+            quit()
         if pressed[pygame.K_UP]:
             curspeed = curspeed + accel
             lastdirection = Up
@@ -680,7 +699,6 @@ while not done:
         screen.blit(carimage2, (x,y))
         if finished:
             screen.blit(donel, (620, 340))
-        print(rotater)
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)

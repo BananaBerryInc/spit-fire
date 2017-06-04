@@ -28,6 +28,7 @@ cartext = "Car: "
 track = 1
 trackname = "First_track"
 clockspeed = 100
+fulscr = False
 change = 0
 parser = SafeConfigParser()
 parser.read("res/tracks.ini")
@@ -91,6 +92,7 @@ def sendtomain():
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))
     parser.set("options", "racefinsihed", "No")
+    parser.set("options", "fulscr", str(fulscr))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
     exec(open("race.py").read())
@@ -245,6 +247,17 @@ while not done:
             if x >= 1180:
                 if y <= 100:
                     inhelp = True
+            if x <= 60:
+                if y >= 640:
+                    if change == 0:
+                        if not fulscr:
+                            screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+                            fulscr = True
+                            change = 20
+                    if change == 0:
+                        if fulscr:
+                            screen = pygame.display.set_mode((1280, 720))
+                            fulscr = False
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -264,7 +277,7 @@ while not done:
         clockspeedlabel = str(clockspeed) + " CC"
         clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
         help = "Drive to a box, and press space to go!"
-        welcometo = "Welcome to " 
+        welcometo = "Welcome to "
         helplabel = "Help"
         helplabel1 = "On the Menu screen:"
         helplabel2 = "Press C to change cars"
@@ -276,6 +289,8 @@ while not done:
         helplabel8 = "Down is the brake"
         helplabel9 = "Space will use your nos"
         helplabel10 = "Press escape to get rid of this messsage"
+        fullscrlabel = "Fullscreen"
+        fullscrl = font.render(fullscrlabel, 10, white)
         welcomel = font.render(welcometo, 10 ,white)
         helpl = font.render(helplabel, 10 ,white)
         helpl1 = font.render(helplabel1, 10 ,white)
@@ -294,7 +309,9 @@ while not done:
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
+        pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
         screen.blit(helpl, (1180, 0))
+        screen.blit(fullscrl, (0, 650))
         screen.blit(tracklabel2, (100,200))
         screen.blit(clockspeedlabel2, (100, 250))
         screen.blit(label, (1185, 625))
