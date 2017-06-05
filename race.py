@@ -25,6 +25,7 @@ trackpath = parser.get("options", "trackpath")
 fulscr = parser.get("options", "fulscr")
 if fulscr == "True":
     screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+players = parser.get("options", "players")
 trackimage = pygame.image.load(trackpath)
 track = int(trackstring)
 trackkey = "track" + str(track)

@@ -20,7 +20,13 @@ pygame.display.flip()
 clock = pygame.time.Clock()
 x = 30
 y = 30
+x2 = 60
+y2 = 60
+players = 1
 inhelp = False
+currentcar2 = "ford_gt"
+carimagepath2 = "res/ford_gt.png"
+carimage2 = pygame.image.load("res/ford_gt.png")
 parser = SafeConfigParser()
 parser.read("res/options.ini")
 level = parser.get("options", "level")
@@ -39,6 +45,8 @@ trackname = "First_track"
 clockspeed = 100
 fulscr = False
 change = 0
+carimage3 = carimage
+carimage4 = carimage
 parser = SafeConfigParser()
 parser.read("res/tracks.ini")
 trackname = parser.get("track1", "trackname")
@@ -93,6 +101,7 @@ def sendtomain():
     global trackname
     global clockspeed
     global levelpoints
+    global players
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
@@ -103,6 +112,7 @@ def sendtomain():
     parser.set("options", "racefinsihed", "No")
     parser.set("options", "fulscr", str(fulscr))
     parser.set("options", "levelpoints", str(levelpoints))
+    parser.set("options", "players", str(players))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
     exec(open("race.py").read())
@@ -137,6 +147,26 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 315)
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 225)
+        if pressed[pygame.K_w]:
+            y2 -= 3
+            carimage4 = carimage3
+        if pressed[pygame.K_s]:
+            y2 += 3
+            carimage4 = pygame.transform.rotate(carimage3, 180)
+        if pressed[pygame.K_a]:
+            x2 -= 3
+            carimage4 = pygame.transform.rotate(carimage3, 90)
+            if pressed[pygame.K_w]:
+                carimage4 = pygame.transform.rotate(carimage3, 45)
+            if pressed[pygame.K_s]:
+                carimage4 = pygame.transform.rotate(carimage3, 135)
+        if pressed[pygame.K_d]:
+            x2 += 3
+            carimage4 = pygame.transform.rotate(carimage3, 270)
+            if pressed[pygame.K_w]:
+                carimage4 = pygame.transform.rotate(carimage3, 315)
+            if pressed[pygame.K_s]:
+                carimage4 = pygame.transform.rotate(carimage3, 225)
         #Change Cars
         if pressed[pygame.K_ESCAPE]:
             inhelp = False
@@ -280,6 +310,20 @@ while not done:
                     carimage = pygame.image.load("res/ford_gt.png")
                     change = 10
 
+        #Change Players
+        if pressed[pygame.K_p]:
+            if players == 1:
+                if change == 0:
+                    players = 2
+                    change = 10
+            if players == 2:
+                if change == 0:
+                    players = 1
+                    change = 10
+        if players == 2:
+            currentcar2 = "ford_gt"
+            carimagepath2 = "res/ford_gt.png"
+            carimage3 = pygame.image.load("res/ford_gt.png")
         #Change Tracks
         if pressed[pygame.K_t]:
             parser.read("res/tracks.ini")
@@ -366,6 +410,8 @@ while not done:
         helplabel9 = "Space will use your nos"
         helplabel10 = "Press escape to get rid of this messsage"
         fullscrlabel = "Fullscreen"
+        playerlabel = "Players : " + str(players)
+        playerl = font.render(playerlabel, 10, white)
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
         levell = font50.render("Level " + str(level), 10, white)
         levelposition = levelpoints
@@ -403,7 +449,10 @@ while not done:
         screen.blit(help10, (495, 680))
         screen.blit(logo, (600, 10))
         screen.blit(welcomel, (495, 60))
+        screen.blit(playerl, (100, 300))
         screen.blit(carimage2, (x,y))
+        if players == 2:
+            screen.blit(carimage4, (x2,y2))        
         if inhelp:
             screen.fill(darkdarkred)
             screen.blit(helpl, (555, 10))
