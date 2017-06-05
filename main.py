@@ -53,6 +53,7 @@ trackname = parser.get("track1", "trackname")
 trackpath = parser.get("track1", "trackpath")
 logo = pygame.image.load("res/Game Logo.png")
 
+
 #Colours (Thanks to atmatm6 for the code in this section!)
 black = (0,0,0)
 white = (255,255,255)
@@ -102,12 +103,15 @@ def sendtomain():
     global clockspeed
     global levelpoints
     global players
+    global car2
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
     parser.set("options", "car", currentcar)
+    parser.set("options", "car2", currentcar2)
     parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
+    parser.set("options", "carimage2", carimagepath2)
     parser.set("options", "speed", str(clockspeed))
     parser.set("options", "racefinsihed", "No")
     parser.set("options", "fulscr", str(fulscr))

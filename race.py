@@ -20,6 +20,7 @@ pygame.display.flip()
 parser = SafeConfigParser()
 parser.read("res/options.ini")
 carimagepath = parser.get("options", "carimage")
+carimagepath2 = parser.get("options", "carimage2")
 trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
 fulscr = parser.get("options", "fulscr")
@@ -30,6 +31,7 @@ trackimage = pygame.image.load(trackpath)
 track = int(trackstring)
 trackkey = "track" + str(track)
 car = parser.get("options", "car")
+car2 = parser.get("options", "car2")
 clockspeedstring = parser.get("options", "speed")
 clockspeed = int(clockspeedstring)
 trackimage = pygame.image.load(trackpath)
@@ -38,16 +40,20 @@ trackpil = tim.load()
 
 #Variables
 carimage = pygame.image.load(carimagepath)
+carimage3 = pygame.image.load(carimagepath2)
 clock = pygame.time.Clock()
 x = 30
 y = 30
 nos = 0
 nosinuse = False
+nosinuse2 = False
 lap = "Lap: "
 lapcount = 0
 place = 11
 atstart = True
+atstart2 = True
 newlap = False
+newlap2 = False
 laptime = 0
 score = 0
 Up = "Up"
@@ -103,6 +109,13 @@ carhandling = parser.get(car, "handling")
 carbrake = parser.get(car, "brake")
 caraero = parser.get(car, "aero")
 carnos = parser.get(car, "nos")
+carspeed2 = parser.get(car2, "speed")
+caraccel2 = parser.get(car2, "accel")
+carbrake2 = parser.get(car2, "brake")
+carhandling2 = parser.get(car2, "handling")
+carbrake2 = parser.get(car2, "brake")
+caraero2 = parser.get(car2, "aero")
+carnos2 = parser.get(car2, "nos")
 parser.read("res/tracks.ini")
 maxlap = int(parser.get(trackkey, "laps"))
 startx = parser.get(trackkey, "startlinex")
@@ -133,6 +146,15 @@ braking = int(carbrake) / 500 * aero
 accel = int(caraccel) / 2100 * aero
 handling = int(carhandling) / 30 * aero
 righthandling = 360 - handling
+mostnos2 = int(carnos2)
+nosleft2 = int(carnos2)
+aero2 = int(caraero2) / 10
+cartopspeed2 = int(carspeed2) / 18 * aero2
+topspeed2 = int(carspeed2) / 18 * aero2
+braking2 = int(carbrake2) / 500 * aero2
+accel2 = int(caraccel2) / 2100 * aero2
+handling2 = int(carhandling2) / 30 * aero2
+righthandling2 = 360 - handling2
 curspeed = 0
 startlinex = int(startx)
 startliney = int(starty)
@@ -144,11 +166,15 @@ checkplus40y = checky + 80
 checkminus40y = checky - 80
 x = startliney
 y = startlinex
+x2 = startliney
+y2 = startlinex
 startneg80x = startlinex - 80
 start80x = startlinex + 80
 passstart = startliney + 10
 rotater = 0
+rotater2 = 0
 carimage2 = pygame.transform.rotate(carimage, 0)
+carimage4 = pygame.transform.rotate(carimage3, 0)
 if trackkey == "track3" :
     carimage2 = pygame.transform.rotate(carimage, 90)
     rotater = 90
@@ -157,7 +183,12 @@ pos = 0
 togo = 0
 maxlaps = maxlap + 1
 score = 0
-
+pos2 = 0
+togo2 = 0
+maxlaps2 = maxlap + 1
+score2 = 0
+trackkey2 = trackkey
+curspeed2 = 0
 #Passoff to the postrace Python script
 def sendtopost():
     global parser
@@ -185,6 +216,459 @@ while not done:
                 if event.type == pygame.QUIT:
                         done = True
         #Key Detection
+        if players == "2":
+            pressed = pygame.key.get_pressed()
+            pixcoloour = trackpil[x2,y2]
+            print(rotater2)
+            if not nosinuse2:
+                if pixcoloour == (0, 0, 0, 255):
+                    topspeed2 = int(carspeed2) / 18 * aero2
+                else:
+                    topspeed2 = int(carspeed2) / 25 * aero2
+                if pixcoloour == (2, 2, 2, 255):
+                    topspeed2 = int(carspeed2) / 18 * aero2
+            if atstart2:
+                if y2 >= passstart:
+                    atstart2 = False
+                if trackkey2 == "track3":
+                    if x2 <= passstart:
+                        atstart2 = False
+            if not atstart2:
+                if not newlap:
+                    if y2 >= startneg80x:
+                        if y2 <= start80x:
+                            if x2 <= startliney:
+                                score2 += 2000
+                                lapcount += 1
+                                newlap = True
+                                atstart2 = False
+            if not atstart2:
+                laptime += 1
+                if y2 >= checkminus40y:
+                    if y2 <= checkplus40y:
+                        if x2 <= checkplus40x:
+                            if x2 >= checkminus40x:
+                                atstart2 = False
+                                newlap = False
+                                laptime = 0
+            if pressed[pygame.K_ESCAPE]:
+                pygame.QUIT
+                quit()
+            if pressed[pygame.K_w]:
+                curspeed2 = curspeed2 + accel
+                lastdirection = Up
+                if curspeed2 >= topspeed2:
+                    curspeed2 = topspeed2
+                segment =  0
+                segmentneg =  0
+                segspeed2 = 0
+                amount = 0
+                rot2 = 0
+                if rotater2 <= 90:
+                    xnow = x2
+                    if rot2 <= 0:
+                        amount = 0
+                    if rot2 >= 0:
+                        amount = rotater2 / 90
+                    segspeed2 = amount * curspeed2
+                    x2 = xnow - segspeed2
+                if rotater2 >= 90:
+                    if rotater2 <= 180:
+                        xnow = x2
+                        rot2 = 180 - rotater2
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow - segspeed2
+                if rotater2 >= 90.01:
+                    if rotater2 <= 180:
+                        ynow = y2
+                        rot2 = rotater2 - 90
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow + segspeed2
+                if rotater2 >= 180:
+                    if rotater2 <= 270:
+                        ynow = y2
+                        rot2 = 270 - rotater2
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow + segspeed2
+                if rotater2 >= 180:
+                    if rotater2 <= 270:
+                        xnow = x2
+                        rot2 = rotater2 - 180
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow + segspeed2
+                if rotater2 >= 270:
+                    if rotater2 <= 360:
+                        xnow = x2
+                        rot2 = rotater2 - 270
+                        rot3 = -90 + rot2
+                        if rot3 >= 0:
+                            amount = 1
+                        if rot3 <= 0:
+                            amount = rot3 / -90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow + segspeed2
+                if rotater2 >= 270:
+                    if rotater2 <= 360:
+                        ynow = y2
+                        rot2 = rotater2 - 270
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow - segspeed2
+                if rotater2 <= 89.9:
+                    ynow = y2
+                    rot2 = -90 + rotater2
+                    if rot2 >= 0:
+                        amount = 1
+                    if rot2 <= 0:
+                        amount = rot2 / -90
+                    segspeed2 = amount * curspeed2
+                    y2 = ynow - segspeed2
+            if pressed[pygame.K_a]:
+                lastdirection = Left
+                if curspeed2 >= topspeed2:
+                    curspeed2 = topspeed2
+                rotater2 += handling2
+                if not pressed [pygame.K_w]:
+                    if rotater2 <= 90:
+                        xnow = x2
+                        if rot2 <= 0:
+                            amount = 0
+                        if rot2 >= 0:
+                            amount = rotater2 / 90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow - segspeed2
+                    if rotater2 >= 90:
+                        if rotater2 <= 180:
+                            xnow = x2
+                            rot2 = 180 - rotater2
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            x2 = xnow - segspeed2
+                    if rotater2 >= 90.01:
+                        if rotater2 <= 180:
+                            ynow = y2
+                            rot2 = rotater2 - 90
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            y2 = ynow + segspeed2
+                    if rotater2 >= 180:
+                        if rotater2 <= 270:
+                            ynow = y2
+                            rot2 = 270 - rotater2
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            y2 = ynow + segspeed2
+                    if rotater2 >= 180:
+                        if rotater2 <= 270:
+                            xnow = x2
+                            rot2 = rotater2 - 180
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            x2 = xnow + segspeed2
+                    if rotater2 >= 270:
+                        if rotater2 <= 359.9:
+                            xnow = x2
+                            rot2 = rotater2 - 270
+                            rot3 = -90 + rot2
+                            if rot3 >= 0:
+                                amount = 1
+                            if rot3 <= 0:
+                                amount = rot3 / -90
+                            segspeed2 = amount * curspeed2
+                            x2 = xnow + segspeed2
+                    if rotater2 >= 270:
+                        if rotater2 <= 360:
+                            ynow = y2
+                            rot2 = rotater2 - 270
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            y2 = ynow - segspeed2
+                    if rotater2 <= 89.9:
+                        ynow = y2
+                        rot2 = -90 + rotater2
+                        if rot2 >= 0:
+                            amount = 1
+                        if rot2 <= 0:
+                            amount = rot2 / -90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow - segspeed2
+                if rotater2 >= 360:
+                    rotater2 = 0
+                if rotater2 <= 0:
+                    rotater2 = 0
+                carimage4 = pygame.transform.rotate(carimage3, rotater2)
+                if pressed[pygame.K_w]:
+                    lastdirection = LeftUp
+                if pressed[pygame.K_s]:
+                    lastdirection = LeftDown
+            if pressed[pygame.K_d]:
+                lastdirection = Right
+                if not pressed [pygame.K_w]:
+                    if rotater2 <= 90:
+                        xnow = x2
+                        if rot2 <= 0:
+                            amount = 0
+                        if rot2 >= 0:
+                            amount = rotater2 / 90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow - segspeed2
+                    if rotater2 >= 90:
+                        if rotater2 <= 180:
+                            xnow = x2
+                            rot2 = 180 - rotater2
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            x2 = xnow - segspeed2
+                    if rotater2 >= 90.01:
+                        if rotater2 <= 180:
+                            ynow = y2
+                            rot2 = rotater2 - 90
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            y2 = ynow + segspeed2
+                    if rotater2 >= 180:
+                        if rotater2 <= 270:
+                            ynow = y2
+                            rot2 = 270 - rotater2
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            y2 = ynow + segspeed2
+                    if rotater2 >= 180:
+                        if rotater2 <= 270:
+                            xnow = x2
+                            rot2 = rotater2 - 180
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            x2 = xnow + segspeed2
+                    if rotater2 >= 270:
+                        if rotater2 <= 360:
+                            xnow = x2
+                            rot2 = rotater2 - 270
+                            rot3 = -90 + rot2
+                            if rot3 >= 0:
+                                amount = 1
+                            if rot3 <= 0:
+                                amount = rot3 / -90
+                            segspeed2 = amount * curspeed2
+                            x2 = xnow + segspeed2
+                    if rotater2 >= 270:
+                        if rotater2 <= 360:
+                            ynow = y2
+                            rot2 = rotater2 - 270
+                            amount = rot2 / 90
+                            segspeed2 = amount * curspeed2
+                            y2 = ynow - segspeed2
+                    if rotater2 <= 89.9:
+                        ynow = y2
+                        rot2 = -90 + rotater2
+                        if rot2 >= 0:
+                            amount = 1
+                        if rot2 <= 0:
+                            amount = rot2 / -90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow - segspeed2
+                if curspeed2 >= topspeed2:
+                    curspeed2 = topspeed2
+                rotater2 -= handling2
+                if rotater2 >= 360:
+                    rotater2 = 0
+                if rotater2 <= 0:
+                    rotater2 = 360
+                carimage4 = pygame.transform.rotate(carimage3, rotater2)
+                if pressed[pygame.K_w]:
+                    lastdirection = RightUp
+                if pressed[pygame.K_s]:
+                    lastdirection = RightDown
+            #Getting that nos working!!!
+            if pressed[pygame.K_LSHIFT]:
+                if nosleft >= 1:
+                    nosleft -= 1
+                    topspeed2 += 0.2
+                    nosinuse2 = True
+                else:
+                   nosinuse2 = False
+                   if topspeed2 >= cartopspeed2:
+                       topspeed2 -= 0.1
+                   if not nosinuse2:
+                       if nosleft <= mostnos:
+                           nosleft += 0.1
+            if pressed[pygame.K_s]:
+                curspeed2 = curspeed2 - braking
+                if curspeed2 >= -1.6:
+                    curspeed2 = curspeed2 - 0.1
+                else:
+                    curspeed2 = -1.5
+                segment =  0
+                segmentneg =  0
+                segspeed2 = 0
+                amount = 0
+                rot2 = 0
+                if rotater2 <= 90:
+                    xnow = x2
+                    if rot2 <= 0:
+                        amount = 0
+                    if rot2 >= 0:
+                        amount = rotater2 / 90
+                    segspeed2 = amount * curspeed2
+                    x2 = xnow - segspeed2
+                if rotater2 >= 90:
+                    if rotater2 <= 180:
+                        xnow = x2
+                        rot2 = 180 - rotater2
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow - segspeed2
+                if rotater2 >= 90.01:
+                    if rotater2 <= 180:
+                        ynow = y2
+                        rot2 = rotater2 - 90
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow + segspeed2
+                if rotater2 >= 180:
+                    if rotater2 <= 270:
+                        ynow = y2
+                        rot2 = 270 - rotater2
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow + segspeed2
+                if rotater2 >= 180:
+                    if rotater2 <= 270:
+                        xnow = x2
+                        rot2 = rotater2 - 180
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow + segspeed2
+                if rotater2 >= 270:
+                    if rotater2 <= 360:
+                        xnow = x2
+                        rot2 = rotater2 - 270
+                        rot3 = -90 + rot2
+                        if rot3 >= 0:
+                            amount = 1
+                        if rot3 <= 0:
+                            amount = rot3 / -90
+                        segspeed2 = amount * curspeed2
+                        x2 = xnow + segspeed2
+                if rotater2 >= 270:
+                    if rotater2 <= 360:
+                        ynow = y2
+                        rot2 = rotater2 - 270
+                        amount = rot2 / 90
+                        segspeed2 = amount * curspeed2
+                        y2 = ynow - segspeed2
+                if rotater2 <= 89.9:
+                    ynow = y2
+                    rot2 = -90 + rotater2
+                    if rot2 >= 0:
+                        amount = 1
+                    if rot2 <= 0:
+                        amount = rot2 / -90
+                    segspeed2 = amount * curspeed2
+                    y2 = ynow - segspeed2
+            if not pressed[pygame.K_SPACE]:
+                nosinuse2 = False
+                if topspeed2 >= cartopspeed2:
+                    topspeed2 -= 0.1
+                if not nosinuse2:
+                    if nosleft <= mostnos:
+                        nosleft += 0.1
+            if not pressed[pygame.K_d]:
+                if not pressed[pygame.K_a]:
+                    if not pressed[pygame.K_s]:
+                        if not pressed[pygame.K_w]:
+                            if not pressed[pygame.K_LSHIFT]:
+                                if curspeed2 >= 0.19:
+                                    curspeed2 = curspeed2 - 0.1
+                                if curspeed2 <= -0.1:
+                                    curspeed2 = curspeed2 + 0.1
+                                if curspeed2 >= -0.1:
+                                    if curspeed2 <= 0.19:
+                                        curspeed2 = 0
+                                segment =  0
+                                segmentneg =  0
+                                segspeed2 = 0
+                                amount = 0
+                                rot2 = 0
+                                if rotater2 <= 90:
+                                    xnow = x2
+                                    if rot2 <= 0:
+                                        amount = 0
+                                    if rot2 >= 0:
+                                        amount = rotater2 / 90
+                                    segspeed2 = amount * curspeed2
+                                    x2 = xnow - segspeed2
+                                if rotater2 >= 90:
+                                    if rotater2 <= 180:
+                                        xnow = x2
+                                        rot2 = 180 - rotater2
+                                        amount = rot2 / 90
+                                        segspeed2 = amount * curspeed2
+                                        x2 = xnow - segspeed2
+                                if rotater2 >= 90.01:
+                                    if rotater2 <= 180:
+                                        ynow = y2
+                                        rot2 = rotater2 - 90
+                                        amount = rot2 / 90
+                                        segspeed2 = amount * curspeed2
+
+                                        y2 = ynow + segspeed2
+                                if rotater2 >= 180:
+                                    if rotater2 <= 270:
+                                        ynow = y2
+                                        rot2 = 270 - rotater2
+                                        amount = rot2 / 90
+                                        segspeed2 = amount * curspeed2
+                                        y2 = ynow + segspeed2
+                                if rotater2 >= 180:
+                                    if rotater2 <= 270:
+                                        xnow = x2
+                                        rot2 = rotater2 - 180
+                                        amount = rot2 / 90
+                                        segspeed2 = amount * curspeed2
+                                        x2 = xnow + segspeed2
+                                if rotater2 >= 270:
+                                    if rotater2 <= 360:
+                                        xnow = x2
+                                        rot2 = rotater2 - 270
+                                        rot3 = -90 + rot2
+                                        if rot3 >= 0:
+                                            amount = 1
+                                        if rot3 <= 0:
+                                            amount = rot3 / -90
+                                        segspeed2 = amount * curspeed2
+                                        x2 = xnow + segspeed2
+                                if rotater2 >= 270:
+                                    if rotater2 <= 360:
+                                        ynow = y2
+                                        rot2 = rotater2 - 270
+                                        amount = rot2 / 90
+                                        segspeed2 = amount * curspeed2
+                                        y2 = ynow - segspeed2
+                                if rotater2 <= 89.9:
+                                    ynow = y2
+                                    rot2 = -90 + rotater2
+                                    if rot2 >= 0:
+                                        amount = 1
+                                    if rot2 <= 0:
+                                        amount = rot2 / -90
+                                    segspeed2 = amount * curspeed2
+                                    y2 = ynow - segspeed2
+            #movement
+            #Collision/OOB detection
+            if x2 >=1270:
+                x2 = 1268
+            if x2 <= -1:
+                x2 = 2
+            if y2 >= 710:
+                y2 = 708
+            if y2 <= -1:
+                y2 = 2
+            score2 -= 1
         pressed = pygame.key.get_pressed()
         pixcoloour = trackpil[x,y]
         print(rotater)
@@ -700,6 +1184,8 @@ while not done:
         screen.blit(lapl, (10, 40))
         screen.blit(curspeedl, (10, 70))
         screen.blit(carimage2, (x,y))
+        if players == "2":
+            screen.blit(carimage4, (x2,y2))
         if finished:
             screen.blit(donel, (620, 340))
         #ANND, GO!
