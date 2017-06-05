@@ -126,8 +126,8 @@ pixcoloour = (0,0,0)
 mostnos = int(carnos)
 nosleft = int(carnos)
 aero = int(caraero) / 10
-cartopspeed = int(carspeed) / 20 * aero
-topspeed = int(carspeed) / 20 * aero
+cartopspeed = int(carspeed) / 18 * aero
+topspeed = int(carspeed) / 18 * aero
 braking = int(carbrake) / 500 * aero
 accel = int(caraccel) / 2100 * aero
 handling = int(carhandling) / 30 * aero
@@ -189,11 +189,11 @@ while not done:
         print(rotater)
         if not nosinuse:
             if pixcoloour == (0, 0, 0, 255):
-                topspeed = int(carspeed) / 20 * aero
+                topspeed = int(carspeed) / 18 * aero
             else:
                 topspeed = int(carspeed) / 25 * aero
             if pixcoloour == (2, 2, 2, 255):
-                topspeed = int(carspeed) / 20 * aero
+                topspeed = int(carspeed) / 18 * aero
         if atstart:
             if y >= passstart:
                 atstart = False
@@ -683,7 +683,7 @@ while not done:
         nosl = font.render(noslabel, 30, black)
         scorelabel = "Score: " + str(round(score, 1))
         scorel = font.render(scorelabel, 30 , black)
-        speedlabel = curspeed * 46
+        speedlabel = curspeed * 41
         currentlabel = "Speed: " + str(round(speedlabel, 2)) + " Km/h"
         curspeedl = font.render(currentlabel, 30, black)
         placelabel = "Place: " + str(place)
