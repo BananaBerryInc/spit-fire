@@ -27,7 +27,12 @@ fulscr = parser.get("options", "fulscr")
 if fulscr == "True":
     screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
 trackimage = pygame.image.load(trackpath)
+level = int(parser.get("options", "level"))
+points = float(parser.get("options", "points"))
+levelpoints = (int(level) + 100) * 70.3
+levelpixels = float(points) / levelpoints * 300
 track = int(trackstring)
+maxpoints = int(points) + int(score)
 trackkey = "track" + str(track)
 car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
@@ -93,6 +98,8 @@ def backtostart():
     global track
     global trackname
     global clockspeed
+    global points
+    global level
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
@@ -101,6 +108,8 @@ def backtostart():
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))
     parser.set("options", "racefinsihed", "No")
+    parser.set("options", "points", str(round(points, 0)))
+    parser.set("options", "level", str(level))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
     pygame.QUIT
@@ -111,6 +120,15 @@ while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         done = True
+        #Leveling
+        if points <= maxpoints:
+            points += 10.1
+        if points >= levelpoints:
+            level += 1
+            maxpoints = maxpoints - points
+            points = 0
+        levelpoints = (int(level) + 100) * 70.3
+        levelpixels = int(points) / levelpoints * 300
         #Key detection!
         pressed = pygame.key.get_pressed()
         #Movement
@@ -251,8 +269,14 @@ while not done:
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
         donel = font.render("Press space to Exit...", 30, black)
+        pointsl = font.render(str(round(points, 1)) + " / " + str(round(levelpoints, 1)), 10, black)
+        levell = font.render("Level " + str(round(level, 1)), 10, black)
         # Rendering and drawing
         screen.fill(lightblue)
+        pygame.draw.rect(screen, gray, pygame.Rect(700, 300, 300, 40))
+        pygame.draw.rect(screen, blue, pygame.Rect(700, 300, int(levelpixels), 40))
+        screen.blit(levell, (700, 250))
+        screen.blit(pointsl, (700, 350))
         screen.blit(resultsl, (585, 10))
         screen.blit(firstplacel, (300, 80))
         screen.blit(secondplacel, (300, 130))

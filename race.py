@@ -186,7 +186,7 @@ while not done:
         #Key Detection
         pressed = pygame.key.get_pressed()
         pixcoloour = trackpil[x,y]
-        print(pixcoloour)
+        print(rotater)
         if not nosinuse:
             if pixcoloour == (0, 0, 0, 255):
                 topspeed = int(carspeed) / 20 * aero
@@ -246,7 +246,7 @@ while not done:
                     amount = rot2 / 90
                     segspeed = amount * curspeed
                     x = xnow - segspeed
-            if rotater >= 90:
+            if rotater >= 90.01:
                 if rotater <= 180:
                     ynow = y
                     rot2 = rotater - 90
@@ -272,10 +272,10 @@ while not done:
                     xnow = x
                     rot2 = rotater - 270
                     rot3 = -90 + rot2
-                    if rot3 <= 0:
-                        amount = 1
                     if rot3 >= 0:
-                        amount = rot2 / -90
+                        amount = 1
+                    if rot3 <= 0:
+                        amount = rot3 / -90
                     segspeed = amount * curspeed
                     x = xnow + segspeed
             if rotater >= 270:
@@ -285,13 +285,13 @@ while not done:
                     amount = rot2 / 90
                     segspeed = amount * curspeed
                     y = ynow - segspeed
-            if rotater <= 90:
+            if rotater <= 89.9:
                 ynow = y
                 rot2 = -90 + rotater
-                if rot2 <= 0:
-                    amount = 1
                 if rot2 >= 0:
-                    amount = rotater / -90
+                    amount = 1
+                if rot2 <= 0:
+                    amount = rot2 / -90
                 segspeed = amount * curspeed
                 y = ynow - segspeed
         if pressed[pygame.K_LEFT]:
@@ -315,7 +315,7 @@ while not done:
                         amount = rot2 / 90
                         segspeed = amount * curspeed
                         x = xnow - segspeed
-                if rotater >= 90:
+                if rotater >= 90.01:
                     if rotater <= 180:
                         ynow = y
                         rot2 = rotater - 90
@@ -337,14 +337,14 @@ while not done:
                         segspeed = amount * curspeed
                         x = xnow + segspeed
                 if rotater >= 270:
-                    if rotater <= 360:
+                    if rotater <= 359.9:
                         xnow = x
                         rot2 = rotater - 270
                         rot3 = -90 + rot2
-                        if rot3 <= 0:
-                            amount = 1
                         if rot3 >= 0:
-                            amount = rot2 / -90
+                            amount = 1
+                        if rot3 <= 0:
+                            amount = rot3 / -90
                         segspeed = amount * curspeed
                         x = xnow + segspeed
                 if rotater >= 270:
@@ -354,13 +354,13 @@ while not done:
                         amount = rot2 / 90
                         segspeed = amount * curspeed
                         y = ynow - segspeed
-                if rotater <= 90:
+                if rotater <= 89.9:
                     ynow = y
                     rot2 = -90 + rotater
-                    if rot2 <= 0:
-                        amount = 1
                     if rot2 >= 0:
-                        amount = rotater / -90
+                        amount = 1
+                    if rot2 <= 0:
+                        amount = rot2 / -90
                     segspeed = amount * curspeed
                     y = ynow - segspeed
             if rotater >= 360:
@@ -390,7 +390,7 @@ while not done:
                         amount = rot2 / 90
                         segspeed = amount * curspeed
                         x = xnow - segspeed
-                if rotater >= 90:
+                if rotater >= 90.01:
                     if rotater <= 180:
                         ynow = y
                         rot2 = rotater - 90
@@ -416,10 +416,10 @@ while not done:
                         xnow = x
                         rot2 = rotater - 270
                         rot3 = -90 + rot2
-                        if rot3 <= 0:
-                            amount = 1
                         if rot3 >= 0:
-                            amount = rot2 / -90
+                            amount = 1
+                        if rot3 <= 0:
+                            amount = rot3 / -90
                         segspeed = amount * curspeed
                         x = xnow + segspeed
                 if rotater >= 270:
@@ -429,13 +429,13 @@ while not done:
                         amount = rot2 / 90
                         segspeed = amount * curspeed
                         y = ynow - segspeed
-                if rotater <= 90:
+                if rotater <= 89.9:
                     ynow = y
                     rot2 = -90 + rotater
-                    if rot2 <= 0:
-                        amount = 1
                     if rot2 >= 0:
-                        amount = rotater / -90
+                        amount = 1
+                    if rot2 <= 0:
+                        amount = rot2 / -90
                     segspeed = amount * curspeed
                     y = ynow - segspeed
             if curspeed >= topspeed:
@@ -489,7 +489,7 @@ while not done:
                     amount = rot2 / 90
                     segspeed = amount * curspeed
                     x = xnow - segspeed
-            if rotater >= 90:
+            if rotater >= 90.01:
                 if rotater <= 180:
                     ynow = y
                     rot2 = rotater - 90
@@ -515,10 +515,10 @@ while not done:
                     xnow = x
                     rot2 = rotater - 270
                     rot3 = -90 + rot2
-                    if rot3 <= 0:
-                        amount = 1
                     if rot3 >= 0:
-                        amount = rot2 / -90
+                        amount = 1
+                    if rot3 <= 0:
+                        amount = rot3 / -90
                     segspeed = amount * curspeed
                     x = xnow + segspeed
             if rotater >= 270:
@@ -528,13 +528,13 @@ while not done:
                     amount = rot2 / 90
                     segspeed = amount * curspeed
                     y = ynow - segspeed
-            if rotater <= 90:
+            if rotater <= 89.9:
                 ynow = y
                 rot2 = -90 + rotater
-                if rot2 <= 0:
-                    amount = 1
                 if rot2 >= 0:
-                    amount = rotater / -90
+                    amount = 1
+                if rot2 <= 0:
+                    amount = rot2 / -90
                 segspeed = amount * curspeed
                 y = ynow - segspeed
         if not pressed[pygame.K_SPACE]:
@@ -576,12 +576,13 @@ while not done:
                                     amount = rot2 / 90
                                     segspeed = amount * curspeed
                                     x = xnow - segspeed
-                            if rotater >= 90:
+                            if rotater >= 90.01:
                                 if rotater <= 180:
                                     ynow = y
                                     rot2 = rotater - 90
                                     amount = rot2 / 90
                                     segspeed = amount * curspeed
+
                                     y = ynow + segspeed
                             if rotater >= 180:
                                 if rotater <= 270:
@@ -602,10 +603,10 @@ while not done:
                                     xnow = x
                                     rot2 = rotater - 270
                                     rot3 = -90 + rot2
-                                    if rot3 <= 0:
-                                        amount = 1
                                     if rot3 >= 0:
-                                        amount = rot2 / -90
+                                        amount = 1
+                                    if rot3 <= 0:
+                                        amount = rot3 / -90
                                     segspeed = amount * curspeed
                                     x = xnow + segspeed
                             if rotater >= 270:
@@ -615,13 +616,13 @@ while not done:
                                     amount = rot2 / 90
                                     segspeed = amount * curspeed
                                     y = ynow - segspeed
-                            if rotater <= 90:
+                            if rotater <= 89.9:
                                 ynow = y
                                 rot2 = -90 + rotater
-                                if rot2 <= 0:
-                                    amount = 1
                                 if rot2 >= 0:
-                                    amount = rotater / -90
+                                    amount = 1
+                                if rot2 <= 0:
+                                    amount = rot2 / -90
                                 segspeed = amount * curspeed
                                 y = ynow - segspeed
         #movement
@@ -690,6 +691,7 @@ while not done:
         donelabel = "Finsihed!  ANd more because this is cool!"
         donel = font.render(donelabel, 30, black)
         #Drawing and rendering
+        print(amount)
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 130))
         screen.blit(scorel, (10, 100))
