@@ -26,7 +26,7 @@ parser.read("res/options.ini")
 level = parser.get("options", "level")
 points = parser.get("options", "points")
 level = int(level)
-levelpoints = (int(level) + 100) * 70.3
+levelpoints = (int(level) + 100) * 202.2
 levelpoints = round(levelpoints, 1)
 levelpixels = float(points) / levelpoints * 300
 carimage = pygame.image.load("res/ford_gt.png")
@@ -323,7 +323,7 @@ while not done:
             if x >= 1180:
                 if y <= 100:
                     inhelp = True
-            if x <= 60:
+            if x <= 160:
                 if y >= 640:
                     if change == 0:
                         if not fulscr:

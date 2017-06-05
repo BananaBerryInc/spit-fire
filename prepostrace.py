@@ -29,7 +29,7 @@ if fulscr == "True":
 trackimage = pygame.image.load(trackpath)
 level = int(parser.get("options", "level"))
 points = float(parser.get("options", "points"))
-levelpoints = (int(level) + 100) * 70.3
+levelpoints = (int(level) + 100) * 202.2
 levelpixels = float(points) / levelpoints * 300
 track = int(trackstring)
 maxpoints = int(points) + int(score)
@@ -127,7 +127,7 @@ while not done:
             level += 1
             maxpoints = maxpoints - points
             points = 0
-        levelpoints = (int(level) + 100) * 70.3
+        levelpoints = (int(level) + 100) * 202.2
         levelpixels = int(points) / levelpoints * 300
         #Key detection!
         pressed = pygame.key.get_pressed()
