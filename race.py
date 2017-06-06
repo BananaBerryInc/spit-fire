@@ -49,6 +49,7 @@ nosinuse = False
 nosinuse2 = False
 lap = "Lap: "
 lapcount = 0
+lapcount2 = 0
 place = 11
 atstart = True
 atstart2 = True
@@ -234,13 +235,13 @@ while not done:
                     if x2 <= passstart:
                         atstart2 = False
             if not atstart2:
-                if not newlap:
+                if not newlap2:
                     if y2 >= startneg80x:
                         if y2 <= start80x:
                             if x2 <= startliney:
                                 score2 += 2000
-                                lapcount += 1
-                                newlap = True
+                                lapcount2 += 1
+                                newlap2 = True
                                 atstart2 = False
             if not atstart2:
                 laptime += 1
@@ -249,7 +250,7 @@ while not done:
                         if x2 <= checkplus40x:
                             if x2 >= checkminus40x:
                                 atstart2 = False
-                                newlap = False
+                                newlap2 = False
                                 laptime = 0
             if pressed[pygame.K_ESCAPE]:
                 pygame.QUIT
@@ -485,17 +486,17 @@ while not done:
                     lastdirection = RightDown
             #Getting that nos working!!!
             if pressed[pygame.K_LSHIFT]:
-                if nosleft >= 1:
-                    nosleft -= 1
+                if nosleft2 >= 1:
+                    nosleft2 -= 1
                     topspeed2 += 0.2
                     nosinuse2 = True
-                else:
-                   nosinuse2 = False
-                   if topspeed2 >= cartopspeed2:
-                       topspeed2 -= 0.1
-                   if not nosinuse2:
-                       if nosleft <= mostnos:
-                           nosleft += 0.1
+            else:
+                nosinuse2 = False
+                if topspeed2 >= cartopspeed2:
+                    topspeed2 -= 0.1
+                if not nosinuse2:
+                    if nosleft2 <= mostnos2:
+                        nosleft2 += 0.1
             if pressed[pygame.K_s]:
                 curspeed2 = curspeed2 - braking
                 if curspeed2 >= -1.6:
@@ -570,13 +571,13 @@ while not done:
                         amount = rot2 / -90
                     segspeed2 = amount * curspeed2
                     y2 = ynow - segspeed2
-            if not pressed[pygame.K_SPACE]:
+            if not pressed[pygame.K_LSHIFT]:
                 nosinuse2 = False
                 if topspeed2 >= cartopspeed2:
                     topspeed2 -= 0.1
                 if not nosinuse2:
-                    if nosleft <= mostnos:
-                        nosleft += 0.1
+                    if nosleft2 <= mostnos:
+                        nosleft2 += 0.1
             if not pressed[pygame.K_d]:
                 if not pressed[pygame.K_a]:
                     if not pressed[pygame.K_s]:
@@ -1120,6 +1121,14 @@ while not done:
             y = 708
         if y <= -1:
             y = 2
+        if x2 >=1270:
+            x2 = 1268
+        if x2 <= -1:
+            x2 = 2
+        if y2 >= 710:
+            y2 = 708
+        if y2 <= -1:
+            y2 = 2
         score -= 1
         #Getting the placing
         if score <= p10:
@@ -1155,6 +1164,44 @@ while not done:
         if score >= p1:
             place = 1
             togo = p10 - score
+        if score2 <= p10:
+            place2 = 11
+            togo = p10 - score
+        if score2 >= p10:
+            place2 = 10
+            togo = p10 - score
+        if score2 >= p9:
+            place2 = 9
+            togo = p10 - score
+        if score2 >= p8:
+            place2 = 8
+            togo = p10 - score
+        if score2 >= p7:
+            place2 = 7
+            togo = p10 - score
+        if score2 >= p6:
+            place2 = 6
+            togo = p10 - score
+        if score2 >= p5:
+            place2 = 5
+            togo = p10 - score
+        if score2 >= p4:
+            place2 = 4
+            togo = p10 - score
+        if score2 >= p3:
+            place2 = 3
+            togo = p10 - score
+        if score2 >= p2:
+            place2 = 2
+            togo = p10 - score
+        if score2 >= p1:
+            place2 = 1
+            togo = p10 - score
+        if place2 == place:
+            if score >= score2:
+                place2 += 1
+            if score2 >= score:
+                place += 1
         #Finishing!
         if lapcount >= maxlaps:
             #PAssoff scfript here
@@ -1173,19 +1220,45 @@ while not done:
         curspeedl = font.render(currentlabel, 30, black)
         placelabel = "Place: " + str(place)
         placel = font.render(placelabel, 30, black)
+        playerl = font.render("Player 1:", 30, black)
+        if players == "2":
+            laplabel = str(lapcount2) + "/" + str(maxlap)
+            lapl2 = font.render(laplabel, 10 ,black)
+            nosleftround = round(nosleft2, 1)
+            noslabel = str(nosleftround)
+            nosl2 = font.render(noslabel, 30, black)
+            scorelabel = str(round(score2, 1))
+            scorel2 = font.render(scorelabel, 30 , black)
+            speedlabel = curspeed2 * 41
+            currentlabel = str(round(speedlabel, 2)) + " Km/h"
+            curspeedl2 = font.render(currentlabel, 30, black)
+            placelabel = str(place2)
+            placel2 = font.render(placelabel, 30, black)
+            player2l = font.render("Player 2:", 30, black)
+            if trackkey == "track2":
+                placel2 = font.render(placelabel, 30, white)
+                curspeedl2 = font.render(currentlabel, 30, white)
+                scorel2 = font.render(scorelabel, 30 , white)
         donelabel = "Finsihed!  ANd more because this is cool!"
         donel = font.render(donelabel, 30, black)
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))
-        screen.blit(placel, (10, 130))
-        screen.blit(scorel, (10, 100))
-        screen.blit(nosl, (10, 10))
-        screen.blit(lapl, (10, 40))
-        screen.blit(curspeedl, (10, 70))
-        screen.blit(carimage2, (x,y))
+        screen.blit(placel, (10, 160))
+        screen.blit(scorel, (10, 130))
+        screen.blit(nosl, (10, 40))
+        screen.blit(lapl, (10, 70))
+        screen.blit(curspeedl, (10, 100))
+        screen.blit(playerl, (10, 10))
         if players == "2":
+            screen.blit(player2l, (205, 10))
+            screen.blit(placel2, (205, 160))
+            screen.blit(scorel2, (205, 130))
+            screen.blit(nosl2, (205, 40))
+            screen.blit(lapl2, (205, 70))
+            screen.blit(curspeedl2, (205, 100))
             screen.blit(carimage4, (x2,y2))
+        screen.blit(carimage2, (x,y))
         if finished:
             screen.blit(donel, (620, 340))
         #ANND, GO!
