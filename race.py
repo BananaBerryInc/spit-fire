@@ -136,6 +136,7 @@ p9 = int(parser.get(trackkey, "9"))
 p10 = parser.get(trackkey, "10")
 p10 = int(p10)
 pixcoloour = (0,0,0)
+changetr = 0
 
 #More Variables!!!!
 mostnos = int(carnos)
@@ -180,6 +181,10 @@ if trackkey == "track3" :
     carimage2 = pygame.transform.rotate(carimage, 90)
     rotater = 90
     passstart = startlinex - 10
+if trackkey == "track4" :
+    carimage2 = pygame.transform.rotate(carimage, 270)
+    rotater = 270
+    passstart = startlinex + 10
 pos = 0
 togo = 0
 maxlaps = maxlap + 1
@@ -233,6 +238,9 @@ while not done:
                     atstart2 = False
                 if trackkey2 == "track3":
                     if x2 <= passstart:
+                        atstart2 = False
+                if trackkey2 == "track4":
+                    if x2 >= passstart:
                         atstart2 = False
             if not atstart2:
                 if not newlap2:
@@ -686,6 +694,9 @@ while not done:
             if trackkey == "track3":
                 if x <= passstart:
                     atstart = False
+            if trackkey2 == "track4":
+                if x2 >= passstart:
+                    atstart2 = False
         if not atstart:
             if not newlap:
                 if y >= startneg80x:
@@ -1241,6 +1252,23 @@ while not done:
                 scorel2 = font.render(scorelabel, 30 , white)
         donelabel = "Finsihed!  ANd more because this is cool!"
         donel = font.render(donelabel, 30, black)
+        if trackkey == "track4":
+            changetr -= 1
+            if trackpath == "res/Camelback Pass (1).png":
+                if changetr <= 0:
+                    trackimage = pygame.image.load("res/Camelback Pass (2).png")
+                    trackpath = "res/Camelback Pass (2).png"
+                    changetr = 6
+            if trackpath == "res/Camelback Pass (2).png":
+                if changetr <= 0:
+                    trackimage = pygame.image.load("res/Camelback Pass (3).png")
+                    trackpath = "res/Camelback Pass (3).png"
+                    changetr = 6
+            if trackpath == "res/Camelback Pass (3).png":
+                if changetr <= 0:
+                    trackimage = pygame.image.load("res/Camelback Pass (1).png")
+                    trackpath = "res/Camelback Pass (1).png"
+                    changetr = 6
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))

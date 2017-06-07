@@ -472,7 +472,7 @@ while not done:
                 track += 1
                 tracktotalstr = parser.get("info", "tracktotal")
                 tracktotal = int(tracktotalstr)
-                if track >> tracktotal:
+                if track >= tracktotal:
                     track = 1
                 if track == 2:
                     trackname = parser.get("track2", "trackname")
