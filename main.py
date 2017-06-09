@@ -481,16 +481,23 @@ while not done:
                     trackname = parser.get("track1", "trackname")
                     trackpath = parser.get("track1", "trackpath")
                 if track == 3:
-                    trackname = parser.get("track3", "trackname")
-                    trackpath = parser.get("track3", "trackpath")
+                    if level >= 3:
+                        trackname = parser.get("track3", "trackname")
+                        trackpath = parser.get("track3", "trackpath")
                 if track == 4:
-                    trackname = parser.get("track4", "trackname")
-                    trackpath = parser.get("track4", "trackpath")
+                    if level >= 10:
+                        trackname = parser.get("track4", "trackname")
+                        trackpath = parser.get("track4", "trackpath")
                 if track == 5:
-                    trackname = parser.get("track5", "trackname")
-                    trackpath = parser.get("track5", "trackpath")
+                    if level >= 14:
+                        trackname = parser.get("track5", "trackname")
+                        trackpath = parser.get("track5", "trackpath")
+                if track == 6:
+                    if level >= 15:
+                        trackname = parser.get("track6", "trackname")
+                        trackpath = parser.get("track6", "trackpath")
         #Change Speed
-        if pressed[pygame.K_s]:
+        if pressed[pygame.K_b]:
             if change == 0:
                 change = 10
                 clockspeed = clockspeed + 50
@@ -542,13 +549,19 @@ while not done:
         helplabel1 = "On the Menu screen:"
         helplabel2 = "Press C to change cars"
         helplabel3 = "Press T to change tracks"
-        helplabel4 = "Press S to change the clockspeed"
+        helplabel4 = "Press B to change the clockspeed"
         helplabel5 = "During a race:"
         helplabel6 = "Left and Right steer"
         helplabel7 = "Up is the gas pedal"
         helplabel8 = "Down is the brake"
         helplabel9 = "Space will use your nos"
-        helplabel10 = "Press escape to get rid of this messsage"
+        helplabel10 = "Press escape to get rid of this message"
+        helplabel11 = "Press P to change amount of players (Up to 2)"
+        helplabel12 = "W,A,S,D + Left Shift Keys control player 2 in the same way as player 1"
+        helplabel13 = "About Leveling:"
+        helplabel14 = "At each new level (up to level 14) you will unlock a new car or track"
+        helplabel15 = "(They will be automatically added to the Menu screen.)"
+        helplabel16 = "Press V to change the second player vehicle"
         fullscrlabel = "Fullscreen"
         playerlabel = "Players : " + str(players)
         playerl = font.render(playerlabel, 10, white)
@@ -568,6 +581,12 @@ while not done:
         helpl8 = font.render(helplabel8, 10 ,white)
         helpl9 = font.render(helplabel9, 10 ,white)
         helpl10 = font.render(helplabel10, 10 ,white)
+        helpl11 = font.render(helplabel11, 10 ,white)
+        helpl12 = font.render(helplabel12, 10 ,white)
+        helpl13 = font.render(helplabel13, 10 ,white)
+        helpl14 = font.render(helplabel14, 10 ,white)
+        helpl15 = font.render(helplabel15, 10 ,white)
+        helpl16 = font.render(helplabel16, 10 ,white)
         help10 = font.render(help, 10 ,white)
         #Drawing/rendering
         pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
@@ -595,17 +614,23 @@ while not done:
             screen.blit(carimage4, (x2,y2))
         if inhelp:
             screen.fill(darkdarkred)
-            screen.blit(helpl, (555, 10))
-            screen.blit(helpl1, (320, 40))
-            screen.blit(helpl2, (320, 70))
-            screen.blit(helpl3, (320, 100))
-            screen.blit(helpl4, (320, 130))
-            screen.blit(helpl5, (655, 40))
-            screen.blit(helpl6, (655, 70))
-            screen.blit(helpl7, (655, 100))
-            screen.blit(helpl8, (655, 130))
-            screen.blit(helpl9, (655, 160))
-            screen.blit(helpl10, (490, 230))
+            screen.blit(helpl, (565, 10))
+            screen.blit(helpl1, (100, 40))
+            screen.blit(helpl2, (100, 70))
+            screen.blit(helpl3, (100, 100))
+            screen.blit(helpl4, (100, 130))
+            screen.blit(helpl5, (600, 40))
+            screen.blit(helpl6, (600, 70))
+            screen.blit(helpl7, (600, 100))
+            screen.blit(helpl8, (600, 130))
+            screen.blit(helpl9, (600, 160))
+            screen.blit(helpl10, (430, 400))
+            screen.blit(helpl11, (100, 160))
+            screen.blit(helpl12, (600, 190))
+            screen.blit(helpl13, (400, 250))
+            screen.blit(helpl14, (400, 280))
+            screen.blit(helpl15, (400, 310))
+            screen.blit(helpl16, (100, 190))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)

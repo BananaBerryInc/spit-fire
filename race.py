@@ -180,11 +180,21 @@ carimage4 = pygame.transform.rotate(carimage3, 0)
 if trackkey == "track3" :
     carimage2 = pygame.transform.rotate(carimage, 90)
     rotater = 90
+    carimage4 = pygame.transform.rotate(carimage3, 90)
+    rotater2 = 90
     passstart = startlinex - 10
 if trackkey == "track4" :
     carimage2 = pygame.transform.rotate(carimage, 270)
     rotater = 270
-    passstart = startlinex + 10
+    carimage4 = pygame.transform.rotate(carimage3, 270)
+    rotater2 = 270
+    passstart = startlinex - 10
+if trackkey == "track6" :
+    carimage2 = pygame.transform.rotate(carimage, 270)
+    rotater = 270
+    carimage4 = pygame.transform.rotate(carimage3, 270)
+    rotater2 = 270
+    passstart = startlinex - 10
 pos = 0
 togo = 0
 maxlaps = maxlap + 1
@@ -498,6 +508,8 @@ while not done:
                     nosleft2 -= 1
                     topspeed2 += 0.2
                     nosinuse2 = True
+                    if trackkey == "track5":
+                        topspeed2 += 0.2
             else:
                 nosinuse2 = False
                 if topspeed2 >= cartopspeed2:
@@ -953,6 +965,8 @@ while not done:
                 nosleft -= 1
                 topspeed += 0.2
                 nosinuse = True
+                if trackkey == "track5":
+                    topspeed += 0.2
             else:
                nosinuse = False
                if topspeed >= cartopspeed:
@@ -1238,6 +1252,13 @@ while not done:
         placelabel = "Place: " + str(place)
         placel = font.render(placelabel, 30, black)
         playerl = font.render("Player 1:", 30, black)
+        if trackkey == "track5":
+            placel = font.render(placelabel, 30, white)
+            playerl = font.render("Player 1:", 30, white)
+            curspeedl = font.render(currentlabel, 30, white)
+            scorel = font.render(scorelabel, 30 , white)
+            nosl = font.render(noslabel, 30, white)
+            lapl = font.render(laplabel, 10 ,white)
         if players == "2":
             laplabel = str(lapcount2) + "/" + str(maxlap)
             lapl2 = font.render(laplabel, 10 ,black)
@@ -1253,6 +1274,13 @@ while not done:
             placel2 = font.render(placelabel, 30, black)
             player2l = font.render("Player 2:", 30, black)
             if trackkey == "track2":
+                placel2 = font.render(placelabel, 30, white)
+                curspeedl2 = font.render(currentlabel, 30, white)
+                scorel2 = font.render(scorelabel, 30 , white)
+            if trackkey == "track5":
+                lapl2 = font.render(laplabel, 10 ,white)
+                nosl2 = font.render(noslabel, 30, white)
+                player2l = font.render("Player 2:", 30, white)
                 placel2 = font.render(placelabel, 30, white)
                 curspeedl2 = font.render(currentlabel, 30, white)
                 scorel2 = font.render(scorelabel, 30 , white)
@@ -1275,6 +1303,18 @@ while not done:
                     trackimage = pygame.image.load("res/Camelback Pass (1).png")
                     trackpath = "res/Camelback Pass (1).png"
                     changetr = 6
+        if trackkey == "track6":
+            changetr -= 1
+            if trackpath == "res/Not An Animal This Time (1).png":
+                if changetr <= 0:
+                    trackimage = pygame.image.load("res/Not An Animal This Time (2).png")
+                    trackpath = "res/Not An Animal This Time (2).png"
+                    changetr = 10
+            if trackpath == "res/Not An Animal This Time (2).png":
+                if changetr <= 0:
+                    trackimage = pygame.image.load("res/Not An Animal This Time (1).png")
+                    trackpath = "res/Not An Animal This Time (1).png"
+                    changetr = 10
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))
