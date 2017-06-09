@@ -309,6 +309,30 @@ while not done:
                         change = 10
             if currentcar == "Limited Gold Koenigsegg One":
                 if change == 0:
+                    if level >= 16:
+                        currentcar = "Toyota Supra"
+                        carimagepath = "res/Toyota Supra.png"
+                        carimage = pygame.image.load("res/Toyota Supra.png")
+                        change = 10
+                    else:
+                        currentcar = "ford_gt"
+                        carimagepath = "res/ford_gt.png"
+                        carimage = pygame.image.load("res/ford_gt.png")
+                        change = 10
+            if currentcar == "Toyota Supra":
+                if change == 0:
+                    if level >= 17:
+                        currentcar = "WMotors Fenyr SuperSport"
+                        carimagepath = "res/WMotors Fenyr SuperSport.png"
+                        carimage = pygame.image.load("res/WMotors Fenyr SuperSport.png")
+                        change = 10
+                    else:
+                        currentcar = "ford_gt"
+                        carimagepath = "res/ford_gt.png"
+                        carimage = pygame.image.load("res/ford_gt.png")
+                        change = 10
+            if currentcar == "WMotors Fenyr SuperSport":
+                if change == 0:
                     currentcar = "ford_gt"
                     carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")
@@ -449,11 +473,34 @@ while not done:
                             change = 10
                 if currentcar2 == "Limited Gold Koenigsegg One":
                     if change == 0:
+                        if level >= 16:
+                            currentcar2 = "Toyota Supra"
+                            carimagepath2 = "res/Toyota Supra.png"
+                            carimage4 = pygame.image.load("res/Toyota Supra.png")
+                            change = 10
+                        else:
+                            currentcar2 = "ford_gt"
+                            carimagepath2 = "res/ford_gt.png"
+                            carimage4 = pygame.image.load("res/ford_gt.png")
+                            change = 10
+                if currentcar2 == "Toyota Supra":
+                    if change == 0:
+                        if level >= 17:
+                            currentcar2 = "WMotors Fenyr SuperSport"
+                            carimagepath2 = "res/WMotors Fenyr SuperSport.png"
+                            carimage4 = pygame.image.load("res/WMotors Fenyr SuperSport.png")
+                            change = 10
+                        else:
+                            currentcar2 = "ford_gt"
+                            carimagepath2 = "res/ford_gt.png"
+                            carimage4 = pygame.image.load("res/ford_gt.png")
+                            change = 10
+                if currentcar2 == "WMotors Fenyr SuperSport":
+                    if change == 0:
                         currentcar2 = "ford_gt"
                         carimagepath2 = "res/ford_gt.png"
                         carimage4 = pygame.image.load("res/ford_gt.png")
                         change = 10
-
         #Change Players
         if pressed[pygame.K_p]:
             if players == 1:
@@ -559,7 +606,7 @@ while not done:
         helplabel11 = "Press P to change amount of players (Up to 2)"
         helplabel12 = "W,A,S,D + Left Shift Keys control player 2 in the same way as player 1"
         helplabel13 = "About Leveling:"
-        helplabel14 = "At each new level (up to level 14) you will unlock a new car or track"
+        helplabel14 = "At each new level (up to level 17) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
         helplabel16 = "Press V to change the second player vehicle"
         fullscrlabel = "Fullscreen"
