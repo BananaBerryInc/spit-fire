@@ -13,7 +13,7 @@ font = pygame.font.SysFont("freesansbold.ttf", 30)
 font50 = pygame.font.SysFont("freesansbold.ttf", 50)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 1")
+pygame.display.set_caption("Spitfire Alpha 2")
 pygame.display.flip()
 
 #Variables
@@ -524,25 +524,34 @@ while not done:
                 if track == 2:
                     trackname = parser.get("track2", "trackname")
                     trackpath = parser.get("track2", "trackpath")
-                if track == 1:
-                    trackname = parser.get("track1", "trackname")
-                    trackpath = parser.get("track1", "trackpath")
+
                 if track == 3:
                     if level >= 3:
                         trackname = parser.get("track3", "trackname")
                         trackpath = parser.get("track3", "trackpath")
+                    else:
+                        track = 1
                 if track == 4:
                     if level >= 10:
                         trackname = parser.get("track4", "trackname")
                         trackpath = parser.get("track4", "trackpath")
+                    else:
+                        track = 1
                 if track == 5:
                     if level >= 14:
                         trackname = parser.get("track5", "trackname")
                         trackpath = parser.get("track5", "trackpath")
+                    else:
+                        track = 1
                 if track == 6:
                     if level >= 15:
                         trackname = parser.get("track6", "trackname")
                         trackpath = parser.get("track6", "trackpath")
+                    else:
+                        track = 1
+                if track == 1:
+                    trackname = parser.get("track1", "trackname")
+                    trackpath = parser.get("track1", "trackpath")
         #Change Speed
         if pressed[pygame.K_b]:
             if change == 0:
