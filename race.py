@@ -6,6 +6,7 @@ import io
 import subprocess
 from configparser import SafeConfigParser
 from PIL import Image
+from random import randint
 
 #Settin' up the window!
 pygame.init()
@@ -184,6 +185,8 @@ startneg80x = startlinex - 80
 start80x = startlinex + 80
 passstart = startliney + 10
 rotater = 0
+gear = 1
+gear2 = 1
 rotater2 = 0
 carimage2 = pygame.transform.rotate(carimage, 0)
 carimage4 = pygame.transform.rotate(carimage3, 0)
@@ -1341,6 +1344,56 @@ while not done:
                 x = 10
             if x2 >= 1230:
                 x2 = 10
+            if gear == 1:
+                if curspeed >= topspeed / 4:
+                    curspeed = topspeed  / 4 + 0.1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+            if gear == 2:
+                if curspeed >= topspeed / 2.5:
+                    curspeed = topspeed / 2.5 + 0.1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+            if gear == 3:
+                if curspeed >= topspeed / 2:
+                    curspeed = topspeed / 2 + 0.1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+            if gear == 4:
+                if curspeed >= topspeed / 1.5:
+                    curspeed = topspeed / 1.5 + 0.1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+            if gear == 5:
+                if curspeed >= topspeed / 1.3:
+                    curspeed = topspeed / 1.3 + 0.1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+            if gear2 == 1:
+                if curspeed2 >= topspeed2 / 4:
+                    curspeed2 = topspeed2  / 4 + 0.1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+            if gear2 == 2:
+                if curspeed2 >= topspeed2 / 2.5:
+                    curspeed2 = topspeed2 / 2.5 + 0.1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+            if gear2 == 3:
+                if curspeed2 >= topspeed2 / 2:
+                    curspeed2 = topspeed2 / 2 + 0.1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+            if gear2 == 4:
+                if curspeed2 >= topspeed2 / 1.5:
+                    curspeed2 = topspeed2 / 1.5 + 0.1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+            if gear2 == 5:
+                if curspeed2 >= topspeed2 / 1.3:
+                    curspeed2 = topspeed2 / 1.3 + 0.1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))
