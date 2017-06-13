@@ -16,5 +16,5 @@ set /p id="if you just got an error, type in the path to python.exe here:"
 
 %id% main.py
 
-::Sleep to see if there errors in the code...
+::Sleep to see if there are errors in the code...
 pause

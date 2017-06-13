@@ -58,6 +58,8 @@ newlap = False
 newlap2 = False
 laptime = 0
 score = 0
+enginecounter = 0
+enginecounter2 = 0
 Up = "Up"
 Down = "Down"
 Left = "Left"
@@ -215,6 +217,8 @@ if trackkey == "track7" :
     rotater2 = 270
     passstart = startlinex - 10
     y -= 30
+    nosleft = 0
+    nosleft2 = 0
 pos = 0
 togo = 0
 maxlaps = maxlap + 1
@@ -1344,56 +1348,99 @@ while not done:
                 x = 10
             if x2 >= 1230:
                 x2 = 10
+            shifttext = ""
+            shifttext2 = ""
+            if enginecounter >= clockspeed * 6:
+                curspeed -= 0.5
+                if curspeed <= 0:
+                    curspeed = 0
+            if enginecounter2 >= clockspeed * 6:
+                curspeed2 -= 0.5
+                if curspeed2 >= 0:
+                    curspeed2 = 0
             if gear == 1:
                 if curspeed >= topspeed / 4:
+                    shifttext = "Shift Now!"
                     curspeed = topspeed  / 4 + 0.1
+                    enginecounter +=  2
                     if pressed[pygame.K_RSHIFT]:
                         gear +=1
+                        enginecounter = 0
             if gear == 2:
                 if curspeed >= topspeed / 2.5:
+                    shifttext = "Shift Now!"
                     curspeed = topspeed / 2.5 + 0.1
+                    enginecounter +=  1
                     if pressed[pygame.K_RSHIFT]:
                         gear +=1
+                        enginecounter = 0
             if gear == 3:
                 if curspeed >= topspeed / 2:
                     curspeed = topspeed / 2 + 0.1
+                    shifttext = "Shift Now!"
+                    enginecounter +=  1
                     if pressed[pygame.K_RSHIFT]:
                         gear +=1
+                        enginecounter = 0
             if gear == 4:
                 if curspeed >= topspeed / 1.5:
                     curspeed = topspeed / 1.5 + 0.1
+                    shifttext = "Shift Now!"
+                    enginecounter +=  1
                     if pressed[pygame.K_RSHIFT]:
                         gear +=1
+                        enginecounter = 0
             if gear == 5:
                 if curspeed >= topspeed / 1.3:
                     curspeed = topspeed / 1.3 + 0.1
+                    shifttext = "Shift Now!"
+                    enginecounter +=  1
                     if pressed[pygame.K_RSHIFT]:
                         gear +=1
+                        enginecounter = 0
             if gear2 == 1:
                 if curspeed2 >= topspeed2 / 4:
                     curspeed2 = topspeed2  / 4 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
                     if pressed[pygame.K_r]:
                         gear2 +=1
+                        enginecounter2 = 0
             if gear2 == 2:
                 if curspeed2 >= topspeed2 / 2.5:
                     curspeed2 = topspeed2 / 2.5 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
                     if pressed[pygame.K_r]:
                         gear2 +=1
+                        enginecounter2 = 0
             if gear2 == 3:
                 if curspeed2 >= topspeed2 / 2:
                     curspeed2 = topspeed2 / 2 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
+                    
                     if pressed[pygame.K_r]:
                         gear2 +=1
+                        enginecounter2 = 0
             if gear2 == 4:
                 if curspeed2 >= topspeed2 / 1.5:
                     curspeed2 = topspeed2 / 1.5 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
                     if pressed[pygame.K_r]:
                         gear2 +=1
+                        enginecounter2 = 0
             if gear2 == 5:
                 if curspeed2 >= topspeed2 / 1.3:
                     curspeed2 = topspeed2 / 1.3 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
                     if pressed[pygame.K_r]:
                         gear2 +=1
+                        enginecounter2 = 0
+            shiftl = font.render(shifttext, 30, black)
+            shiftl2 = font.render(shifttext2, 30, black)
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))
@@ -1403,6 +1450,9 @@ while not done:
         screen.blit(lapl, (10, 70))
         screen.blit(curspeedl, (10, 100))
         screen.blit(playerl, (10, 10))
+        if trackkey == "track7":
+            screen.blit(shiftl, (10, 190))
+            screen.blit(shiftl2, (205, 190))
         if players == "2":
             screen.blit(player2l, (205, 10))
             screen.blit(placel2, (205, 160))
