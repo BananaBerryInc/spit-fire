@@ -135,6 +135,16 @@ p8 = int(parser.get(trackkey, "8"))
 p9 = int(parser.get(trackkey, "9"))
 p10 = parser.get(trackkey, "10")
 p10 = int(p10)
+p1 = randint(-1 , 99) + p1
+p2 = randint(-1 , 99) + p2
+p3 = randint(-1 , 99) + p3
+p4 = randint(-1, 99) + p4
+p5 = randint(-1 , 99) + p5
+p6 = randint(-1, 99) + p6
+p7 = randint(-1 , 99) + p7
+p8 = randint(-1 , 99) + p8
+p9 = randint(-1 , 99) + p9
+p10 = randint(-1 , 99) + p10
 pixcoloour = (0,0,0)
 changetr = 0
 
@@ -195,6 +205,13 @@ if trackkey == "track6" :
     carimage4 = pygame.transform.rotate(carimage3, 270)
     rotater2 = 270
     passstart = startlinex - 10
+if trackkey == "track7" :
+    carimage2 = pygame.transform.rotate(carimage, 270)
+    rotater = 270
+    carimage4 = pygame.transform.rotate(carimage3, 270)
+    rotater2 = 270
+    passstart = startlinex - 10
+    y -= 30
 pos = 0
 togo = 0
 maxlaps = maxlap + 1
@@ -274,7 +291,7 @@ while not done:
                 pygame.QUIT
                 quit()
             if pressed[pygame.K_w]:
-                curspeed2 = curspeed2 + accel
+                curspeed2 = curspeed2 + accel2
                 lastdirection = Up
                 if curspeed2 >= topspeed2:
                     curspeed2 = topspeed2
@@ -597,7 +614,7 @@ while not done:
                     topspeed2 -= 0.1
                 if not nosinuse2:
                     if nosleft2 <= mostnos:
-                        nosleft2 += 0.1
+                        nosleft2 += 0.0
             if not pressed[pygame.K_d]:
                 if not pressed[pygame.K_a]:
                     if not pressed[pygame.K_s]:
@@ -709,6 +726,8 @@ while not done:
             if trackkey2 == "track4":
                 if x2 >= passstart:
                     atstart2 = False
+            if trackkey2 == "track7":
+                    atstart = False
         if not atstart:
             if not newlap:
                 if y >= startneg80x:
@@ -969,6 +988,8 @@ while not done:
                     topspeed += 0.2
             else:
                nosinuse = False
+               if trackkey == "track5":
+                   nosleft += 0.2
                if topspeed >= cartopspeed:
                    topspeed -= 0.1
                if not nosinuse:
@@ -1315,6 +1336,11 @@ while not done:
                     trackimage = pygame.image.load("res/Not An Animal This Time (1).png")
                     trackpath = "res/Not An Animal This Time (1).png"
                     changetr = 10
+        if trackkey == "track7":
+            if x >= 1230:
+                x = 10
+            if x2 >= 1230:
+                x2 = 10
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))

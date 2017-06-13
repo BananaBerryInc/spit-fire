@@ -549,6 +549,12 @@ while not done:
                         trackpath = parser.get("track6", "trackpath")
                     else:
                         track = 1
+                if track == 7:
+                    if level >= 18:
+                        trackname = parser.get("track7", "trackname")
+                        trackpath = parser.get("track7", "trackpath")
+                    else:
+                        track = 1
                 if track == 1:
                     trackname = parser.get("track1", "trackname")
                     trackpath = parser.get("track1", "trackpath")
