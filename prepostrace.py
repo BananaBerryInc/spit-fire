@@ -57,16 +57,6 @@ p8 = int(parser.get(trackkey, "8"))
 p9 = int(parser.get(trackkey, "9"))
 p10 = parser.get(trackkey, "10")
 p10 = int(p10)
-p1 = randint(-1 , 99) + p1
-p2 = randint(-1 , 99) + p2
-p3 = randint(-1 , 99) + p3
-p4 = randint(-1, 99) + p4
-p5 = randint(-1 , 99) + p5
-p6 = randint(-1, 99) + p6
-p7 = randint(-1 , 99) + p7
-p8 = randint(-1 , 99) + p8
-p9 = randint(-1 , 99) + p9
-p10 = randint(-1 , 99) + p10
 
 #Colours (Thanks to atmatm6 for the code in this section!)
 black = (0,0,0)

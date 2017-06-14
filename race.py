@@ -184,6 +184,11 @@ y = startlinex
 x2 = startliney
 y2 = startlinex
 startneg80x = startlinex - 80
+if trackkey != "track4":
+    if trackkey != "track3":
+        if trackkey != "track6":
+            if trackkey != "track7":
+                startneg80x = startlinex
 start80x = startlinex + 80
 passstart = startliney + 10
 rotater = 0
@@ -241,12 +246,36 @@ def sendtopost():
     global clockspeed
     global score
     global place
+    global trackkey
+    global p1
+    global p2
+    global p3
+    global p4
+    global p5
+    global p6
+    global p7
+    global p8
+    global p9
+    global p10
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "racefinsihed", "Yes")
     parser.set("options", "score", str(score))
     parser.set("options", "place", str(place))
     with open('res/options.ini', 'w') as configfile:
+        parser.write(configfile)
+    parser.read("res/highscore.ini")
+    parser.set(trackkey, "1", str(p1))
+    parser.set(trackkey, "2", str(p2))
+    parser.set(trackkey, "3", str(p3))
+    parser.set(trackkey, "4", str(p4))
+    parser.set(trackkey, "5", str(p5))
+    parser.set(trackkey, "6", str(p6))
+    parser.set(trackkey, "7", str(p7))
+    parser.set(trackkey, "8", str(p8))
+    parser.set(trackkey, "9", str(p9))
+    parser.set(trackkey, "10", str(p10))
+    with open('res/highscore.ini', 'w') as configfile:
         parser.write(configfile)
     exec(open("prepostrace.py").read())
 
@@ -280,11 +309,32 @@ while not done:
                 if not newlap2:
                     if y2 >= startneg80x:
                         if y2 <= start80x:
-                            if x2 <= startliney:
-                                score2 += 2000
-                                lapcount2 += 1
-                                newlap2 = True
-                                atstart2 = False
+                            if trackkey == "track3":
+                                if x2 >= startliney:
+                                    score2 += 2000
+                                    lapcount2 += 1
+                                    newlap2 = True
+                                    atstart2 = False
+                            if trackkey == "track4":
+                                if x2 >= startliney:
+                                    score2 += 2000
+                                    lapcount2 += 1
+                                    newlap2 = True
+                                    atstart2 = False
+                            if trackkey == "track6":
+                                if x2 >= startliney:
+                                    score2 += 2000
+                                    lapcount2 += 1
+                                    newlap2 = True
+                                    atstart2 = False
+                            if trackkey != "track4":
+                                if trackkey != "track3":
+                                    if trackkey != "track6":
+                                        if x2 <= startliney:
+                                            score2 += 2000
+                                            lapcount2 += 1
+                                            newlap2 = True
+                                            atstart2 = False
             if not atstart2:
                 laptime += 1
                 if y2 >= checkminus40y:
@@ -534,6 +584,13 @@ while not done:
                     nosinuse2 = True
                     if trackkey == "track5":
                         topspeed2 += 0.2
+                else:
+                    nosinuse2 = False
+                    if topspeed2 >= cartopspeed2:
+                        topspeed2 -= 0.1
+                    if not nosinuse2:
+                        if nosleft2 <= mostnos2:
+                            nosleft2 += 0.1
             else:
                 nosinuse2 = False
                 if topspeed2 >= cartopspeed2:
@@ -739,11 +796,32 @@ while not done:
             if not newlap:
                 if y >= startneg80x:
                     if y <= start80x:
-                        if x <= startliney:
-                            score += 2000
-                            lapcount += 1
-                            newlap = True
-                            atstart = False
+                        if trackkey == "track3":
+                            if x >= startliney:
+                                score += 2000
+                                lapcount += 1
+                                newlap = True
+                                atstart = False
+                        if trackkey == "track4":
+                            if x >= startliney:
+                                score += 2000
+                                lapcount += 1
+                                newlap = True
+                                atstart = False
+                        if trackkey == "track6":
+                            if x >= startliney:
+                                score += 2000
+                                lapcount += 1
+                                newlap = True
+                                atstart = False
+                        if trackkey != "track4":
+                            if trackkey != "track3":
+                                if trackkey != "track6":
+                                    if x <= startliney:
+                                        score += 2000
+                                        lapcount += 1
+                                        newlap = True
+                                        atstart = False
         if not atstart:
             laptime += 1
             if y >= checkminus40y:
@@ -833,7 +911,6 @@ while not done:
             lastdirection = Left
             if curspeed >= topspeed:
                 curspeed = topspeed
-            rotater += handling
             if not pressed [pygame.K_UP]:
                 if rotater <= 90:
                     xnow = x
@@ -898,6 +975,7 @@ while not done:
                         amount = rot2 / -90
                     segspeed = amount * curspeed
                     y = ynow - segspeed
+            rotater += handling
             if rotater >= 360:
                 rotater = 0
             if rotater <= 0:
@@ -1223,37 +1301,37 @@ while not done:
         if score >= p1 / lapstogo:
             place = 1
             togo = p10 - score
-        if score2 <= p10 / lapstogo2:
+        if score2 <= p10 / lapstogo:
             place2 = 11
             togo = p10 - score
-        if score2 >= p10 / lapstogo2:
+        if score2 >= p10 / lapstogo:
             place2 = 10
             togo = p10 - score
-        if score2 >= p9 / lapstogo2:
+        if score2 >= p9 / lapstogo:
             place2 = 9
             togo = p10 - score
-        if score2 >= p8 / lapstogo2:
+        if score2 >= p8 / lapstogo:
             place2 = 8
             togo = p10 - score
-        if score2 >= p7 / lapstogo2:
+        if score2 >= p7 / lapstogo:
             place2 = 7
             togo = p10 - score
-        if score2 >= p6 / lapstogo2:
+        if score2 >= p6 / lapstogo:
             place2 = 6
             togo = p10 - score
-        if score2 >= p5 / lapstogo2:
+        if score2 >= p5 / lapstogo:
             place2 = 5
             togo = p10 - score
-        if score2 >= p4 / lapstogo2:
+        if score2 >= p4 / lapstogo:
             place2 = 4
             togo = p10 - score
-        if score2 >= p3 / lapstogo2:
+        if score2 >= p3 / lapstogo:
             place2 = 3
             togo = p10 - score
-        if score2 >= p2 / lapstogo2:
+        if score2 >= p2 / lapstogo:
             place2 = 2
             togo = p10 - score
-        if score2 >= p1 / lapstogo2:
+        if score2 >= p1 / lapstogo:
             place2 = 1
             togo = p10 - score
         if place2 == place:
@@ -1419,7 +1497,7 @@ while not done:
                     curspeed2 = topspeed2 / 2 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    
+
                     if pressed[pygame.K_r]:
                         gear2 +=1
                         enginecounter2 = 0

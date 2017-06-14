@@ -29,6 +29,9 @@ carimagepath2 = "res/ford_gt.png"
 carimage2 = pygame.image.load("res/ford_gt.png")
 parser = SafeConfigParser()
 parser.read("res/options.ini")
+fulscr = parser.get("options", "fulscr")
+if fulscr == "True":
+    screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
 level = parser.get("options", "level")
 points = parser.get("options", "points")
 level = int(level)
@@ -43,7 +46,6 @@ cartext = "Car: "
 track = 1
 trackname = "First_track"
 clockspeed = 100
-fulscr = False
 change = 0
 carimage3 = carimage
 carimage4 = carimage
