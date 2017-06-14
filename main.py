@@ -2,10 +2,15 @@
 import os
 import sys
 import pygame
+import os.path as osp
 import io
 import subprocess
 from configparser import SafeConfigParser
-
+import git
+from subprocess import call
+call(["cd",".."])
+call(["rm","spit-fire"])
+git.Git().clone("https://github.com/BananaBerryInc/spit-fire")
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
