@@ -55,7 +55,7 @@ p6 = int(parser.get(trackkey, "6"))
 p7 = int(parser.get(trackkey, "7"))
 p8 = int(parser.get(trackkey, "8"))
 p9 = int(parser.get(trackkey, "9"))
-p10 = parser.get(trackkey, "10")
+p10 = parser.get(trackkey, "p10")
 p10 = int(p10)
 
 #Colours (Thanks to atmatm6 for the code in this section!)
