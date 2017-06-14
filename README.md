@@ -3,6 +3,8 @@
 NOTE : As of build/commit 102 (or Alpha 2), PIL (Python Image Library) is required to run spit-fire!!!!
 
 
+Spit-fire is a top down racing game that is built in Python and Pygame. You can race solo, with a friend, or in a drag race. There is a leveling system and hours of content in the game. Download or fork it now!
+
 
 This is our first game we ever made so it is probabally not the best,but we both put alot of time and effort into this
 
