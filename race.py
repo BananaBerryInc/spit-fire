@@ -1334,11 +1334,12 @@ while not done:
         if score2 >= p1 / lapstogo:
             place2 = 1
             togo = p10 - score
-        if place2 == place:
-            if score >= score2:
-                place2 += 1
-            if score2 >= score:
-                place += 1
+        if lapstogo >= 2:
+            if place2 == place:
+                if score >= score2:
+                    place2 += 1
+                if score2 >= score:
+                    place += 1
         #Finishing!
         if lapcount >= maxlaps:
             #PAssoff scfript here
