@@ -25,7 +25,10 @@ x2 = 60
 y2 = 60
 players = 1
 inhelp = False
+shifting = "Automatic"
+shifting2 = "Automatic"
 currentcar2 = "ford_gt"
+back = pygame.image.load("res/Title Screen Parking Lot.png")
 carimagepath2 = "res/ford_gt.png"
 carimage2 = pygame.image.load("res/ford_gt.png")
 parser = SafeConfigParser()
@@ -34,6 +37,8 @@ fulscr = parser.get("options", "fulscr")
 if fulscr == "True":
     screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
 level = parser.get("options", "level")
+shifting = parser.get("options", "shifting")
+shifting2 = parser.get("options", "shifting2")
 points = parser.get("options", "points")
 level = int(level)
 levelpoints = (int(level) + 100) * 202.2
@@ -107,10 +112,14 @@ def sendtomain():
     global levelpoints
     global players
     global car2
+    global shifting
+    global shifting2
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
     parser.set("options", "car", currentcar)
+    parser.set("options", "shifting", shifting)
+    parser.set("options", "shifting2", shifting2)
     parser.set("options", "car2", currentcar2)
     parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
@@ -590,6 +599,38 @@ while not done:
                         if fulscr:
                             screen = pygame.display.set_mode((1280, 720))
                             fulscr = False
+            if x >= 200:
+                if x <= 362:
+                    if players == 1:
+                        if y >= 620:
+                            if change == 0:
+                                if shifting == "Automatic":
+                                    shifting = "Manual"
+                                    change = 10
+                            if change == 0:
+                                if shifting == "Manual":
+                                    shifting = "Automatic"
+                                    change = 10
+                    if players == 2:
+                        if y >= 620:
+                            if y <= 679:
+                                if change == 0:
+                                    if shifting == "Automatic":
+                                        shifting = "Manual"
+                                        change = 10
+                                if change == 0:
+                                    if shifting == "Manual":
+                                        shifting = "Automatic"
+                                        change = 10
+                        if y >= 680:
+                            if change == 0:
+                                if shifting2 == "Automatic":
+                                    shifting2 = "Manual"
+                                    change = 10
+                            if change == 0:
+                                if shifting2 == "Manual":
+                                    shifting2 = "Automatic"
+                                    change = 10
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -624,10 +665,11 @@ while not done:
         helplabel11 = "Press P to change amount of players (Up to 2)"
         helplabel12 = "W,A,S,D + Left Shift Keys control player 2 in the same way as player 1"
         helplabel13 = "About Leveling:"
-        helplabel14 = "At each new level (up to level 17) you will unlock a new car or track"
+        helplabel14 = "At each new level (up to level 18) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
         helplabel16 = "Press V to change the second player vehicle"
         fullscrlabel = "Fullscreen"
+        shiftinglabel = "Shifting:"
         playerlabel = "Players : " + str(players)
         playerl = font.render(playerlabel, 10, white)
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
@@ -635,6 +677,9 @@ while not done:
         levelposition = levelpoints
         fullscrl = font.render(fullscrlabel, 10, white)
         welcomel = font.render(welcometo, 10 ,white)
+        shiftingtitle = font.render(shiftinglabel, 10 ,white)
+        shiftingl = font.render(shifting, 10 ,white)
+        shifting2l = font.render(shifting2, 10 ,white)
         helpl = font.render(helplabel, 10 ,white)
         helpl1 = font.render(helplabel1, 10 ,white)
         helpl2 = font.render(helplabel2, 10 ,white)
@@ -654,29 +699,33 @@ while not done:
         helpl16 = font.render(helplabel16, 10 ,white)
         help10 = font.render(help, 10 ,white)
         #Drawing/rendering
-        pygame.draw.rect(screen, darkdarkred, pygame.Rect(0, 0, 6000, 6000))
+        screen.blit(back, (0,0))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
-        pygame.draw.rect(screen, gray, pygame.Rect(700, 300, 300, 40))
-        pygame.draw.rect(screen, blue, pygame.Rect(700, 300, int(levelpixels), 40))
-        screen.blit(levell, (700, 250))
-        screen.blit(pointsl, (700, 350))
+        pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
+        pygame.draw.rect(screen, gray, pygame.Rect(800, 300, 300, 40))
+        pygame.draw.rect(screen, blue, pygame.Rect(800, 300, int(levelpixels), 40))
+        screen.blit(levell, (800, 250))
+        screen.blit(shiftingtitle, (201, 641))
+        screen.blit(shiftingl, (201, 671))
+        screen.blit(pointsl, (800, 350))
         screen.blit(helpl, (1180, 0))
         screen.blit(fullscrl, (0, 650))
-        screen.blit(tracklabel2, (100,200))
-        screen.blit(clockspeedlabel2, (100, 250))
+        screen.blit(tracklabel2, (150,200))
+        screen.blit(clockspeedlabel2, (150, 250))
         screen.blit(label, (1185, 625))
         screen.blit(labelstart, (10, 10))
-        screen.blit(carlabel2, (100, 150))
-        screen.blit(help10, (495, 680))
-        screen.blit(logo, (600, 10))
-        screen.blit(welcomel, (495, 60))
-        screen.blit(playerl, (100, 300))
+        screen.blit(carlabel2, (150, 150))
+        screen.blit(help10, (495, 580))
+        screen.blit(logo, (630, 0))
+        screen.blit(welcomel, (520, 45))
+        screen.blit(playerl, (150, 300))
         screen.blit(carimage2, (x,y))
         if players == 2:
             screen.blit(carimage4, (x2,y2))
+            screen.blit(shifting2l, (201, 701))
         if inhelp:
             screen.fill(darkdarkred)
             screen.blit(helpl, (565, 10))

@@ -24,6 +24,8 @@ carimagepath = parser.get("options", "carimage")
 carimagepath2 = parser.get("options", "carimage2")
 trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
+shifting = parser.get("options", "shifting")
+shifting2 = parser.get("options", "shifting2")
 fulscr = parser.get("options", "fulscr")
 if fulscr == "True":
     screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
@@ -1520,6 +1522,126 @@ while not done:
                         enginecounter2 = 0
             shiftl = font.render(shifttext, 30, black)
             shiftl2 = font.render(shifttext2, 30, black)
+        if shifting == "Manual":
+            shifttext = ""
+            shifttext2 = ""
+            if enginecounter >= clockspeed * 6:
+                curspeed -= 0.5
+                if curspeed <= 0:
+                    curspeed = 0
+            if enginecounter2 >= clockspeed * 6:
+                curspeed2 -= 0.5
+                if curspeed2 >= 0:
+                    curspeed2 = 0
+            if gear == 1:
+                if curspeed >= topspeed / 4:
+                    shifttext = "Shift Now!"
+                    curspeed = topspeed  / 4 + 0.1
+                    enginecounter +=  2
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+                        enginecounter = 0
+            if gear == 2:
+                if curspeed >= topspeed / 2.5:
+                    shifttext = "Shift Now!"
+                    curspeed = topspeed / 2.5 + 0.1
+                    enginecounter +=  1
+                if curspeed <= topspeed / 2.7:
+                    if enginecounter >= 50:
+                        gear -= 1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+                        enginecounter = 0
+            if gear == 3:
+                if curspeed >= topspeed / 2:
+                    curspeed = topspeed / 2 + 0.1
+                    shifttext = "Shift Now!"
+                    enginecounter +=  1
+                if curspeed <= topspeed / 2.3:
+                    if enginecounter >= 50:
+                        gear -= 1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+                        enginecounter = 0
+            if gear == 4:
+                if curspeed >= topspeed / 1.5:
+                    curspeed = topspeed / 1.5 + 0.1
+                    shifttext = "Shift Now!"
+                    enginecounter +=  1
+                if curspeed <= topspeed / 1.7:
+                    if enginecounter >= 50:
+                        gear -= 1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+                        enginecounter = 0
+            if gear == 5:
+                if curspeed >= topspeed / 1.3:
+                    curspeed = topspeed / 1.3 + 0.1
+                    shifttext = "Shift Now!"
+                    enginecounter +=  1
+                if curspeed <= topspeed / 1.5:
+                    if enginecounter >= 50:
+                        gear -= 1
+                    if pressed[pygame.K_RSHIFT]:
+                        gear +=1
+                        enginecounter = 0
+        if shifting2 == "Manual":
+            if gear2 == 1:
+                if curspeed2 >= topspeed2 / 4:
+                    curspeed2 = topspeed2  / 4 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+                        enginecounter2 = 0
+            if gear2 == 2:
+                if curspeed2 >= topspeed2 / 2.5:
+                    curspeed2 = topspeed2 / 2.5 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
+                if curspeed2 <= topspeed2 / 2.8:
+                    if enginecounter2 >= 50:
+                        gear2 -= 1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+                        enginecounter2 = 0
+            if gear2 == 3:
+                if curspeed2 >= topspeed2 / 2:
+                    curspeed2 = topspeed2 / 2 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
+                if curspeed2 <= topspeed2 / 2.2:
+                    if enginecounter2 >= 50:
+                        gear2 -= 1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+                        enginecounter2 = 0
+            if gear2 == 4:
+                if curspeed2 >= topspeed2 / 1.5:
+                    curspeed2 = topspeed2 / 1.5 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
+                if curspeed2 <= topspeed2 / 1.7:
+                    if enginecounter2 >= 50:
+                        gear2 -= 1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+                        enginecounter2 = 0
+            if gear2 == 5:
+                if curspeed2 >= topspeed2 / 1.3:
+                    curspeed2 = topspeed2 / 1.3 + 0.1
+                    shifttext2 = "Shift Now!"
+                    enginecounter2 +=  1
+                    if pressed[pygame.K_r]:
+                        gear2 +=1
+                        enginecounter2 = 0
+                if curspeed2 <= topspeed2 / 1.5:
+                    if enginecounter2 >= 50:
+                        gear2 -= 1
+            shiftl = font.render(shifttext, 30, black)
+            shiftl2 = font.render(shifttext2, 30, black)
+        shiftl = font.render(shifttext, 30, black)
+        shiftl2 = font.render(shifttext2, 30, black)
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))
@@ -1532,6 +1654,10 @@ while not done:
         if trackkey == "track7":
             screen.blit(shiftl, (10, 190))
             screen.blit(shiftl2, (205, 190))
+        if shifting == "Manual":
+            screen.blit(shiftl, (10, 190))
+        if shifting2 == "Manual":
+            screen.blit(shiftl2, (10, 190))
         if players == "2":
             screen.blit(player2l, (205, 10))
             screen.blit(placel2, (205, 160))
