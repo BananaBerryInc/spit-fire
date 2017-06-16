@@ -14,7 +14,7 @@ font = pygame.font.SysFont("freesansbold.ttf", 30)
 font50 = pygame.font.SysFont("freesansbold.ttf", 50)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 2")
+pygame.display.set_caption("Spitfire Alpha 3")
 pygame.display.flip()
 
 #Variables
@@ -27,6 +27,8 @@ players = 1
 inhelp = False
 shifting = "Automatic"
 shifting2 = "Automatic"
+shifttext = ""
+shifttext2 = ""
 currentcar2 = "ford_gt"
 back = pygame.image.load("res/Title Screen Parking Lot.png")
 carimagepath2 = "res/ford_gt.png"
@@ -668,6 +670,8 @@ while not done:
         helplabel14 = "At each new level (up to level 18) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
         helplabel16 = "Press V to change the second player vehicle"
+        helplabel17 = "Press Right Shift or E to shift gears"
+        helplabel18 = "Shifting is always manual on the Drag Strip"
         fullscrlabel = "Fullscreen"
         shiftinglabel = "Shifting:"
         playerlabel = "Players : " + str(players)
@@ -697,6 +701,8 @@ while not done:
         helpl14 = font.render(helplabel14, 10 ,white)
         helpl15 = font.render(helplabel15, 10 ,white)
         helpl16 = font.render(helplabel16, 10 ,white)
+        helpl17 = font.render(helplabel17, 10 ,white)
+        helpl18 = font.render(helplabel18, 10 ,white)
         help10 = font.render(help, 10 ,white)
         #Drawing/rendering
         screen.blit(back, (0,0))
@@ -738,13 +744,15 @@ while not done:
             screen.blit(helpl7, (600, 100))
             screen.blit(helpl8, (600, 130))
             screen.blit(helpl9, (600, 160))
-            screen.blit(helpl10, (430, 400))
+            screen.blit(helpl10, (430, 450))
             screen.blit(helpl11, (100, 160))
             screen.blit(helpl12, (600, 190))
-            screen.blit(helpl13, (400, 250))
-            screen.blit(helpl14, (400, 280))
-            screen.blit(helpl15, (400, 310))
+            screen.blit(helpl13, (400, 310))
+            screen.blit(helpl14, (400, 350))
+            screen.blit(helpl15, (400, 380))
             screen.blit(helpl16, (100, 190))
+            screen.blit(helpl17, (600, 220))
+            screen.blit(helpl18, (600, 250))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)

@@ -14,7 +14,7 @@ pygame.font.init()
 font = pygame.font.SysFont("freesansbold.ttf", 30)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 2")
+pygame.display.set_caption("Spitfire Alpha 3")
 pygame.display.flip()
 
 #Re-collecting those settings!
@@ -1484,7 +1484,7 @@ while not done:
                     curspeed2 = topspeed2  / 4 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 2:
@@ -1492,7 +1492,7 @@ while not done:
                     curspeed2 = topspeed2 / 2.5 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 3:
@@ -1501,7 +1501,7 @@ while not done:
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
 
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 4:
@@ -1509,7 +1509,7 @@ while not done:
                     curspeed2 = topspeed2 / 1.5 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 5:
@@ -1517,7 +1517,7 @@ while not done:
                     curspeed2 = topspeed2 / 1.3 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             shiftl = font.render(shifttext, 30, black)
@@ -1591,7 +1591,7 @@ while not done:
                     curspeed2 = topspeed2  / 4 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 2:
@@ -1602,7 +1602,7 @@ while not done:
                 if curspeed2 <= topspeed2 / 2.8:
                     if enginecounter2 >= 50:
                         gear2 -= 1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 3:
@@ -1613,7 +1613,7 @@ while not done:
                 if curspeed2 <= topspeed2 / 2.2:
                     if enginecounter2 >= 50:
                         gear2 -= 1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 4:
@@ -1624,7 +1624,7 @@ while not done:
                 if curspeed2 <= topspeed2 / 1.7:
                     if enginecounter2 >= 50:
                         gear2 -= 1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
             if gear2 == 5:
@@ -1632,7 +1632,7 @@ while not done:
                     curspeed2 = topspeed2 / 1.3 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                    if pressed[pygame.K_r]:
+                    if pressed[pygame.K_e]:
                         gear2 +=1
                         enginecounter2 = 0
                 if curspeed2 <= topspeed2 / 1.5:
