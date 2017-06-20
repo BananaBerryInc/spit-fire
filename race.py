@@ -226,6 +226,11 @@ if trackkey == "track7" :
     y -= 30
     nosleft = 0
     nosleft2 = 0
+if trackkey == "track5":
+    cartopspeed2 = int(carspeed2) / 10 * aero2
+    topspeed2 = int(carspeed2) / 10 * aero2
+    cartopspeed = int(carspeed) / 10 * aero
+    topspeed = int(carspeed) / 10 * aero
 pos = 0
 togo = 0
 maxlaps = maxlap + 1
@@ -286,6 +291,7 @@ while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         done = True
+        #Mainloop
         #Key Detection
         if players == "2":
             pressed = pygame.key.get_pressed()
@@ -294,9 +300,15 @@ while not done:
             if not nosinuse2:
                 if pixcoloour == (0, 0, 0, 255):
                     topspeed2 = int(carspeed2) / 18 * aero2
+                    if trackkey == "track5":
+                        cartopspeed2 = int(carspeed2) / 10 * aero2
+                        topspeed2 = int(carspeed2) / 10 * aero2
                 else:
                     topspeed2 = int(carspeed2) / 25 * aero2
                 if pixcoloour == (2, 2, 2, 255):
+                    if trackkey == "track5":
+                        cartopspeed2 = int(carspeed2) / 10 * aero2
+                        topspeed2 = int(carspeed2) / 10 * aero2
                     topspeed2 = int(carspeed2) / 18 * aero2
             if atstart2:
                 if y2 >= passstart:
@@ -779,10 +791,16 @@ while not done:
         if not nosinuse:
             if pixcoloour == (0, 0, 0, 255):
                 topspeed = int(carspeed) / 18 * aero
+                if trackkey == "track5":
+                    cartopspeed = int(carspeed) / 10 * aero
+                    topspeed = int(carspeed) / 10 * aero
             else:
                 topspeed = int(carspeed) / 25 * aero
             if pixcoloour == (2, 2, 2, 255):
                 topspeed = int(carspeed) / 18 * aero
+                if trackkey == "track5":
+                    cartopspeed = int(carspeed) / 10 * aero
+                    topspeed = int(carspeed) / 10 * aero
         if atstart:
             if y >= passstart:
                 atstart = False

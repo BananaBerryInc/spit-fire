@@ -29,7 +29,7 @@ shifting = "Automatic"
 shifting2 = "Automatic"
 shifttext = ""
 shifttext2 = ""
-currentcar2 = "ford_gt"
+currentcar2 = "Ford GT"
 back = pygame.image.load("res/Title Screen Parking Lot.png")
 carimagepath2 = "res/ford_gt.png"
 carimage2 = pygame.image.load("res/ford_gt.png")
@@ -49,7 +49,7 @@ levelpixels = float(points) / levelpoints * 300
 carimage = pygame.image.load("res/ford_gt.png")
 carimage2 = pygame.image.load("res/ford_gt.png")
 carimagepath = "res/ford_gt.png"
-currentcar = "ford_gt"
+currentcar = "Ford GT"
 cartext = "Car: "
 track = 1
 trackname = "First_track"
@@ -144,6 +144,10 @@ while not done:
         #Mainloop...?
         #Key detection!
         pressed = pygame.key.get_pressed()
+        #Quit With the escape key
+        if pressed[pygame.K_ESCAPE]:
+            pygame.QUIT
+            quit()
         #Movement
         if pressed[pygame.K_UP]:
             y -= 3
@@ -197,11 +201,11 @@ while not done:
                         carimage = pygame.image.load("res/Koenigsegg_One.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
-            if currentcar == "Ferrari_F40":
+            if currentcar == "Ferrari F40":
                 if change == 0:
                     if level >= 5:
                         currentcar = "Dodge_Challenger"
@@ -209,19 +213,19 @@ while not done:
                         carimage = pygame.image.load("res/Dodge_Challenger.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
-            if currentcar == "ford_gt":
+            if currentcar == "Ford GT":
                 if change == 0:
                     if level >= 2:
-                        currentcar = "Ferrari_F40"
+                        currentcar = "Ferrari F40"
                         carimagepath = "res/Ferrari_F40.png"
                         carimage = pygame.image.load("res/Ferrari_F40.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -233,7 +237,7 @@ while not done:
                         carimage = pygame.image.load("res/Bugatti Vision GT Gran Turismo.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -245,7 +249,7 @@ while not done:
                         carimage = pygame.image.load("res/Camaro ZL1 1LE.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -257,7 +261,7 @@ while not done:
                         carimage = pygame.image.load("res/Mclaren P1.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -269,7 +273,7 @@ while not done:
                         carimage = pygame.image.load("res/Nissan 240SX.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -281,7 +285,7 @@ while not done:
                         carimage = pygame.image.load("res/Nissan GTR R35.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -293,7 +297,7 @@ while not done:
                         carimage = pygame.image.load("res/Porsche 918.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -305,7 +309,7 @@ while not done:
                         carimage = pygame.image.load("res/Nitro Cart.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -317,7 +321,7 @@ while not done:
                         carimage = pygame.image.load("res/Limited Gold Koenigsegg One.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -329,7 +333,7 @@ while not done:
                         carimage = pygame.image.load("res/Toyota Supra.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -341,13 +345,49 @@ while not done:
                         carimage = pygame.image.load("res/WMotors Fenyr SuperSport.png")
                         change = 10
                     else:
-                        currentcar = "ford_gt"
+                        currentcar = "Ford GT"
                         carimagepath = "res/ford_gt.png"
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
             if currentcar == "WMotors Fenyr SuperSport":
                 if change == 0:
-                    currentcar = "ford_gt"
+                    if level >= 19:
+                        currentcar = "1998 Ferrari F355 Spider"
+                        carimagepath = "res/1998 Ferrari F355 Spider.png"
+                        carimage = pygame.image.load("res/1998 Ferrari F355 Spider.png")
+                        change = 10
+                    else:
+                        currentcar = "Ford GT"
+                        carimagepath = "res/ford_gt.png"
+                        carimage = pygame.image.load("res/ford_gt.png")
+                        change = 10
+            if currentcar == "1998 Ferrari F355 Spider":
+                if change == 0:
+                    if level >= 20:
+                        currentcar = "Dodge Viper ACR"
+                        carimagepath = "res/Dodge Viper ACR.png"
+                        carimage = pygame.image.load("res/Dodge Viper ACR.png")
+                        change = 10
+                    else:
+                        currentcar = "Ford GT"
+                        carimagepath = "res/ford_gt.png"
+                        carimage = pygame.image.load("res/ford_gt.png")
+                        change = 10
+            if currentcar == "Dodge Viper ACR":
+                if change == 0:
+                    if level >= 21:
+                        currentcar = "2016 Lamborghini Huracan LP610-4"
+                        carimagepath = "res/2016 Lamborghini Huracan LP610-4.png"
+                        carimage = pygame.image.load("res/2016 Lamborghini Huracan LP610-4.png")
+                        change = 10
+                    else:
+                        currentcar = "Ford GT"
+                        carimagepath = "res/ford_gt.png"
+                        carimage = pygame.image.load("res/ford_gt.png")
+                        change = 10
+            if currentcar == "2016 Lamborghini Huracan LP610-4":
+                if change == 0:
+                    currentcar = "Ford GT"
                     carimagepath = "res/ford_gt.png"
                     carimage = pygame.image.load("res/ford_gt.png")
                     change = 10
@@ -361,11 +401,11 @@ while not done:
                             carimage4 = pygame.image.load("res/Koenigsegg_One.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
-                if currentcar2 == "Ferrari_F40":
+                if currentcar == "Ferrari F40":
                     if change == 0:
                         if level >= 5:
                             currentcar2 = "Dodge_Challenger"
@@ -373,19 +413,19 @@ while not done:
                             carimage4 = pygame.image.load("res/Dodge_Challenger.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
                 if currentcar2 == "ford_gt":
                     if change == 0:
                         if level >= 2:
-                            currentcar2 = "Ferrari_F40"
+                            currentcar2 = "Ferrari F40"
                             carimagepath2 = "res/Ferrari_F40.png"
                             carimage4 = pygame.image.load("res/Ferrari_F40.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -397,7 +437,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Bugatti Vision GT Gran Turismo.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -409,7 +449,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Camaro ZL1 1LE.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -421,7 +461,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Mclaren P1.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -433,7 +473,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Nissan 240SX.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -445,7 +485,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Nissan GTR R35.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -457,7 +497,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Porsche 918.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -469,7 +509,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Nitro Cart.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -481,7 +521,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Limited Gold Koenigsegg One.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -493,7 +533,7 @@ while not done:
                             carimage4 = pygame.image.load("res/Toyota Supra.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
@@ -505,13 +545,49 @@ while not done:
                             carimage4 = pygame.image.load("res/WMotors Fenyr SuperSport.png")
                             change = 10
                         else:
-                            currentcar2 = "ford_gt"
+                            currentcar2 = "Ford GT"
                             carimagepath2 = "res/ford_gt.png"
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
                 if currentcar2 == "WMotors Fenyr SuperSport":
                     if change == 0:
-                        currentcar2 = "ford_gt"
+                        if level >= 19:
+                            currentcar2 = "1998 Ferrari F355 Spider"
+                            carimagepath2 = "res/1998 Ferrari F355 Spider.png"
+                            carimage4 = pygame.image.load("res/1998 Ferrari F355 Spider.png")
+                            change = 10
+                        else:
+                            currentcar2 = "Ford GT"
+                            carimagepath2 = "res/ford_gt.png"
+                            carimage4 = pygame.image.load("res/ford_gt.png")
+                            change = 10
+                if currentcar2 == "1998 Ferrari F355 Spider":
+                    if change == 0:
+                        if level >= 20:
+                            currentcar2 = "Dodge Viper ACR"
+                            carimagepath2 = "res/Dodge Viper ACR.png"
+                            carimage4 = pygame.image.load("res/Dodge Viper ACR.png")
+                            change = 10
+                        else:
+                            currentcar2 = "Ford GT"
+                            carimagepath2 = "res/ford_gt.png"
+                            carimage4 = pygame.image.load("res/ford_gt.png")
+                            change = 10
+                if currentcar2 == "Dodge Viper ACR":
+                    if change == 0:
+                        if level >= 21:
+                            currentcar2 = "2016 Lamborghini Huracan LP610-4"
+                            carimagepath2 = "res/2016 Lamborghini Huracan LP610-4.png"
+                            carimage4 = pygame.image.load("res/2016 Lamborghini Huracan LP610-4.png")
+                            change = 10
+                        else:
+                            currentcar2 = "Ford GT"
+                            carimagepath2 = "res/ford_gt.png"
+                            carimage4 = pygame.image.load("res/ford_gt.png")
+                            change = 10
+                if currentcar2 == "2016 Lamborghini Huracan LP610-4":
+                    if change == 0:
+                        currentcar2 = "Ford GT"
                         carimagepath2 = "res/ford_gt.png"
                         carimage4 = pygame.image.load("res/ford_gt.png")
                         change = 10
@@ -667,13 +743,13 @@ while not done:
         helplabel11 = "Press P to change amount of players (Up to 2)"
         helplabel12 = "W,A,S,D + Left Shift Keys control player 2 in the same way as player 1"
         helplabel13 = "About Leveling:"
-        helplabel14 = "At each new level (up to level 18) you will unlock a new car or track"
+        helplabel14 = "At each new level (up to level 21) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
         helplabel16 = "Press V to change the second player vehicle"
         helplabel17 = "Press Right Shift or E to shift gears"
         helplabel18 = "Shifting is always manual on the Drag Strip"
         fullscrlabel = "Fullscreen"
-        shiftinglabel = "Shifting:"
+        shiftinglabel = "Shifting: (Beta)"
         playerlabel = "Players : " + str(players)
         playerl = font.render(playerlabel, 10, white)
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
