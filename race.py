@@ -1564,45 +1564,45 @@ while not done:
                     shifttext = "Shift Now!"
                     curspeed = topspeed / 2.5 + 0.1
                     enginecounter +=  1
-                if curspeed <= topspeed / 2.7:
-                    if enginecounter >= 50:
-                        gear -= 1
                     if pressed[pygame.K_RSHIFT]:
-                        gear +=1
-                        enginecounter = 0
+                            gear +=1
+                            enginecounter = 0
+                if curspeed <= topspeed / 2.7:
+                    if enginecounter >= 5:
+                        gear -= 1
             if gear == 3:
                 if curspeed >= topspeed / 2:
                     curspeed = topspeed / 2 + 0.1
                     shifttext = "Shift Now!"
                     enginecounter +=  1
-                if curspeed <= topspeed / 2.3:
-                    if enginecounter >= 50:
-                        gear -= 1
                     if pressed[pygame.K_RSHIFT]:
-                        gear +=1
-                        enginecounter = 0
+                            gear +=1
+                            enginecounter = 0
+                if curspeed <= topspeed / 2.3:
+                    if enginecounter >= 5:
+                        gear -= 1
             if gear == 4:
                 if curspeed >= topspeed / 1.5:
                     curspeed = topspeed / 1.5 + 0.1
                     shifttext = "Shift Now!"
                     enginecounter +=  1
-                if curspeed <= topspeed / 1.7:
-                    if enginecounter >= 50:
-                        gear -= 1
                     if pressed[pygame.K_RSHIFT]:
-                        gear +=1
-                        enginecounter = 0
+                            gear +=1
+                            enginecounter = 0
+                if curspeed <= topspeed / 1.7:
+                    if enginecounter >= 5:
+                        gear -= 1
             if gear == 5:
                 if curspeed >= topspeed / 1.3:
                     curspeed = topspeed / 1.3 + 0.1
                     shifttext = "Shift Now!"
                     enginecounter +=  1
-                if curspeed <= topspeed / 1.5:
-                    if enginecounter >= 50:
-                        gear -= 1
                     if pressed[pygame.K_RSHIFT]:
-                        gear +=1
-                        enginecounter = 0
+                            gear +=1
+                            enginecounter = 0
+                if curspeed <= topspeed / 1.5:
+                    if enginecounter >= 5:
+                        gear -= 1
         if shifting2 == "Manual":
             if gear2 == 1:
                 if curspeed2 >= topspeed2 / 4:
@@ -1617,34 +1617,34 @@ while not done:
                     curspeed2 = topspeed2 / 2.5 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                if curspeed2 <= topspeed2 / 2.8:
-                    if enginecounter2 >= 50:
-                        gear2 -= 1
                     if pressed[pygame.K_e]:
-                        gear2 +=1
-                        enginecounter2 = 0
+                            gear2 +=1
+                            enginecounter2 = 0
+                if curspeed2 <= topspeed2 / 2.8:
+                    if enginecounter2 >= 5:
+                        gear2 -= 1
             if gear2 == 3:
                 if curspeed2 >= topspeed2 / 2:
                     curspeed2 = topspeed2 / 2 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                if curspeed2 <= topspeed2 / 2.2:
-                    if enginecounter2 >= 50:
-                        gear2 -= 1
                     if pressed[pygame.K_e]:
-                        gear2 +=1
-                        enginecounter2 = 0
+                            gear2 +=1
+                            enginecounter2 = 0
+                if curspeed2 <= topspeed2 / 2.2:
+                    if enginecounter2 >= 5:
+                        gear2 -= 1
             if gear2 == 4:
                 if curspeed2 >= topspeed2 / 1.5:
                     curspeed2 = topspeed2 / 1.5 + 0.1
                     shifttext2 = "Shift Now!"
                     enginecounter2 +=  1
-                if curspeed2 <= topspeed2 / 1.7:
-                    if enginecounter2 >= 50:
-                        gear2 -= 1
                     if pressed[pygame.K_e]:
-                        gear2 +=1
-                        enginecounter2 = 0
+                            gear2 +=1
+                            enginecounter2 = 0
+                if curspeed2 <= topspeed2 / 1.7:
+                    if enginecounter2 >= 5:
+                        gear2 -= 1
             if gear2 == 5:
                 if curspeed2 >= topspeed2 / 1.3:
                     curspeed2 = topspeed2 / 1.3 + 0.1
