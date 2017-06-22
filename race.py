@@ -183,7 +183,7 @@ checkplus40y = checky + 80
 checkminus40y = checky - 80
 x = startliney
 y = startlinex
-x2 = startliney
+x2 = startliney - 61
 y2 = startlinex
 startneg80x = startlinex - 80
 if trackkey != "track4":
@@ -295,7 +295,10 @@ while not done:
         #Key Detection
         if players == "2":
             pressed = pygame.key.get_pressed()
-            pixcoloour = trackpil[x2,y2]
+            try:
+                pixcoloour = trackpil[x2 + 30,y2 + 30]
+            except IndexError:
+                pixcoloour = trackpil[x2,y2]
             print(rotater2)
             if not nosinuse2:
                 if pixcoloour == (0, 0, 0, 255):
@@ -304,7 +307,10 @@ while not done:
                         cartopspeed2 = int(carspeed2) / 10 * aero2
                         topspeed2 = int(carspeed2) / 10 * aero2
                 else:
-                    topspeed2 = int(carspeed2) / 25 * aero2
+                    if curspeed2 >= int(carspeed2) / 25 * aero2:
+                        curspeed2 -= 0.4
+                    else:
+                        topspeed2 = int(carspeed2) / 25 * aero2
                 if pixcoloour == (2, 2, 2, 255):
                     if trackkey == "track5":
                         cartopspeed2 = int(carspeed2) / 10 * aero2
@@ -786,7 +792,10 @@ while not done:
                 y2 = 2
             score2 -= 1
         pressed = pygame.key.get_pressed()
-        pixcoloour = trackpil[x,y]
+        try:
+            pixcoloour = trackpil[x + 30,y + 30]
+        except IndexError:
+            pixcoloour = trackpil[x,y]
         print(rotater)
         if not nosinuse:
             if pixcoloour == (0, 0, 0, 255):
@@ -795,7 +804,10 @@ while not done:
                     cartopspeed = int(carspeed) / 10 * aero
                     topspeed = int(carspeed) / 10 * aero
             else:
-                topspeed = int(carspeed) / 25 * aero
+                if curspeed >= int(carspeed) / 25 * aero:
+                    curspeed -= 0.3
+                else:
+                    topspeed = int(carspeed) / 25 * aero
             if pixcoloour == (2, 2, 2, 255):
                 topspeed = int(carspeed) / 18 * aero
                 if trackkey == "track5":
@@ -1557,7 +1569,7 @@ while not done:
                     curspeed = topspeed  / 4 + 0.1
                     enginecounter +=  2
                     if pressed[pygame.K_RSHIFT]:
-                        gear +=1
+                        gear += 1
                         enginecounter = 0
             if gear == 2:
                 if curspeed >= topspeed / 2.5:
@@ -1660,6 +1672,12 @@ while not done:
             shiftl2 = font.render(shifttext2, 30, black)
         shiftl = font.render(shifttext, 30, black)
         shiftl2 = font.render(shifttext2, 30, black)
+        if trackkey == "track5":
+            shiftl = font.render(shifttext, 30, white)
+            shiftl2 = font.render(shifttext2, 30, white)
+        if trackkey == "track2":
+            shiftl = font.render(shifttext, 30, white)
+            shiftl2 = font.render(shifttext2, 30, white)
         #Drawing and rendering
         print(amount)
         screen.blit(trackimage, (0,0))

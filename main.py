@@ -39,6 +39,8 @@ fulscr = parser.get("options", "fulscr")
 if fulscr == "True":
     screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
 level = parser.get("options", "level")
+trackname = parser.get("options", "track")
+trackpath = parser.get("options", "trackpath")
 shifting = parser.get("options", "shifting")
 shifting2 = parser.get("options", "shifting2")
 points = parser.get("options", "points")
@@ -46,21 +48,23 @@ level = int(level)
 levelpoints = (int(level) + 100) * 202.2
 levelpoints = round(levelpoints, 1)
 levelpixels = float(points) / levelpoints * 300
-carimage = pygame.image.load("res/ford_gt.png")
-carimage2 = pygame.image.load("res/ford_gt.png")
-carimagepath = "res/ford_gt.png"
-currentcar = "Ford GT"
+carimage = pygame.image.load(parser.get("options", "carimage"))
+carimage2 = pygame.image.load(parser.get("options", "carimage"))
+carimagepath = parser.get("options", "carimage")
+currentcar = parser.get("options", "car")
 cartext = "Car: "
-track = 1
-trackname = "First_track"
+track = int(parser.get("options", "track"))
+parser.read("res/tracks.ini")
+trackname = trackname = parser.get("track" + str(track), "trackname")
 clockspeed = 100
 change = 0
 carimage3 = carimage
 carimage4 = carimage
 parser = SafeConfigParser()
-parser.read("res/tracks.ini")
-trackname = parser.get("track1", "trackname")
-trackpath = parser.get("track1", "trackpath")
+if level == 1:
+    parser.read("res/tracks.ini")
+    trackname = parser.get("track1", "trackname")
+    trackpath = parser.get("track1", "trackpath")
 logo = pygame.image.load("res/Game Logo.png")
 
 
