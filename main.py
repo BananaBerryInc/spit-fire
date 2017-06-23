@@ -17,21 +17,26 @@ done = False
 pygame.display.set_caption("Spitfire Alpha 3")
 pygame.display.flip()
 
+#Intro Music
+#pygame.mixer.music.load("res/Title scren.ogg")
+#pygame.mixer.music.play(1,0)
 #Variables
 clock = pygame.time.Clock()
 x = 30
 y = 30
 x2 = 60
 y2 = 60
-players = 1
+parser = SafeConfigParser()
+parser.read("res/options.ini")
+players = int(parser.get("options", "players"))
 inhelp = False
 shifting = "Automatic"
 shifting2 = "Automatic"
 shifttext = ""
 shifttext2 = ""
-currentcar2 = "Ford GT"
+currentcar2 = parser.get("options", "car2")
 back = pygame.image.load("res/Title Screen Parking Lot.png")
-carimagepath2 = "res/ford_gt.png"
+carimagepath2 = parser.get("options", "carimage2")
 carimage2 = pygame.image.load("res/ford_gt.png")
 parser = SafeConfigParser()
 parser.read("res/options.ini")
@@ -44,6 +49,7 @@ trackpath = parser.get("options", "trackpath")
 shifting = parser.get("options", "shifting")
 shifting2 = parser.get("options", "shifting2")
 points = parser.get("options", "points")
+clockspeed = int(parser.get("options", "speed"))
 level = int(level)
 levelpoints = (int(level) + 100) * 202.2
 levelpoints = round(levelpoints, 1)
@@ -56,10 +62,9 @@ cartext = "Car: "
 track = int(parser.get("options", "track"))
 parser.read("res/tracks.ini")
 trackname = trackname = parser.get("track" + str(track), "trackname")
-clockspeed = 100
 change = 0
-carimage3 = carimage
-carimage4 = carimage
+carimage3 = pygame.image.load(parser.get("options", "carimage2"))
+carimage4 = carimage3
 parser = SafeConfigParser()
 if level == 1:
     parser.read("res/tracks.ini")
@@ -109,6 +114,7 @@ labelstart = font.render("Start the Race!", 10, white)
 def sendtomain():
     global parser
     global carimage
+    global carimagepath
     global currentcar
     global tracktotal
     global trackpath
@@ -124,6 +130,7 @@ def sendtomain():
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
     parser.set("options", "car", currentcar)
+    parser.set("options", "carimage", carimagepath)
     parser.set("options", "shifting", shifting)
     parser.set("options", "shifting2", shifting2)
     parser.set("options", "car2", currentcar2)

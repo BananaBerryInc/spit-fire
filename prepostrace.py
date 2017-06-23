@@ -113,8 +113,7 @@ def backtostart():
     parser.set("options", "level", str(level))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-    pygame.QUIT
-    quit()
+    exec(open("main.py").read())
 
 #Exit Control
 while not done:
@@ -132,7 +131,11 @@ while not done:
         levelpixels = int(points) / levelpoints * 300
         #Key detection!
         pressed = pygame.key.get_pressed()
-        #Movement
+        #Quit With the escape key
+        if pressed[pygame.K_ESCAPE]:
+            pygame.QUIT
+            quit()
+        #bacttostart
         if pressed[pygame.K_SPACE]:
             backtostart()
         #Setting up the labels
@@ -269,7 +272,8 @@ while not done:
         eightplacel = font.render(eightplacelabel, 30, black)
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
-        donel = font.render("Press space to Exit...", 30, black)
+        startl = font.render("Press space to start a new race...", 30, black)
+        donel = font.render("Press escape to  Exit...", 30, black)
         pointsl = font.render(str(round(points, 1)) + " / " + str(round(levelpoints, 1)), 10, black)
         levell = font.render("Level " + str(round(level, 1)), 10, black)
         # Rendering and drawing
@@ -290,6 +294,7 @@ while not done:
         screen.blit(ninthplacel, (300, 480))
         screen.blit(tenthplacel, (300, 530))
         screen.blit(donel, (300, 600))
+        screen.blit(startl, (300, 650))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
