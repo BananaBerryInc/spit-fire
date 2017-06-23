@@ -135,7 +135,7 @@ while not done:
         if pressed[pygame.K_ESCAPE]:
             pygame.QUIT
             quit()
-        #bacttostart
+        #backtostart
         if pressed[pygame.K_SPACE]:
             backtostart()
         #Setting up the labels
