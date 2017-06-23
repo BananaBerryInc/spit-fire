@@ -115,6 +115,7 @@ def sendtomain():
     global parser
     global carimage
     global carimagepath
+    global carimagepath2
     global currentcar
     global tracktotal
     global trackpath

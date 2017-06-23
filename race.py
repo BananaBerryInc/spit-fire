@@ -72,6 +72,8 @@ RightUp = "RightUp"
 RightDown = "RightDown"
 lastdirection = Down
 finished = False
+checklap = False
+checklap2 = False
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -128,6 +130,8 @@ startx = parser.get(trackkey, "startlinex")
 starty = parser.get(trackkey, "startliney")
 checkpointy = parser.get(trackkey, "checkpointy")
 checkpointx = parser.get(trackkey, "checkpointx")
+checkpointy2 = parser.get(trackkey, "checkpointy2")
+checkpointx2 = parser.get(trackkey, "checkpointx2")
 parser.read("res/highscore.ini")
 p1 = int(parser.get(trackkey, "1"))
 p2 = int(parser.get(trackkey, "2"))
@@ -177,10 +181,16 @@ startlinex = int(startx)
 startliney = int(starty)
 checky = int(checkpointy)
 checkx = int(checkpointx)
+checky2 = int(checkpointy2)
+checkx2 = int(checkpointx2)
 checkplus40x = checkx + 80
 checkminus40x = checkx - 80
 checkplus40y = checky + 80
 checkminus40y = checky - 80
+checkplus40x2 = checkx2 + 80
+checkminus40x2 = checkx2 - 80
+checkplus40y2 = checky2 + 80
+checkminus40y2 = checky2 - 80
 x = startliney
 y = startlinex
 x2 = startliney - 61
@@ -327,34 +337,39 @@ while not done:
                         atstart2 = False
             if not atstart2:
                 if not newlap2:
-                    if y2 >= startneg80x:
-                        if y2 <= start80x:
-                            if trackkey == "track3":
-                                if x2 >= startliney:
-                                    score2 += 2000
-                                    lapcount2 += 1
-                                    newlap2 = True
-                                    atstart2 = False
-                            if trackkey == "track4":
-                                if x2 >= startliney:
-                                    score2 += 2000
-                                    lapcount2 += 1
-                                    newlap2 = True
-                                    atstart2 = False
-                            if trackkey == "track6":
-                                if x2 >= startliney:
-                                    score2 += 2000
-                                    lapcount2 += 1
-                                    newlap2 = True
-                                    atstart2 = False
-                            if trackkey != "track4":
-                                if trackkey != "track3":
-                                    if trackkey != "track6":
-                                        if x2 <= startliney:
-                                            score2 += 2000
-                                            lapcount2 += 1
-                                            newlap2 = True
-                                            atstart2 = False
+                    if not checklap2:
+                        if y2 >= startneg80x:
+                            if y2 <= start80x:
+                                if trackkey == "track3":
+                                    if x2 >= startliney:
+                                        score2 += 2000
+                                        lapcount2 += 1
+                                        newlap2 = True
+                                        atstart2 = False
+                                        checklap2 = True
+                                if trackkey == "track4":
+                                    if x2 >= startliney:
+                                        score2 += 2000
+                                        lapcount2 += 1
+                                        newlap2 = True
+                                        atstart2 = False
+                                        checklap2 = True
+                                if trackkey == "track6":
+                                    if x2 >= startliney:
+                                        score2 += 2000
+                                        lapcount2 += 1
+                                        newlap2 = True
+                                        atstart2 = False
+                                        checklap2 = True
+                                if trackkey != "track4":
+                                    if trackkey != "track3":
+                                        if trackkey != "track6":
+                                            if x2 <= startliney:
+                                                score2 += 2000
+                                                lapcount2 += 1
+                                                newlap2 = True
+                                                atstart2 = False
+                                                checklap2 = True
             if not atstart2:
                 laptime += 1
                 if y2 >= checkminus40y:
@@ -363,6 +378,13 @@ while not done:
                             if x2 >= checkminus40x:
                                 atstart2 = False
                                 newlap2 = False
+                                laptime = 0
+                if y2 >= checkminus40y2:
+                    if y2 <= checkplus40y2:
+                        if x2 <= checkplus40x2:
+                            if x2 >= checkminus40x2:
+                                atstart2 = False
+                                checklap2 = False
                                 laptime = 0
             if pressed[pygame.K_ESCAPE]:
                 pygame.QUIT
@@ -826,34 +848,39 @@ while not done:
                     atstart = False
         if not atstart:
             if not newlap:
-                if y >= startneg80x:
-                    if y <= start80x:
-                        if trackkey == "track3":
-                            if x >= startliney:
-                                score += 2000
-                                lapcount += 1
-                                newlap = True
-                                atstart = False
-                        if trackkey == "track4":
-                            if x >= startliney:
-                                score += 2000
-                                lapcount += 1
-                                newlap = True
-                                atstart = False
-                        if trackkey == "track6":
-                            if x >= startliney:
-                                score += 2000
-                                lapcount += 1
-                                newlap = True
-                                atstart = False
-                        if trackkey != "track4":
-                            if trackkey != "track3":
-                                if trackkey != "track6":
-                                    if x <= startliney:
-                                        score += 2000
-                                        lapcount += 1
-                                        newlap = True
-                                        atstart = False
+                if not checklap:
+                    if y >= startneg80x:
+                        if y <= start80x:
+                            if trackkey == "track3":
+                                if x >= startliney:
+                                    score += 2000
+                                    lapcount += 1
+                                    newlap = True
+                                    atstart = False
+                                    checklap = True
+                            if trackkey == "track4":
+                                if x >= startliney:
+                                    score += 2000
+                                    lapcount += 1
+                                    newlap = True
+                                    atstart = False
+                                    checklap = True
+                            if trackkey == "track6":
+                                if x >= startliney:
+                                    score += 2000
+                                    lapcount += 1
+                                    newlap = True
+                                    atstart = False
+                                    checklap = True
+                            if trackkey != "track4":
+                                if trackkey != "track3":
+                                    if trackkey != "track6":
+                                        if x <= startliney:
+                                            score += 2000
+                                            lapcount += 1
+                                            newlap = True
+                                            atstart = False
+                                            checklap = True
         if not atstart:
             laptime += 1
             if y >= checkminus40y:
@@ -862,6 +889,13 @@ while not done:
                         if x >= checkminus40x:
                             atstart = False
                             newlap = False
+                            laptime = 0
+            if y >= checkminus40y2:
+                if y <= checkplus40y2:
+                    if x <= checkplus40x2:
+                        if x >= checkminus40x2:
+                            atstart = False
+                            checklap = False
                             laptime = 0
         if pressed[pygame.K_ESCAPE]:
             pygame.QUIT
@@ -1679,7 +1713,7 @@ while not done:
             shiftl = font.render(shifttext, 30, white)
             shiftl2 = font.render(shifttext2, 30, white)
         #Drawing and rendering
-        print(amount)
+        print(str(checklap))
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 160))
         screen.blit(scorel, (10, 130))
