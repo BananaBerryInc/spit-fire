@@ -155,10 +155,6 @@ while not done:
         #Mainloop...?
         #Key detection!
         pressed = pygame.key.get_pressed()
-        #Quit With the escape key
-        if pressed[pygame.K_ESCAPE]:
-            pygame.QUIT
-            quit()
         #Movement
         if pressed[pygame.K_UP]:
             y -= 3
@@ -202,7 +198,15 @@ while not done:
                 carimage4 = pygame.transform.rotate(carimage3, 225)
         #Change Cars
         if pressed[pygame.K_ESCAPE]:
-            inhelp = False
+            if inhelp:
+                if change == 0:
+                    inhelp = False
+                    change = 30
+            else:
+                if change == 0:
+                    #Quit With the escape key
+                    pygame.QUIT
+                    quit()
         if pressed[pygame.K_c]:
             if currentcar == "Dodge_Challenger":
                 if change == 0:
@@ -817,7 +821,7 @@ while not done:
         helplabel9 = "Space will use your nos"
         helplabel10 = "Press escape to get rid of this message"
         helplabel11 = "Press P to change amount of players (Up to 2)"
-        helplabel12 = "W,A,S,D + Left Shift Keys control player 2 in the same way as player 1"
+        helplabel12 = "W,A,S,D,Q Keys control player 2 in the same way as player 1"
         helplabel13 = "About Leveling:"
         helplabel14 = "At each new level (up to level 21) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
@@ -880,10 +884,11 @@ while not done:
         screen.blit(logo, (630, 0))
         screen.blit(welcomel, (520, 45))
         screen.blit(playerl, (150, 300))
+        if players == 2:
+            screen.blit(shifting2l, (201, 701))
         screen.blit(carimage2, (x,y))
         if players == 2:
             screen.blit(carimage4, (x2,y2))
-            screen.blit(shifting2l, (201, 701))
         if inhelp:
             screen.fill(darkdarkred)
             screen.blit(helpl, (565, 10))

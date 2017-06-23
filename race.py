@@ -597,7 +597,7 @@ while not done:
                 if pressed[pygame.K_s]:
                     lastdirection = RightDown
             #Getting that nos working!!!
-            if pressed[pygame.K_LSHIFT]:
+            if pressed[pygame.K_q]:
                 if nosleft2 >= 1:
                     nosleft2 -= 1
                     topspeed2 += 0.2
@@ -692,7 +692,7 @@ while not done:
                         amount = rot2 / -90
                     segspeed2 = amount * curspeed2
                     y2 = ynow - segspeed2
-            if not pressed[pygame.K_LSHIFT]:
+            if not pressed[pygame.K_q]:
                 nosinuse2 = False
                 if topspeed2 >= cartopspeed2:
                     topspeed2 -= 0.1
@@ -703,7 +703,7 @@ while not done:
                 if not pressed[pygame.K_a]:
                     if not pressed[pygame.K_s]:
                         if not pressed[pygame.K_w]:
-                            if not pressed[pygame.K_LSHIFT]:
+                            if not pressed[pygame.K_q]:
                                 if curspeed2 >= 0.19:
                                     curspeed2 = curspeed2 - 0.1
                                 if curspeed2 <= -0.1:
@@ -1693,7 +1693,7 @@ while not done:
         if shifting == "Manual":
             screen.blit(shiftl, (10, 190))
         if shifting2 == "Manual":
-            screen.blit(shiftl2, (10, 190))
+            screen.blit(shiftl2, (205, 190))
         if players == "2":
             screen.blit(player2l, (205, 10))
             screen.blit(placel2, (205, 160))
