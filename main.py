@@ -117,6 +117,7 @@ def sendtomain():
     global carimagepath
     global carimagepath2
     global currentcar
+    global currentcar2
     global tracktotal
     global trackpath
     global track

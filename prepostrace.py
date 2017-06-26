@@ -6,17 +6,22 @@ import io
 import subprocess
 from configparser import SafeConfigParser
 from random import randint
+from PIL import Image
+import operator
 
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
 font = pygame.font.SysFont("freesansbold.ttf", 50)
+fontbig = pygame.font.SysFont("freesansbold.ttf", 70)
+fontsmall = pygame.font.SysFont("freesansbold.ttf", 35)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Alpha 4")
 pygame.display.flip()
 
 #Re-collecting those settings!
+reallydonewiththis = False
 parser = SafeConfigParser()
 parser.read("res/options.ini")
 carimagepath = parser.get("options", "carimage")
@@ -33,10 +38,13 @@ points = float(parser.get("options", "points"))
 levelpoints = (int(level) + 100) * 202.2
 levelpixels = float(points) / levelpoints * 300
 track = int(trackstring)
+clock = pygame.time.Clock()
 maxpoints = int(points) + int(score)
 trackkey = "track" + str(track)
 car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
+players = int(parser.get("options", "players"))
+score2 = int(parser.get("options", "score2"))
 clockspeed = int(clockspeedstring)
 trackimage = pygame.image.load(trackpath)
 parser.read("res/tracks.ini")
@@ -90,6 +98,39 @@ darklightmagenta = (255,0,192)
 pink = (255,0,128)
 lightred = (255,0,64)
 
+trackimage = Image.open(trackpath)
+tim = trackimage.load()
+whiteout = (90,90,90)
+pixcoloour = tim[1,1]
+back = tuple(map(operator.add, pixcoloour, whiteout))
+print(back)
+
+def blanks():
+    global parser
+    global carimage
+    global currentcar
+    global tracktotal
+    global trackpath
+    global track
+    global trackname
+    global clockspeed
+    global points
+    global level
+    #send off the settings
+    parser.read("res/options.ini")
+    parser.set("options", "track", str(track))
+    parser.set("options", "trackpath", trackpath)
+    parser.set("options", "carimage", carimagepath)
+    parser.set("options", "speed", str(clockspeed))
+    parser.set("options", "racefinsihed", "No")
+    parser.set("options", "points", str(round(points, 0)))
+    parser.set("options", "level", str(level))
+    with open('res/options.ini', 'w') as configfile:
+        parser.write(configfile)
+    done = True
+    pygame.QUIT
+    quit()
+
 def backtostart():
     global parser
     global carimage
@@ -104,7 +145,6 @@ def backtostart():
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
-    parser.set("options", "car", currentcar)
     parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))
@@ -115,12 +155,17 @@ def backtostart():
         parser.write(configfile)
     exec(open("main.py").read())
 
+
 #Exit Control
 while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         done = True
         #Leveling
+        if points <= maxpoints - 2000:
+            points += 10.1
+        if points <= maxpoints - 500:
+            points -= 5.1
         if points <= maxpoints:
             points += 10.1
         if points >= levelpoints:
@@ -133,15 +178,18 @@ while not done:
         pressed = pygame.key.get_pressed()
         #Quit With the escape key
         if pressed[pygame.K_ESCAPE]:
-            pygame.QUIT
-            quit()
+            blanks()
+            reallydonewiththis = True
         #backtostart
         if pressed[pygame.K_SPACE]:
             backtostart()
         #Setting up the labels
         resultsl = font.render("Results: ", 30, black)
+        if players == 2:
+            scorelabel2 = "Player 2's score: " + str(score2)
+            scorel2 = font.render(scorelabel2, 30, black)
         scorelabel = "Your Score: " + score
-        scorel = font.render(scorelabel, 30, black)
+        scorel = fontbig.render(scorelabel, 30, black)
         firstplacelabel = "1st : " + str(p1)
         secondplacelabel = "2nd : " + str(p2)
         thirdplacelabel = "3rd : " + str(p3)
@@ -152,6 +200,8 @@ while not done:
         eightplacelabel = "8th : " + str(p8)
         ninthplacelabel = "9th : " + str(p9)
         tenthplacelabel = "10th : " + str(p10)
+        if place == "11":
+            hi = "hi"
         if place == "1":
             firstplacelabel = "1st (You) :  " + score
             secondplacelabel = "2nd : " + str(p1)
@@ -272,29 +322,36 @@ while not done:
         eightplacel = font.render(eightplacelabel, 30, black)
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
-        startl = font.render("Press space to start a new race...", 30, black)
-        donel = font.render("Press escape to  Exit...", 30, black)
+        startl = fontsmall.render("Press space to start a new race", 30, black)
+        donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
         pointsl = font.render(str(round(points, 1)) + " / " + str(round(levelpoints, 1)), 10, black)
         levell = font.render("Level " + str(round(level, 1)), 10, black)
         # Rendering and drawing
-        screen.fill(lightblue)
+        screen.fill(pixcoloour)
+        s = pygame.Surface((1300,1300))
+        s.set_alpha(75)
+        s.fill((255,255,255))
+        screen.blit(s, (0,0))
         pygame.draw.rect(screen, gray, pygame.Rect(700, 300, 300, 40))
         pygame.draw.rect(screen, blue, pygame.Rect(700, 300, int(levelpixels), 40))
         screen.blit(levell, (700, 250))
         screen.blit(pointsl, (700, 350))
         screen.blit(resultsl, (585, 10))
-        screen.blit(firstplacel, (300, 80))
-        screen.blit(secondplacel, (300, 130))
-        screen.blit(thirdplacel, (300, 180))
-        screen.blit(fourthplacel, (300, 230))
-        screen.blit(fifthplacel, (300, 280))
-        screen.blit(sixthplacel, (300, 330))
-        screen.blit(seventhplacel, (300, 380))
-        screen.blit(eightplacel, (300, 430))
-        screen.blit(ninthplacel, (300, 480))
-        screen.blit(tenthplacel, (300, 530))
-        screen.blit(donel, (300, 600))
-        screen.blit(startl, (300, 650))
+        screen.blit(firstplacel, (100, 80))
+        screen.blit(secondplacel, (100, 130))
+        screen.blit(thirdplacel, (100, 180))
+        screen.blit(fourthplacel, (100, 230))
+        screen.blit(fifthplacel, (100, 280))
+        screen.blit(sixthplacel, (100, 330))
+        screen.blit(seventhplacel, (100, 380))
+        screen.blit(eightplacel, (100, 430))
+        screen.blit(ninthplacel, (100, 480))
+        screen.blit(tenthplacel, (100, 530))
+        if players == 2:
+            screen.blit(scorel2, (430, 660))
+        screen.blit(scorel, (430, 600))
+        screen.blit(donel, (700, 400))
+        screen.blit(startl, (700, 430))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)

@@ -264,6 +264,7 @@ def sendtopost():
     global score
     global place
     global trackkey
+    global score2
     global p1
     global p2
     global p3
@@ -279,6 +280,7 @@ def sendtopost():
     parser.set("options", "racefinsihed", "Yes")
     parser.set("options", "score", str(score))
     parser.set("options", "place", str(place))
+    parser.set("options", "score2", str(score2))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
     parser.read("res/highscore.ini")
@@ -1327,6 +1329,12 @@ while not done:
         if y2 <= -1:
             y2 = 2
         score -= 1
+        if players == "2":
+            if lapcount2 >= maxlaps + 1:
+                lapcount2 -= 1
+                score2 -= 2000
+            if lapcount2 >= maxlaps:
+                score2 += 1
         lapstogo = maxlaps - lapcount
         lapstogo2 = maxlaps - lapcount2
         if lapstogo == 0:
@@ -1704,14 +1712,17 @@ while not done:
                         gear2 -= 1
             shiftl = font.render(shifttext, 30, black)
             shiftl2 = font.render(shifttext2, 30, black)
-        shiftl = font.render(shifttext, 30, black)
-        shiftl2 = font.render(shifttext2, 30, black)
-        if trackkey == "track5":
-            shiftl = font.render(shifttext, 30, white)
-            shiftl2 = font.render(shifttext2, 30, white)
-        if trackkey == "track2":
-            shiftl = font.render(shifttext, 30, white)
-            shiftl2 = font.render(shifttext2, 30, white)
+        try:
+            shiftl = font.render(shifttext, 30, black)
+            shiftl2 = font.render(shifttext2, 30, black)
+            if trackkey == "track5":
+                shiftl = font.render(shifttext, 30, white)
+                shiftl2 = font.render(shifttext2, 30, white)
+            if trackkey == "track2":
+                shiftl = font.render(shifttext, 30, white)
+                shiftl2 = font.render(shifttext2, 30, white)
+        except NameError:
+            hi = "hi"
         #Drawing and rendering
         print(str(checklap))
         screen.blit(trackimage, (0,0))
