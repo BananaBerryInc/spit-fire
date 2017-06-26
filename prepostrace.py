@@ -181,7 +181,7 @@ while not done:
             blanks()
             reallydonewiththis = True
         #backtostart
-        if pressed[pygame.K_SPACE]:
+        if pressed[pygame.K_RETURN]:
             backtostart()
         #Setting up the labels
         resultsl = font.render("Results: ", 30, black)
@@ -322,7 +322,7 @@ while not done:
         eightplacel = font.render(eightplacelabel, 30, black)
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
-        startl = fontsmall.render("Press space to start a new race", 30, black)
+        startl = fontsmall.render("Press enter to start a new race", 30, black)
         donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
         pointsl = font.render(str(round(points, 1)) + " / " + str(round(levelpoints, 1)), 10, black)
         levell = font.render("Level " + str(round(level, 1)), 10, black)

@@ -261,6 +261,7 @@ maxlaps2 = maxlap + 1
 score2 = 0
 trackkey2 = trackkey
 curspeed2 = 0
+
 #Passoff to the postrace Python script
 def sendtopost():
     global parser
