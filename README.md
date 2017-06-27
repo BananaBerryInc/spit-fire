@@ -21,4 +21,8 @@ If you want, you can run run_main.py.bat in the root of the repo for a quick sta
 
 As of now, stable(ish) releases are planned for Friday of each week. If you want to be on the bleeding edge, or just want an easy way to update, please check out https://github.com/BananaBerryInc/spit-fire-updater for an easy way to update Spit-fire
 
+# About the font we used.
+
+We used the font "Saira", which is licensed under OFL (SIL Open Font License). You can fins a copy of the font's license in the "res" directory, under the name "OFS.txt". Saira was created by Cristiano Sobral. 
+
 # Thanks

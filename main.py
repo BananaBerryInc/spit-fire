@@ -10,8 +10,8 @@ from configparser import SafeConfigParser
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont("freesansbold.ttf", 30)
-font50 = pygame.font.SysFont("freesansbold.ttf", 50)
+font = pygame.font.Font("res/Saira-Regular.ttf", 25)
+font50 = pygame.font.Font("res/Saira-Regular.ttf", 35)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Alpha 4")
@@ -742,7 +742,7 @@ while not done:
             if x >= 1175:
                 if y >= 615:
                     done = True
-            if x <= 163:
+            if x <= 183:
                 if y <= 87:
                     sendtomain()
             if x >= 1180:
@@ -831,7 +831,7 @@ while not done:
         helplabel17 = "Press Right Shift or E to shift gears"
         helplabel18 = "Shifting is always manual on the Drag Strip"
         fullscrlabel = "Fullscreen"
-        shiftinglabel = "Shifting: (Beta)"
+        shiftinglabel = "Shifting:"
         playerlabel = "Players : " + str(players)
         playerl = font.render(playerlabel, 10, white)
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
@@ -865,53 +865,53 @@ while not done:
         #Drawing/rendering
         screen.blit(back, (0,0))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
-        pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 160, 85))
+        pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
         pygame.draw.rect(screen, gray, pygame.Rect(800, 300, 300, 40))
         pygame.draw.rect(screen, blue, pygame.Rect(800, 300, int(levelpixels), 40))
         screen.blit(levell, (800, 250))
-        screen.blit(shiftingtitle, (201, 641))
-        screen.blit(shiftingl, (201, 671))
+        screen.blit(shiftingtitle, (201, 631))
+        screen.blit(shiftingl, (201, 661))
         screen.blit(pointsl, (800, 350))
         screen.blit(helpl, (1180, 0))
-        screen.blit(fullscrl, (0, 650))
+        screen.blit(fullscrl, (0, 640))
         screen.blit(tracklabel2, (150,200))
         screen.blit(clockspeedlabel2, (150, 250))
         screen.blit(label, (1185, 625))
-        screen.blit(labelstart, (10, 10))
+        screen.blit(labelstart, (1, 1))
         screen.blit(carlabel2, (150, 150))
-        screen.blit(help10, (495, 580))
+        screen.blit(help10, (470, 580))
         screen.blit(logo, (630, 0))
-        screen.blit(welcomel, (520, 45))
+        screen.blit(welcomel, (500, 40))
         screen.blit(playerl, (150, 300))
         if players == 2:
-            screen.blit(shifting2l, (201, 701))
+            screen.blit(shifting2l, (201, 685))
         screen.blit(carimage2, (x,y))
         if players == 2:
             screen.blit(carimage4, (x2,y2))
         if inhelp:
             screen.fill(darkdarkred)
             screen.blit(helpl, (565, 10))
-            screen.blit(helpl1, (100, 40))
-            screen.blit(helpl2, (100, 70))
-            screen.blit(helpl3, (100, 100))
-            screen.blit(helpl4, (100, 130))
-            screen.blit(helpl5, (600, 40))
-            screen.blit(helpl6, (600, 70))
-            screen.blit(helpl7, (600, 100))
-            screen.blit(helpl8, (600, 130))
-            screen.blit(helpl9, (600, 160))
+            screen.blit(helpl1, (50, 40))
+            screen.blit(helpl2, (50, 70))
+            screen.blit(helpl3, (50, 100))
+            screen.blit(helpl4, (50, 130))
+            screen.blit(helpl5, (580, 40))
+            screen.blit(helpl6, (580, 70))
+            screen.blit(helpl7, (580, 100))
+            screen.blit(helpl8, (580, 130))
+            screen.blit(helpl9, (580, 160))
             screen.blit(helpl10, (430, 450))
-            screen.blit(helpl11, (100, 160))
-            screen.blit(helpl12, (600, 190))
+            screen.blit(helpl11, (50, 160))
+            screen.blit(helpl12, (580, 190))
             screen.blit(helpl13, (400, 310))
             screen.blit(helpl14, (400, 350))
             screen.blit(helpl15, (400, 380))
-            screen.blit(helpl16, (100, 190))
-            screen.blit(helpl17, (600, 220))
-            screen.blit(helpl18, (600, 250))
+            screen.blit(helpl16, (50, 190))
+            screen.blit(helpl17, (580, 220))
+            screen.blit(helpl18, (580, 250))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)

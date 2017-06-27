@@ -12,9 +12,9 @@ import operator
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont("freesansbold.ttf", 50)
-fontbig = pygame.font.SysFont("freesansbold.ttf", 70)
-fontsmall = pygame.font.SysFont("freesansbold.ttf", 35)
+font = pygame.font.Font("res/Saira-Regular.ttf", 40)
+fontbig = pygame.font.Font("res/Saira-Regular.ttf", 55)
+fontsmall = pygame.font.Font("res/Saira-Regular.ttf", 27)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Alpha 4")

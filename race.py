@@ -11,7 +11,7 @@ from random import randint
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
-font = pygame.font.SysFont("freesansbold.ttf", 30)
+font = pygame.font.Font("res/Saira-Regular.ttf", 20)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Alpha 4")
@@ -322,7 +322,7 @@ while not done:
                 pixcoloour = trackpil[x2 + 30,y2 + 30]
             except IndexError:
                 pixcoloour = trackpil[x2,y2]
-            print(rotater2)
+            print(pixcoloour)
             if not nosinuse2:
                 if pixcoloour == (0, 0, 0, 255):
                     topspeed2 = int(carspeed2) / 18 * aero2
@@ -1775,7 +1775,7 @@ while not done:
         except NameError:
             hi = "hi"
         #Drawing and rendering
-        print(str(checklap))
+        print(pixcoloour)
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 160))
         screen.blit(scorel, (10, 130))
