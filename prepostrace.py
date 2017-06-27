@@ -17,7 +17,7 @@ fontbig = pygame.font.Font("res/Saira-Regular.ttf", 55)
 fontsmall = pygame.font.Font("res/Saira-Regular.ttf", 27)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 4")
+pygame.display.set_caption("Spitfire Alpha 4/Presentation Release")
 pygame.display.flip()
 
 #Re-collecting those settings!
@@ -324,12 +324,22 @@ while not done:
         tenthplacel = font.render(tenthplacelabel, 30, black)
         startl = fontsmall.render("Press enter to start a new race", 30, black)
         donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
+        if players == 2:
+            highl = fontsmall.render("Please note: highscore table is for player 1 ONLY!", 30, black)
         pointsl = font.render(str(round(points, 1)) + " / " + str(round(levelpoints, 1)), 10, black)
         levell = font.render("Level " + str(round(level, 1)), 10, black)
         # Rendering and drawing
         screen.fill(pixcoloour)
         s = pygame.Surface((1300,1300))
-        s.set_alpha(75)
+        if trackkey != "track1":
+            if trackkey != "track4":
+                s.set_alpha(75)
+            else:
+                s.set_alpha(0)
+        else:
+            s.set_alpha(75)
+        if trackkey == "track5":
+            s.set_alpha(100)
         s.fill((255,255,255))
         screen.blit(s, (0,0))
         pygame.draw.rect(screen, gray, pygame.Rect(700, 300, 300, 40))
@@ -349,6 +359,7 @@ while not done:
         screen.blit(tenthplacel, (100, 530))
         if players == 2:
             screen.blit(scorel2, (430, 660))
+            screen.blit(highl, (680, 460))
         screen.blit(scorel, (430, 600))
         screen.blit(donel, (700, 400))
         screen.blit(startl, (700, 430))

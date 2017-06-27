@@ -14,7 +14,7 @@ pygame.font.init()
 font = pygame.font.Font("res/Saira-Regular.ttf", 20)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 4")
+pygame.display.set_caption("Spitfire Alpha 4/Presentation Release")
 pygame.display.flip()
 
 #Re-collecting those settings!

@@ -14,7 +14,7 @@ font = pygame.font.Font("res/Saira-Regular.ttf", 25)
 font50 = pygame.font.Font("res/Saira-Regular.ttf", 35)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 4")
+pygame.display.set_caption("Spitfire Alpha 4/Presentation Release")
 pygame.display.flip()
 
 #Intro Music
@@ -436,11 +436,25 @@ while not done:
                         change = 10
             if currentcar == "2016 Lamborghini Huracan LP610-4":
                 if change == 0:
-                    currentcar = "Ford GT"
-                    carimagepath = "res/ford_gt.png"
-                    carimage2 = pygame.image.load("res/ford_gt.png")
-                    carimage = pygame.image.load("res/ford_gt.png")
-                    change = 10
+                    if level >= 22:
+                        currentcar = "Porsche Mission E Concept"
+                        carimagepath = "res/porsche mission e concept.png"
+                        carimage = pygame.image.load("res/porsche mission e concept.png")
+                        carimage2 = pygame.image.load("res/porsche mission e concept.png")
+                        change = 10
+                    else:
+                        currentcar = "Ford GT"
+                        carimagepath = "res/ford_gt.png"
+                        carimage = pygame.image.load("res/ford_gt.png")
+                        carimage2 = pygame.image.load("res/ford_gt.png")
+                        change = 10
+            if currentcar == "Porsche Mission E Concept":
+                if change == 0:
+                     currentcar = "Ford GT"
+                     carimagepath = "res/ford_gt.png"
+                     carimage = pygame.image.load("res/ford_gt.png")
+                     carimage2 = pygame.image.load("res/ford_gt.png")
+                     change = 10
         if players == 2:
             if pressed[pygame.K_v]:
                 if currentcar2 == "Dodge_Challenger":
@@ -668,11 +682,25 @@ while not done:
                             change = 10
                 if currentcar2 == "2016 Lamborghini Huracan LP610-4":
                     if change == 0:
-                        currentcar2 = "Ford GT"
-                        carimagepath2 = "res/ford_gt.png"
-                        carimage3 = pygame.image.load("res/ford_gt.png")
-                        carimage4 = pygame.image.load("res/ford_gt.png")
-                        change = 10
+                        if level >= 22:
+                            currentcar2 = "Porsche Mission E Concept"
+                            carimagepath2 = "res/porsche mission e concept.png"
+                            carimage3 = pygame.image.load("res/porsche mission e concept.png")
+                            carimage4 = pygame.image.load("res/porsche mission e concept.png")
+                            change = 10
+                        else:
+                            currentcar2 = "Ford GT"
+                            carimagepath2 = "res/ford_gt.png"
+                            carimage3 = pygame.image.load("res/ford_gt.png")
+                            carimage4 = pygame.image.load("res/ford_gt.png")
+                            change = 10
+                if currentcar2 == "Porsche Mission E Concept":
+                    if change == 0:
+                         currentcar2 = "Ford GT"
+                         carimagepath2 = "res/ford_gt.png"
+                         carimage3 = pygame.image.load("res/ford_gt.png")
+                         carimage4 = pygame.image.load("res/ford_gt.png")
+                         change = 10
         #Change Players
         if pressed[pygame.K_p]:
             if players == 1:
@@ -825,7 +853,7 @@ while not done:
         helplabel11 = "Press P to change amount of players (Up to 2)"
         helplabel12 = "W,A,S,D,Q Keys control player 2 in the same way as player 1"
         helplabel13 = "About Leveling:"
-        helplabel14 = "At each new level (up to level 21) you will unlock a new car or track"
+        helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
         helplabel16 = "Press V to change the second player vehicle"
         helplabel17 = "Press Right Shift or E to shift gears"
