@@ -23,6 +23,6 @@ As of now, stable(ish) releases are planned for Friday of each week. If you want
 
 # About the font we used.
 
-We used the font "Saira", which is licensed under OFL (SIL Open Font License). You can fins a copy of the font's license in the "res" directory, under the name "OFS.txt". Saira was created by Cristiano Sobral. 
+We used the font "Saira", which is licensed under OFL (SIL Open Font License). You can fins a copy of the font's license in the "res" directory, under the name "OFL.txt". Saira was created by Cristiano Sobral. 
 
 # Thanks
