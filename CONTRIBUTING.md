@@ -1,7 +1,7 @@
 # How to help out!
 
 # Bugs/Issues
-Use the "Issues" tab on GitHub. Create an issue with the "bug" label, and we will work on it as soon as possible! 
+Use the "Issues" tab on GitHub. Create an issue with the "bug" label, and we will work on it as soon as possible!
 
 # Suggestions
 
@@ -9,6 +9,6 @@ Use the "Issues" tab on GitHub. Create and issue with the "Enhancement" label, a
 
 # Coding the game!
 
-If you feel like you have something to add to the game, we are open to help. Although, plase wait a couple weeks to speak up, as we are using this as a school project. Once it is over (likely end of June), we will be open to any help you have. Submit a Pull Request, and if we think you are great, we will add you to the team!
+If you feel like you have something to add to the game, we are really exited to see what you can bring to the game! Really, just submit a Pull Request,and that will decide what happens with your coding work! We are trying to be a more open team, so fell free to try to contribute, and if we think you are great, we will add you to the team!
 
 # Thanks!
