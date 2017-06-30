@@ -1,10 +1,20 @@
 # Import those moduels!!!!
 import os
 import sys
-import pygame
 import os.path as osp
 import io
 import subprocess
+from subprocess import call
+try:
+    import pygame
+except ImportError:
+    print("You don't have Pygame installed; I'll install it for you")
+    call(["python3", "-m", "pip","install","pygame","--user"])
+try:
+    from PIL import Image
+except ImportError:
+    print("You don't have PIL installed; I'll install it for you")
+    call(["python3", "-m", "pip","install","Pillow","--user"])
 from configparser import SafeConfigParser
 
 #Settin' up the window!
@@ -842,17 +852,17 @@ while not done:
         welcometo = "Welcome to "
         helplabel = "Help"
         helplabel1 = "On the Menu screen:"
-        helplabel2 = "Press C to change cars"
+        helplabel2 = "Press C to change cars (for the first player)"
         helplabel3 = "Press T to change tracks"
-        helplabel4 = "Press B to change the clockspeed"
+        helplabel4 = "Press B to change the clockspeed/difficulty"
         helplabel5 = "During a race:"
         helplabel6 = "Left and Right steer"
-        helplabel7 = "Up is the gas pedal"
+        helplabel7 = "Up is the gas pedal/accelleration"
         helplabel8 = "Down is the brake"
         helplabel9 = "Space will use your nos"
         helplabel10 = "Press escape to get rid of this message"
         helplabel11 = "Press P to change amount of players (Up to 2)"
-        helplabel12 = "W,A,S,D,Q Keys control player 2 in the same way as player 1"
+        helplabel12 = "The W,A,S,D,Q Keys control player 2 in the same way as player 1"
         helplabel13 = "About Leveling:"
         helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
         helplabel15 = "(They will be automatically added to the Menu screen.)"
@@ -860,6 +870,7 @@ while not done:
         helplabel17 = "Press Right Shift or E to shift gears"
         helplabel18 = "Shifting is always manual on the Drag Strip"
         fullscrlabel = "Fullscreen"
+        fullscrlabel2 = "Toggle"
         shiftinglabel = "Shifting:"
         playerlabel = "Players : " + str(players)
         playerl = font.render(playerlabel, 10, white)
@@ -867,6 +878,7 @@ while not done:
         levell = font50.render("Level " + str(level), 10, white)
         levelposition = levelpoints
         fullscrl = font.render(fullscrlabel, 10, white)
+        fullscrl2 = font.render(fullscrlabel2, 10, white)
         welcomel = font.render(welcometo, 10 ,white)
         shiftingtitle = font.render(shiftinglabel, 10 ,white)
         shiftingl = font.render(shifting, 10 ,white)
@@ -905,7 +917,8 @@ while not done:
         screen.blit(shiftingl, (201, 661))
         screen.blit(pointsl, (800, 350))
         screen.blit(helpl, (1180, 0))
-        screen.blit(fullscrl, (0, 640))
+        screen.blit(fullscrl, (0, 670))
+        screen.blit(fullscrl2, (0, 640))
         screen.blit(tracklabel2, (150,200))
         screen.blit(clockspeedlabel2, (150, 250))
         screen.blit(label, (1185, 625))

@@ -6,7 +6,6 @@ import io
 import subprocess
 from configparser import SafeConfigParser
 from PIL import Image
-parser.read("res/options.ini")
 from random import randint
 
 #Settin' up the window!
@@ -1498,6 +1497,13 @@ while not done:
         placelabel = "Place: " + str(place)
         placel = font.render(placelabel, 30, black)
         playerl = font.render("Player 1:", 30, black)
+        if trackkey == "track2":
+            placel = font.render(placelabel, 30, white)
+            playerl = font.render("Player 1:", 30, white)
+            curspeedl = font.render(currentlabel, 30, white)
+            scorel = font.render(scorelabel, 30 , white)
+            nosl = font.render(noslabel, 30, white)
+            lapl = font.render(laplabel, 10 ,white)
         if trackkey == "track5":
             placel = font.render(placelabel, 30, white)
             playerl = font.render("Player 1:", 30, white)
@@ -1522,6 +1528,9 @@ while not done:
             placel2 = font.render(placelabel, 30, black)
             player2l = font.render("Player 2:", 30, black)
             if trackkey == "track2":
+                lapl2 = font.render(laplabel, 10 ,white)
+                nosl2 = font.render(noslabel, 30, white)
+                player2l = font.render("Player 2:", 30, white)
                 placel2 = font.render(placelabel, 30, white)
                 curspeedl2 = font.render(currentlabel, 30, white)
                 scorel2 = font.render(scorelabel, 30 , white)
