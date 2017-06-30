@@ -15,7 +15,7 @@ pygame.font.init()
 font = pygame.font.Font("res/Saira-Regular.ttf", 20)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 4")
+pygame.display.set_caption("Spitfire Alpha 5")
 pygame.display.flip()
 
 #Re-collecting those settings!
@@ -204,8 +204,14 @@ checkplus40y3 = checky3 + 80
 checkminus40y3 = checky3 - 80
 x = startliney
 y = startlinex
-x2 = startliney - 61
-y2 = startlinex
+y2 = startlinex - 10
+x2 = startliney
+if trackkey != "track4":
+    if trackkey != "track3":
+        if trackkey != "track6":
+            if trackkey != "track7":
+                x2 = startliney - 61
+                y2 = startlinex
 startneg80x = startlinex - 80
 if trackkey != "track4":
     if trackkey != "track3":
@@ -262,6 +268,7 @@ maxlaps2 = maxlap + 1
 score2 = 0
 trackkey2 = trackkey
 curspeed2 = 0
+rot2 = 0
 
 #Passoff to the postrace Python script
 def sendtopost():
@@ -323,7 +330,6 @@ while not done:
                 pixcoloour = trackpil[x2 + 30,y2 + 30]
             except IndexError:
                 pixcoloour = trackpil[x2,y2]
-            print(pixcoloour)
             if not nosinuse2:
                 if pixcoloour == (0, 0, 0, 255):
                     topspeed2 = int(carspeed2) / 18 * aero2
@@ -492,7 +498,8 @@ while not done:
                 lastdirection = Left
                 if curspeed2 >= topspeed2:
                     curspeed2 = topspeed2
-                rotater2 += handling2
+                if curspeed2 >= 0.1:
+                    rotater2 += handling2
                 if not pressed [pygame.K_w]:
                     if rotater2 <= 90:
                         xnow = x2
@@ -634,11 +641,12 @@ while not done:
                         y2 = ynow - segspeed2
                 if curspeed2 >= topspeed2:
                     curspeed2 = topspeed2
-                rotater2 -= handling2
-                if rotater2 >= 360:
-                    rotater2 = 0
-                if rotater2 <= 0:
-                    rotater2 = 360
+                if curspeed2 >= 0.1:
+                    rotater2 -= handling2
+                    if rotater2 >= 360:
+                        rotater2 = 0
+                    if rotater2 <= 0:
+                        rotater2 = 360
                 carimage4 = pygame.transform.rotate(carimage3, rotater2)
                 if pressed[pygame.K_w]:
                     lastdirection = RightUp
@@ -844,7 +852,6 @@ while not done:
             pixcoloour = trackpil[x + 30,y + 30]
         except IndexError:
             pixcoloour = trackpil[x,y]
-        print(rotater)
         if not nosinuse:
             if pixcoloour == (0, 0, 0, 255):
                 topspeed = int(carspeed) / 18 * aero
@@ -1079,7 +1086,8 @@ while not done:
                         amount = rot2 / -90
                     segspeed = amount * curspeed
                     y = ynow - segspeed
-            rotater += handling
+            if curspeed >= 0.1:
+                rotater += handling
             if rotater >= 360:
                 rotater = 0
             if rotater <= 0:
@@ -1157,7 +1165,8 @@ while not done:
                     y = ynow - segspeed
             if curspeed >= topspeed:
                 curspeed = topspeed
-            rotater -= handling
+            if curspeed >= 0.1:
+                rotater -= handling
             if rotater >= 360:
                 rotater = 0
             if rotater <= 0:
@@ -1378,6 +1387,11 @@ while not done:
                 score += 1
         lapstogo = maxlaps - lapcount
         lapstogo2 = maxlaps - lapcount2
+        if players == "2":
+            if lapstogo2 <= lapstogo:
+                lapstogo = lapstogo2
+            else:
+                lapstogo = lapstogo
         if lapstogo == 0:
             lapstogo = 1
         if lapstogo2 == 0:
@@ -1416,55 +1430,56 @@ while not done:
         if score >= p1 / lapstogo:
             place = 1
             togo = p10 - score
-        if score2 <= p10 / lapstogo:
-            place2 = 11
-            togo = p10 - score
-        if score2 >= p10 / lapstogo:
-            place2 = 10
-            togo = p10 - score
-        if score2 >= p9 / lapstogo:
-            place2 = 9
-            togo = p10 - score
-        if score2 >= p8 / lapstogo:
-            place2 = 8
-            togo = p10 - score
-        if score2 >= p7 / lapstogo:
-            place2 = 7
-            togo = p10 - score
-        if score2 >= p6 / lapstogo:
-            place2 = 6
-            togo = p10 - score
-        if score2 >= p5 / lapstogo:
-            place2 = 5
-            togo = p10 - score
-        if score2 >= p4 / lapstogo:
-            place2 = 4
-            togo = p10 - score
-        if score2 >= p3 / lapstogo:
-            place2 = 3
-            togo = p10 - score
-        if score2 >= p2 / lapstogo:
-            place2 = 2
-            togo = p10 - score
-        if score2 >= p1 / lapstogo:
-            place2 = 1
-            togo = p10 - score
-        if lapstogo >= 2:
-            if place2 == place:
-                if score >= score2:
-                    place2 += 1
-                if score2 >= score:
-                    place += 1
+        if players == "2":
+            if score2 <= p10 / lapstogo:
+                place2 = 11
+                togo = p10 - score
+            if score2 >= p10 / lapstogo:
+                place2 = 10
+                togo = p10 - score
+            if score2 >= p9 / lapstogo:
+                place2 = 9
+                togo = p10 - score
+            if score2 >= p8 / lapstogo:
+                place2 = 8
+                togo = p10 - score
+            if score2 >= p7 / lapstogo:
+                place2 = 7
+                togo = p10 - score
+            if score2 >= p6 / lapstogo:
+                place2 = 6
+                togo = p10 - score
+            if score2 >= p5 / lapstogo:
+                place2 = 5
+                togo = p10 - score
+            if score2 >= p4 / lapstogo:
+                place2 = 4
+                togo = p10 - score
+            if score2 >= p3 / lapstogo:
+                place2 = 3
+                togo = p10 - score
+            if score2 >= p2 / lapstogo:
+                place2 = 2
+                togo = p10 - score
+            if score2 >= p1 / lapstogo:
+                place2 = 1
+                togo = p10 - score
+            if lapstogo >= 2:
+                if place2 == place:
+                    if score >= score2:
+                        place2 += 1
+                    if score2 >= score:
+                        place += 1
         #Finishing!
         if players == "1":
             if lapcount >= maxlaps:
-                #PAssoff scfript here
+                #Passoff scprit goes here
                 finished = True
                 sendtopost()
         if players == "2":
             if lapcount >= maxlaps:
                 if lapcount2 >= maxlaps:
-                    #PAssoff scfript here
+                    #Passoff script goes here
                     finished = True
                     sendtopost()
         #Setting Up the labels

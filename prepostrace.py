@@ -17,7 +17,7 @@ fontbig = pygame.font.Font("res/Saira-Regular.ttf", 55)
 fontsmall = pygame.font.Font("res/Saira-Regular.ttf", 27)
 screen = pygame.display.set_mode((1280, 720))
 done = False
-pygame.display.set_caption("Spitfire Alpha 4")
+pygame.display.set_caption("Spitfire Alpha 5")
 pygame.display.flip()
 
 #Re-collecting those settings!
@@ -103,9 +103,8 @@ tim = trackimage.load()
 whiteout = (90,90,90)
 pixcoloour = tim[1,1]
 back = tuple(map(operator.add, pixcoloour, whiteout))
-print(back)
 
-def blanks():
+def exitthegame():
     global parser
     global carimage
     global currentcar
@@ -178,7 +177,7 @@ while not done:
         pressed = pygame.key.get_pressed()
         #Quit With the escape key
         if pressed[pygame.K_ESCAPE]:
-            blanks()
+            exitthegame()
             reallydonewiththis = True
         #backtostart
         if pressed[pygame.K_RETURN]:
