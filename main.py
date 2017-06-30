@@ -210,10 +210,10 @@ while not done:
                     pygame.QUIT
                     quit()
         if pressed[pygame.K_c]:
-            if currentcar == "Dodge_Challenger":
+            if currentcar == "Dodge Challenger":
                 if change == 0:
                     if level >= 4:
-                        currentcar = "Koenigsegg_One"
+                        currentcar = "Koenigsegg One"
                         carimagepath = "res/Koenigsegg_One.png"
                         carimage2 = pygame.image.load("res/Koenigsegg_One.png")
                         carimage = pygame.image.load("res/Koenigsegg_One.png")
@@ -227,7 +227,7 @@ while not done:
             if currentcar == "Ferrari F40":
                 if change == 0:
                     if level >= 5:
-                        currentcar = "Dodge_Challenger"
+                        currentcar = "Dodge Challenger"
                         carimagepath = "res/Dodge_Challenger.png"
                         carimage2 = pygame.image.load("res/Dodge_Challenger.png")
                         carimage = pygame.image.load("res/Dodge_Challenger.png")
@@ -252,7 +252,7 @@ while not done:
                         carimage2 = pygame.image.load("res/ford_gt.png")
                         carimage = pygame.image.load("res/ford_gt.png")
                         change = 10
-            if currentcar == "Koenigsegg_One":
+            if currentcar == "Koenigsegg One":
                 if change == 0:
                     if level >= 6:
                         currentcar = "Bugatti Vision GT Gran Turismo"
@@ -457,10 +457,10 @@ while not done:
                      change = 10
         if players == 2:
             if pressed[pygame.K_v]:
-                if currentcar2 == "Dodge_Challenger":
+                if currentcar2 == "Dodge Challenger":
                     if change == 0:
                         if level >= 4:
-                            currentcar2 = "Koenigsegg_One"
+                            currentcar2 = "Koenigsegg One"
                             carimagepath2 = "res/Koenigsegg_One.png"
                             carimage3 = pygame.image.load("res/Koenigsegg_One.png")
                             carimage4 = pygame.image.load("res/Koenigsegg_One.png")
@@ -474,7 +474,7 @@ while not done:
                 if currentcar2 == "Ferrari F40":
                     if change == 0:
                         if level >= 5:
-                            currentcar2 = "Dodge_Challenger"
+                            currentcar2 = "Dodge Challenger"
                             carimagepath2 = "res/Dodge_Challenger.png"
                             carimage3 = pygame.image.load("res/Dodge_Challenger.png")
                             carimage4 = pygame.image.load("res/Dodge_Challenger.png")
@@ -499,7 +499,7 @@ while not done:
                             carimage3 = pygame.image.load("res/ford_gt.png")
                             carimage4 = pygame.image.load("res/ford_gt.png")
                             change = 10
-                if currentcar2 == "Koenigsegg_One":
+                if currentcar2 == "Koenigsegg One":
                     if change == 0:
                         if level >= 6:
                             currentcar2 = "Bugatti Vision GT Gran Turismo"

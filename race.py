@@ -6,6 +6,7 @@ import io
 import subprocess
 from configparser import SafeConfigParser
 from PIL import Image
+parser.read("res/options.ini")
 from random import randint
 
 #Settin' up the window!
@@ -1775,7 +1776,6 @@ while not done:
         except NameError:
             hi = "hi"
         #Drawing and rendering
-        print(pixcoloour)
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 160))
         screen.blit(scorel, (10, 130))
