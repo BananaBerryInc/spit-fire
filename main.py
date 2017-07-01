@@ -4,11 +4,19 @@ import sys
 import os.path as osp
 import io
 import subprocess
+import urllib
 from subprocess import call
+
 try:
     import pygame
 except ImportError:
     print("You don't have Pygame installed; I'll install it for you")
+    print("Downloading pip, incase you don't have it")
+    url = "https://bootstrap.pypa.io/get-pip.py"
+    urllib.urlretrieve(url, "get-pip.py")
+    print("Now installing pip")
+    call(["python3", "get-pip.py"])
+    print("Now installing Pygame")
     call(["python3", "-m", "pip","install","pygame","--user"])
 try:
     from PIL import Image
