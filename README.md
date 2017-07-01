@@ -11,7 +11,11 @@ We hope to make more
 # How to run spit-fire
 
 Run main.py in Python 3 to start the game.
-*Pygame and PIL (Python Image Library) (preferably the latest versions) are required to run the game, but if you don't have them, the Spit-fire will install them for you on first run*
+
+
+**Pygame and PIL (Python Image Library) (preferably the latest versions) are required to run the game, but if you don't have them, the Spit-fire will install them for you on first run**
+
+
 If you want, you can run run_main.py.bat in the root of the repo for a quick start script.
 
 # Releases/Updates
