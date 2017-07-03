@@ -18,12 +18,15 @@ except ImportError:
     call(["python3", "get-pip.py"])
     print("Now installing Pygame")
     call(["python3", "-m", "pip","install","pygame","--user"])
+    import pygame
 try:
     from PIL import Image
 except ImportError:
     print("You don't have PIL installed; I'll install it for you")
     call(["python3", "-m", "pip","install","Pillow","--user"])
+    from PIL import Image
 from configparser import SafeConfigParser
+
 
 #Settin' up the window!
 pygame.init()
@@ -33,12 +36,65 @@ font50 = pygame.font.Font("res/Saira-Regular.ttf", 35)
 screen = pygame.display.set_mode((1280, 720))
 done = False
 pygame.display.set_caption("Spitfire Alpha 5")
+white = (255,255,255)
+loading = font50.render("Now Loading...", 10, white)
+screen.blit(loading, (640, 350))
 pygame.display.flip()
 
 #Intro Music
 #pygame.mixer.music.load("res/Title scren.ogg")
 #pygame.mixer.music.play(1,0)
 #Variables
+#Text Strings 
+help = "Drive to a box, and press space to go!"
+welcometo = "Welcome to "
+helplabel = "Help"
+helplabel1 = "On the Menu screen:"
+helplabel2 = "Press C to change cars (for the first player)"
+helplabel3 = "Press T to change tracks"
+helplabel4 = "Press B to change the clockspeed/difficulty"
+helplabel5 = "During a race:"
+helplabel6 = "Left and Right steer"
+helplabel7 = "Up is the gas pedal/accelleration"
+helplabel8 = "Down is the brake"
+helplabel9 = "Space will use your nos"
+helplabel10 = "Press escape to get rid of this message"
+helplabel11 = "Press P to change amount of players (Up to 2)"
+helplabel12 = "The W,A,S,D,Q Keys control player 2 in the same way as player 1"
+helplabel13 = "About Leveling:"
+helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
+helplabel15 = "(They will be automatically added to the Menu screen.)"
+helplabel16 = "Press V to change the second player vehicle"
+helplabel17 = "Press Right Shift or E to shift gears"
+helplabel18 = "Shifting is always manual on the Drag Strip"
+fullscrlabel = "Menu"
+fullscrlabel2 = "Options"
+optionslabel1 = "Fullscreen:"
+reslabel = "Resloution: "
+the1080plabel = "1920x1080 (Full HD)"
+the720plabel = "1280x720 (HD)"
+shiftinglabel = "Shifting:"
+changelabel = "Change"
+changel = font.render(changelabel, 10, white)
+helpl = font.render(helplabel, 10 ,white)
+helpl1 = font.render(helplabel1, 10 ,white)
+helpl2 = font.render(helplabel2, 10 ,white)
+helpl3 = font.render(helplabel3, 10 ,white)
+helpl4 = font.render(helplabel4, 10 ,white)
+helpl5 = font.render(helplabel5, 10 ,white)
+helpl6 = font.render(helplabel6, 10 ,white)
+helpl7 = font.render(helplabel7, 10 ,white)
+helpl8 = font.render(helplabel8, 10 ,white)
+helpl9 = font.render(helplabel9, 10 ,white)
+helpl10 = font.render(helplabel10, 10 ,white)
+helpl11 = font.render(helplabel11, 10 ,white)
+helpl12 = font.render(helplabel12, 10 ,white)
+helpl13 = font.render(helplabel13, 10 ,white)
+helpl14 = font.render(helplabel14, 10 ,white)
+helpl15 = font.render(helplabel15, 10 ,white)
+helpl16 = font.render(helplabel16, 10 ,white)
+helpl17 = font.render(helplabel17, 10 ,white)
+helpl18 = font.render(helplabel18, 10 ,white)
 clock = pygame.time.Clock()
 x = 30
 y = 30
@@ -48,6 +104,7 @@ parser = SafeConfigParser()
 parser.read("res/options.ini")
 players = int(parser.get("options", "players"))
 inhelp = False
+inoptions = False
 shifting = "Automatic"
 shifting2 = "Automatic"
 shifttext = ""
@@ -785,42 +842,75 @@ while not done:
             clockspeed = 50
         #Selecting things
         if pressed[pygame.K_SPACE]:
-            if x >= 1175:
-                if y >= 615:
-                    done = True
-            if x <= 183:
-                if y <= 87:
-                    sendtomain()
-            if x >= 1180:
-                if y <= 100:
-                    inhelp = True
-            if x <= 160:
-                if y >= 640:
-                    if change == 0:
-                        if not fulscr:
-                            screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
-                            fulscr = True
-                            change = 20
-                    if change == 0:
-                        if fulscr:
-                            screen = pygame.display.set_mode((1280, 720))
-                            fulscr = False
-                            change = 20
-            if x >= 200:
-                if x <= 362:
-                    if players == 1:
-                        if y >= 620:
-                            if change == 0:
-                                if shifting == "Automatic":
-                                    shifting = "Manual"
-                                    change = 10
-                            if change == 0:
-                                if shifting == "Manual":
-                                    shifting = "Automatic"
-                                    change = 10
-                    if players == 2:
-                        if y >= 620:
-                            if y <= 679:
+            if inoptions:
+                if x <= 160:
+                    if y >= 640:
+                        if change == 0:
+                            if not inoptions:
+                                inoptions = True
+                                change = 20
+                        if change == 0:
+                            if inoptions:
+                                inoptions = False
+                                change = 20
+                if x >= 595:
+                    if x <= 700:
+                        if y >= 45:
+                            if y <= 150:
+                                if screen ==  pygame.display.set_mode((1920,1080)):
+                                    if change == 0:
+                                         screen =  pygame.display.set_mode((1280, 720))
+                                         change = 20
+                                if screen == pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN):
+                                    if change == 0:
+                                        screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+                                        change = 20
+                                if screen ==  pygame.display.set_mode((1280, 720)):
+                                    if change == 0:
+                                         screen =  pygame.display.set_mode((1920,1080))
+                                         change = 20
+                                if screen == pygame.display.set_mode((1280, 720), pygame.FULLSCREEN):
+                                     if change == 0:
+                                         screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+                                         change = 20
+                if x >= 95:
+                    if x <= 375:
+                        if y >= 45:
+                            if y <= 150:
+                                if fulscr:
+                                    if change == 0:
+                                        fulscr = False
+                                        screen = pygame.display.set_mode((1280, 720))
+                                        change = 20
+                                if not fulscr:
+                                    if change == 0:
+                                        screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+                                        fulscr = True
+                                        change = 20
+            if not inoptions:
+                if x >= 1175:
+                    if y >= 615:
+                        done = True
+                if x <= 183:
+                    if y <= 87:
+                        sendtomain()
+                if x >= 1180:
+                    if y <= 100:
+                        inhelp = True
+                if x <= 160:
+                    if y >= 640:
+                        if change == 0:
+                            if not inoptions:
+                                inoptions = True
+                                change = 20
+                        if change == 0:
+                            if inoptions:
+                                inoptions = False
+                                change = 20
+                if x >= 200:
+                    if x <= 362:
+                        if players == 1:
+                            if y >= 620:
                                 if change == 0:
                                     if shifting == "Automatic":
                                         shifting = "Manual"
@@ -829,15 +919,26 @@ while not done:
                                     if shifting == "Manual":
                                         shifting = "Automatic"
                                         change = 10
-                        if y >= 680:
-                            if change == 0:
-                                if shifting2 == "Automatic":
-                                    shifting2 = "Manual"
-                                    change = 10
-                            if change == 0:
-                                if shifting2 == "Manual":
-                                    shifting2 = "Automatic"
-                                    change = 10
+                        if players == 2:
+                            if y >= 620:
+                                if y <= 679:
+                                    if change == 0:
+                                        if shifting == "Automatic":
+                                            shifting = "Manual"
+                                            change = 10
+                                    if change == 0:
+                                        if shifting == "Manual":
+                                            shifting = "Automatic"
+                                            change = 10
+                            if y >= 680:
+                                if change == 0:
+                                    if shifting2 == "Automatic":
+                                        shifting2 = "Manual"
+                                        change = 10
+                                if change == 0:
+                                    if shifting2 == "Manual":
+                                        shifting2 = "Automatic"
+                                        change = 10
         #Collision/OOB detection
         if x >=1270:
             x = 1268
@@ -856,30 +957,6 @@ while not done:
         tracklabel2 = font.render(tracklabel, 10 ,white)
         clockspeedlabel = str(clockspeed) + " CC"
         clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
-        help = "Drive to a box, and press space to go!"
-        welcometo = "Welcome to "
-        helplabel = "Help"
-        helplabel1 = "On the Menu screen:"
-        helplabel2 = "Press C to change cars (for the first player)"
-        helplabel3 = "Press T to change tracks"
-        helplabel4 = "Press B to change the clockspeed/difficulty"
-        helplabel5 = "During a race:"
-        helplabel6 = "Left and Right steer"
-        helplabel7 = "Up is the gas pedal/accelleration"
-        helplabel8 = "Down is the brake"
-        helplabel9 = "Space will use your nos"
-        helplabel10 = "Press escape to get rid of this message"
-        helplabel11 = "Press P to change amount of players (Up to 2)"
-        helplabel12 = "The W,A,S,D,Q Keys control player 2 in the same way as player 1"
-        helplabel13 = "About Leveling:"
-        helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
-        helplabel15 = "(They will be automatically added to the Menu screen.)"
-        helplabel16 = "Press V to change the second player vehicle"
-        helplabel17 = "Press Right Shift or E to shift gears"
-        helplabel18 = "Shifting is always manual on the Drag Strip"
-        fullscrlabel = "Fullscreen"
-        fullscrlabel2 = "Toggle"
-        shiftinglabel = "Shifting:"
         playerlabel = "Players : " + str(players)
         playerl = font.render(playerlabel, 10, white)
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
@@ -891,26 +968,12 @@ while not done:
         shiftingtitle = font.render(shiftinglabel, 10 ,white)
         shiftingl = font.render(shifting, 10 ,white)
         shifting2l = font.render(shifting2, 10 ,white)
-        helpl = font.render(helplabel, 10 ,white)
-        helpl1 = font.render(helplabel1, 10 ,white)
-        helpl2 = font.render(helplabel2, 10 ,white)
-        helpl3 = font.render(helplabel3, 10 ,white)
-        helpl4 = font.render(helplabel4, 10 ,white)
-        helpl5 = font.render(helplabel5, 10 ,white)
-        helpl6 = font.render(helplabel6, 10 ,white)
-        helpl7 = font.render(helplabel7, 10 ,white)
-        helpl8 = font.render(helplabel8, 10 ,white)
-        helpl9 = font.render(helplabel9, 10 ,white)
-        helpl10 = font.render(helplabel10, 10 ,white)
-        helpl11 = font.render(helplabel11, 10 ,white)
-        helpl12 = font.render(helplabel12, 10 ,white)
-        helpl13 = font.render(helplabel13, 10 ,white)
-        helpl14 = font.render(helplabel14, 10 ,white)
-        helpl15 = font.render(helplabel15, 10 ,white)
-        helpl16 = font.render(helplabel16, 10 ,white)
-        helpl17 = font.render(helplabel17, 10 ,white)
-        helpl18 = font.render(helplabel18, 10 ,white)
         help10 = font.render(help, 10 ,white)
+        optionsl1 = font.render(optionslabel1, 10, white)
+        resl = font.render(reslabel, 10, white)
+        the1080pl = font.render(the1080plabel, 10, white)
+        the720pl = font.render(the720plabel, 10, white)
+        fulscrl = font.render(str(fulscr), 10, white)
         #Drawing/rendering
         screen.blit(back, (0,0))
         pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
@@ -962,6 +1025,21 @@ while not done:
             screen.blit(helpl16, (50, 190))
             screen.blit(helpl17, (580, 220))
             screen.blit(helpl18, (580, 250))
-        #ANND, GO!
+        if inoptions:
+            screen.fill(darkdarkred)
+            pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
+            pygame.draw.rect(screen, gray, pygame.Rect(100,50, 210, 55))
+            pygame.draw.rect(screen, gray, pygame.Rect(600, 50, 330, 55))
+            screen.blit(fullscrl, (0, 670))
+            screen.blit(fullscrl2, (0, 640))
+            screen.blit(changel , (100, 50))
+            screen.blit(changel, (600, 50))
+            screen.blit(optionsl1, (100, 100))
+            screen.blit(resl, (600, 100))
+            screen.blit(the720pl, (750, 100))
+            screen.blit(the1080pl, (750, 150))
+            screen.blit(fulscrl, (250, 100))
+            screen.blit(carimage2, (x,y))
+        #ANND, GO2
         pygame.display.flip()
         clock.tick(clockspeed)
