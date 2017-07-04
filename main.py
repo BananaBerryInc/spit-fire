@@ -46,6 +46,7 @@ pygame.display.flip()
 #pygame.mixer.music.play(1,0)
 #Variables
 #Text Strings 
+frame = 2
 help = "Drive to a box, and press space to go!"
 welcometo = "Welcome to "
 helplabel = "Help"
@@ -100,6 +101,9 @@ helpl15 = font.render(helplabel15, 10 ,white)
 helpl16 = font.render(helplabel16, 10 ,white)
 helpl17 = font.render(helplabel17, 10 ,white)
 helpl18 = font.render(helplabel18, 10 ,white)
+fullscrl = font.render(fullscrlabel, 10, white)
+fullscrl2 = font.render(fullscrlabel2, 10, white)
+welcomel = font.render(welcometo, 10 ,white)
 clock = pygame.time.Clock()
 screenres = "720p"
 x = 30
@@ -945,26 +949,27 @@ while not done:
                 carimage2 = pygame.transform.rotate(carimage, 315)
             if pressed[pygame.K_DOWN]:
                 carimage2 = pygame.transform.rotate(carimage, 225)
-        if pressed[pygame.K_w]:
-            y2 -= 3
-            carimage4 = carimage3
-        if pressed[pygame.K_s]:
-            y2 += 3
-            carimage4 = pygame.transform.rotate(carimage3, 180)
-        if pressed[pygame.K_a]:
-            x2 -= 3
-            carimage4 = pygame.transform.rotate(carimage3, 90)
+        if players == 2:
             if pressed[pygame.K_w]:
-                carimage4 = pygame.transform.rotate(carimage3, 45)
+                y2 -= 3
+                carimage4 = carimage3
             if pressed[pygame.K_s]:
-                carimage4 = pygame.transform.rotate(carimage3, 135)
-        if pressed[pygame.K_d]:
-            x2 += 3
-            carimage4 = pygame.transform.rotate(carimage3, 270)
-            if pressed[pygame.K_w]:
-                carimage4 = pygame.transform.rotate(carimage3, 315)
-            if pressed[pygame.K_s]:
-                carimage4 = pygame.transform.rotate(carimage3, 225)
+                y2 += 3
+                carimage4 = pygame.transform.rotate(carimage3, 180)
+            if pressed[pygame.K_a]:
+                x2 -= 3
+                carimage4 = pygame.transform.rotate(carimage3, 90)
+                if pressed[pygame.K_w]:
+                    carimage4 = pygame.transform.rotate(carimage3, 45)
+                if pressed[pygame.K_s]:
+                    carimage4 = pygame.transform.rotate(carimage3, 135)
+            if pressed[pygame.K_d]:
+                x2 += 3
+                carimage4 = pygame.transform.rotate(carimage3, 270)
+                if pressed[pygame.K_w]:
+                    carimage4 = pygame.transform.rotate(carimage3, 315)
+                if pressed[pygame.K_s]:
+                    carimage4 = pygame.transform.rotate(carimage3, 225)
         #Change Cars
         if pressed[pygame.K_ESCAPE]:
             if inhelp:
@@ -1027,38 +1032,38 @@ while not done:
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
         levell = font50.render("Level " + str(level), 10, white)
         levelposition = levelpoints
-        fullscrl = font.render(fullscrlabel, 10, white)
-        fullscrl2 = font.render(fullscrlabel2, 10, white)
-        welcomel = font.render(welcometo, 10 ,white)
         shiftingtitle = font.render(shiftinglabel, 10 ,white)
         shiftingl = font.render(shifting, 10 ,white)
         shifting2l = font.render(shifting2, 10 ,white)
         fulscrl = font.render(str(fulscr), 10, white)
         #Drawing/rendering
-        screen.blit(back, (0,0))
-        pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
-        pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
-        pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
-        pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
-        pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
-        pygame.draw.rect(screen, gray, pygame.Rect(800, 300, 300, 40))
-        pygame.draw.rect(screen, blue, pygame.Rect(800, 300, int(levelpixels), 40))
-        screen.blit(levell, (800, 250))
-        screen.blit(shiftingtitle, (201, 631))
-        screen.blit(shiftingl, (201, 661))
-        screen.blit(pointsl, (800, 350))
-        screen.blit(helpl, (1180, 0))
-        screen.blit(fullscrl, (0, 670))
-        screen.blit(fullscrl2, (0, 640))
-        screen.blit(tracklabel2, (150,200))
-        screen.blit(clockspeedlabel2, (150, 250))
-        screen.blit(label, (1185, 625))
-        screen.blit(labelstart, (1, 1))
-        screen.blit(carlabel2, (150, 150))
-        screen.blit(help10, (470, 580))
-        screen.blit(logo, (630, 0))
-        screen.blit(welcomel, (500, 40))
-        screen.blit(playerl, (150, 300))
+        if not inoptions:
+            if not inhelp:
+                screen.fill(black)
+                screen.blit(back, (0,0))
+                pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
+                pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
+                pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
+                pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
+                pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
+                pygame.draw.rect(screen, gray, pygame.Rect(800, 300, 300, 40))
+                pygame.draw.rect(screen, blue, pygame.Rect(800, 300, int(levelpixels), 40))
+                screen.blit(levell, (800, 250))
+                screen.blit(shiftingtitle, (201, 631))
+                screen.blit(shiftingl, (201, 661))
+                screen.blit(pointsl, (800, 350))
+                screen.blit(helpl, (1180, 0))
+                screen.blit(fullscrl, (0, 670))
+                screen.blit(fullscrl2, (0, 640))
+                screen.blit(tracklabel2, (150,200))
+                screen.blit(clockspeedlabel2, (150, 250))
+                screen.blit(label, (1185, 625))
+                screen.blit(labelstart, (1, 1))
+                screen.blit(carlabel2, (150, 150))
+                screen.blit(help10, (470, 580))
+                screen.blit(logo, (630, 0))
+                screen.blit(welcomel, (500, 40))
+                screen.blit(playerl, (150, 300))
         if players == 2:
             screen.blit(shifting2l, (201, 685))
         screen.blit(carimage2, (x,y))
