@@ -20,10 +20,10 @@ If you want, you can run run_main.py.bat in the root of the repo for a quick sta
 
 # Releases/Updates
 
-As of now, stable(ish) releases are planned for Friday of each week. If you want to be on the bleeding edge, or just want an easy way to update, please check out https://github.com/BananaBerryInc/spit-fire-updater for an easy way to update Spit-fire. THis is still in Beta stages, though.
+As of now, stable(ish) releases are planned for Friday of each week. If you want to be on the bleeding edge, or just want an easy way to update, please check out https://github.com/BananaBerryInc/spit-fire-updater for an easy way to update Spit-fire. This is still in Beta stages, though.
 
 # About the font we used.
 
-We used the font "Saira", which is licensed under OFL (SIL Open Font License). You can fins a copy of the font's license in the "res" directory, under the name "OFL.txt". Saira was created by Cristiano Sobral. 
+We used the font "Saira", which is licensed under OFL (SIL Open Font License). You can find a copy of the font's license in the "res" directory, under the name "OFL.txt". Saira was created by Cristiano Sobral. 
 
 # Thanks

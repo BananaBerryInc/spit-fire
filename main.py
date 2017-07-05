@@ -816,36 +816,6 @@ def spaceaction():
                         if inoptions:
                             inoptions = False
                             change = 20
-            if x >= 595:
-                if x <= 700:
-                    if y >= 45:
-                        if y <= 150:
-                            if screenres == "1080p":
-                                if not fulscr:
-                                    if change == 0:
-                                        screen =  pygame.display.set_mode((1280, 720))
-                                        screenres = "720p"
-                                        change = 20
-                            if screenres == "1080p":
-                                if fulscr:
-                                    if change == 0:
-                                        screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
-                                        screenres = "720p"
-                                        change = 20
-                            if screenres == "720p":
-                                if not fulscr:
-                                    if change == 0:
-                                        screen =  pygame.display.set_mode((1920,1080))
-                                        back = pygame.image.load("res/Title Screen Parking Lot_1080p.png")
-                                        screenres = "1080p"
-                                        change = 20
-                            if screenres == "720p":
-                                if fulscr:
-                                    if change == 0:
-                                        screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
-                                        back = pygame.image.load("res/Title Screen Parking Lot_1080p.png")
-                                        screenres = "1080p"
-                                        change = 20
             if x >= 95:
                 if x <= 375:
                     if y >= 45:
@@ -853,17 +823,11 @@ def spaceaction():
                             if fulscr:
                                 if change == 0:
                                     fulscr = False
-                                    if screenres == "1080p":
-                                            screen =  pygame.display.set_mode((1920,1080))
-                                    else:
-                                            screen =  pygame.display.set_mode((1280, 720))
+                                    screen =  pygame.display.set_mode((1280, 720))
                                     change = 20
                             if not fulscr:
                                 if change == 0:
-                                    if fulscr == "720p":
-                                        screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
-                                    else: 
-                                        screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
+                                    screen = pygame.display.set_mode((1280, 720),pygame.FULLSCREEN)
                                     fulscr = True
                                     change = 20
     if not inoptions:
@@ -1037,9 +1001,9 @@ while not done:
         shifting2l = font.render(shifting2, 10 ,white)
         fulscrl = font.render(str(fulscr), 10, white)
         #Drawing/rendering
+        screen.fill((0,0,0))
         if not inoptions:
             if not inhelp:
-                screen.fill(black)
                 screen.blit(back, (0,0))
                 pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
                 pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
@@ -1094,19 +1058,12 @@ while not done:
             screen.fill(darkdarkred)
             pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
             pygame.draw.rect(screen, gray, pygame.Rect(100,50, 210, 55))
-            pygame.draw.rect(screen, gray, pygame.Rect(600, 50, 330, 55))
             screen.blit(fullscrl, (0, 670))
             screen.blit(fullscrl2, (0, 640))
             screen.blit(changel , (100, 50))
-            screen.blit(changel, (600, 50))
             screen.blit(optionsl1, (100, 100))
-            screen.blit(resl, (600, 100))
-            if screenres == "720p":
-                screen.blit(the720pl, (750, 100))
-            else:
-                screen.blit(the1080pl, (750, 100))
             screen.blit(fulscrl, (250, 100))
             screen.blit(carimage2, (x,y))
-        #ANND, GO2
+        #ANND, GO
         pygame.display.flip()
         clock.tick(clockspeed)

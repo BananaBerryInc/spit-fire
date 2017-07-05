@@ -425,11 +425,6 @@ while not done:
                 lastdirection = Up
                 if curspeed2 >= topspeed2:
                     curspeed2 = topspeed2
-                segment =  0
-                segmentneg =  0
-                segspeed2 = 0
-                amount = 0
-                rot2 = 0
                 if rotater2 <= 90:
                     xnow = x2
                     if rot2 <= 0:
@@ -679,11 +674,6 @@ while not done:
                     curspeed2 = curspeed2 - 0.1
                 else:
                     curspeed2 = -1.5
-                segment =  0
-                segmentneg =  0
-                segspeed2 = 0
-                amount = 0
-                rot2 = 0
                 if rotater2 <= 90:
                     xnow = x2
                     if rot2 <= 0:
@@ -766,11 +756,6 @@ while not done:
                                 if curspeed2 >= -0.1:
                                     if curspeed2 <= 0.19:
                                         curspeed2 = 0
-                                segment =  0
-                                segmentneg =  0
-                                segspeed2 = 0
-                                amount = 0
-                                rot2 = 0
                                 if rotater2 <= 90:
                                     xnow = x2
                                     if rot2 <= 0:
@@ -949,11 +934,6 @@ while not done:
             lastdirection = Up
             if curspeed >= topspeed:
                 curspeed = topspeed
-            segment =  0
-            segmentneg =  0
-            segspeed = 0
-            amount = 0
-            rot2 = 0
             if rotater <= 90:
                 xnow = x
                 if rot2 <= 0:
@@ -1198,11 +1178,6 @@ while not done:
                 curspeed = curspeed - 0.1
             else:
                 curspeed = -1.5
-            segment =  0
-            segmentneg =  0
-            segspeed = 0
-            amount = 0
-            rot2 = 0
             if rotater <= 90:
                 xnow = x
                 if rot2 <= 0:
@@ -1798,7 +1773,7 @@ while not done:
                 shiftl = font.render(shifttext, 30, white)
                 shiftl2 = font.render(shifttext2, 30, white)
         except NameError:
-            hi = "hi"
+            pass
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 160))
