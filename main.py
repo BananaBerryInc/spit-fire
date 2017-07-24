@@ -46,6 +46,42 @@ pygame.display.flip()
 #pygame.mixer.music.play(1,0)
 #Variables
 #Text Strings 
+
+
+
+#Colours (Thanks to atmatm6 for the code in this section!)
+black = (0,0,0)
+white = (255,255,255)
+brown = (100,42,42)
+gray = (128,128,128)
+darkdarkred = (64,0,0)
+rhubarb = (128,0,0)
+red = (255,0,0)
+redorange = (255,64,0)
+orange = (255,128,0)
+orangeyellow = (255,192,0)
+yellow = (255,255,0)
+limegreen = (192,255,0)
+screengreen = (128,255,0)
+lightgreen = (64,255,0)
+green = (0,255,0)
+mehgreen = (0,255,64)
+greenblue = (0,255,128)
+aqua = (0,255,192)
+lightblue = (0,255,255)
+turquoise = (0,192,255)
+teal = (0,128,255)
+lightdarkblue = (0,64,255)
+blue = (0,0,255)
+darkblue = (64,0,255)
+purple = (128,0,255)
+violet = (192,0,255)
+magenta = (255,0,255)
+darklightmagenta = (255,0,192)
+pink = (255,0,128)
+lightred = (255,0,64)
+
+
 frame = 2
 help = "Drive to a box, and press space to go!"
 welcometo = "Welcome to "
@@ -83,6 +119,7 @@ the1080pl = font.render(the1080plabel, 10, white)
 the720pl = font.render(the720plabel, 10, white)
 changel = font.render(changelabel, 10, white)
 helpl = font.render(helplabel, 10 ,white)
+explainl = font.render("Use the terminal window to enter the new name...", 10, white)
 helpl1 = font.render(helplabel1, 10 ,white)
 helpl2 = font.render(helplabel2, 10 ,white)
 helpl3 = font.render(helplabel3, 10 ,white)
@@ -145,6 +182,7 @@ carimagepath = parser.get("options", "carimage")
 currentcar = parser.get("options", "car")
 cartext = "Car: "
 track = int(parser.get("options", "track"))
+playername = parser.get("options", "name")
 parser.read("res/tracks.ini")
 trackname = trackname = parser.get("track" + str(track), "trackname")
 change = 0
@@ -158,37 +196,6 @@ if level == 1:
 logo = pygame.image.load("res/Game Logo.png")
 
 
-#Colours (Thanks to atmatm6 for the code in this section!)
-black = (0,0,0)
-white = (255,255,255)
-brown = (100,42,42)
-gray = (128,128,128)
-darkdarkred = (64,0,0)
-rhubarb = (128,0,0)
-red = (255,0,0)
-redorange = (255,64,0)
-orange = (255,128,0)
-orangeyellow = (255,192,0)
-yellow = (255,255,0)
-limegreen = (192,255,0)
-screengreen = (128,255,0)
-lightgreen = (64,255,0)
-green = (0,255,0)
-mehgreen = (0,255,64)
-greenblue = (0,255,128)
-aqua = (0,255,192)
-lightblue = (0,255,255)
-turquoise = (0,192,255)
-teal = (0,128,255)
-lightdarkblue = (0,64,255)
-blue = (0,0,255)
-darkblue = (64,0,255)
-purple = (128,0,255)
-violet = (192,0,255)
-magenta = (255,0,255)
-darklightmagenta = (255,0,192)
-pink = (255,0,128)
-lightred = (255,0,64)
 
 
 #Labels that don't change will go here
@@ -805,6 +812,8 @@ def spaceaction():
     global players
     global shifting
     global shifting2
+    global playername
+    global explainl
     if inoptions:
             if x <= 160:
                 if y >= 640:
@@ -816,6 +825,15 @@ def spaceaction():
                         if inoptions:
                             inoptions = False
                             change = 20
+            if x >= 495:
+                if x <= 795:
+                    if y >= 45:
+                        if y <= 150:
+                            screen = pygame.display.set_mode((1280, 720))
+                            screen.blit(explainl, (0,0))
+                            playername = str(input("Enter the new name here >"))
+                            if fulscr:
+                                screen = pygame.display.set_mode((1280, 720),pygame.FULLSCREEN)
             if x >= 95:
                 if x <= 375:
                     if y >= 45:
@@ -1000,6 +1018,7 @@ while not done:
         shiftingl = font.render(shifting, 10 ,white)
         shifting2l = font.render(shifting2, 10 ,white)
         fulscrl = font.render(str(fulscr), 10, white)
+        nametextl = font.render("Name: " + playername, 10, white)
         #Drawing/rendering
         screen.fill((0,0,0))
         if not inoptions:
@@ -1034,7 +1053,6 @@ while not done:
         if players == 2:
             screen.blit(carimage4, (x2,y2))
         if inhelp:
-            screen.fill(darkdarkred)
             screen.blit(helpl, (565, 10))
             screen.blit(helpl1, (50, 40))
             screen.blit(helpl2, (50, 70))
@@ -1055,15 +1073,17 @@ while not done:
             screen.blit(helpl17, (580, 220))
             screen.blit(helpl18, (580, 250))
         if inoptions:
-            screen.fill(darkdarkred)
             pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
             pygame.draw.rect(screen, gray, pygame.Rect(100,50, 210, 55))
+            pygame.draw.rect(screen, gray, pygame.Rect(500, 50, 210, 55))
             screen.blit(fullscrl, (0, 670))
             screen.blit(fullscrl2, (0, 640))
             screen.blit(changel , (100, 50))
             screen.blit(optionsl1, (100, 100))
             screen.blit(fulscrl, (250, 100))
             screen.blit(carimage2, (x,y))
+            screen.blit(nametextl, (500,100))
+            screen.blit(changel,(500,50))
         #ANND, GO
         pygame.display.flip()
         clock.tick(clockspeed)
