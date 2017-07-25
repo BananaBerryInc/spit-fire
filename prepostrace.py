@@ -43,6 +43,7 @@ maxpoints = int(points) + int(score)
 trackkey = "track" + str(track)
 car = parser.get("options", "car")
 clockspeedstring = parser.get("options", "speed")
+playername = parser.get("options", "name")
 players = int(parser.get("options", "players"))
 score2 = int(parser.get("options", "score2"))
 clockspeed = int(clockspeedstring)
@@ -202,7 +203,7 @@ while not done:
         if place == "11":
             hi = "hi"
         if place == "1":
-            firstplacelabel = "1st (You) :  " + score
+            firstplacelabel = "1st ("+ playername + ") :  " + score
             secondplacelabel = "2nd : " + str(p1)
             thirdplacelabel = "3rd : " + str(p2)
             fourthplacelabel = "4th : " + str(p3)
@@ -213,7 +214,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "2":
-            secondplacelabel = "2nd (You) :  " + score
+            secondplacelabel = "2nd ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p2)
             fourthplacelabel = "4th : " + str(p3)
@@ -224,7 +225,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "3":
-            thirdplacelabel = "3rd (You) :  " + score
+            thirdplacelabel = "3rd ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             secondplacelabel = "2nd : " + str(p2)
             fourthplacelabel = "4th : " + str(p4)
@@ -235,7 +236,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p9)
             tenthplacelabel = "10th : " + str(p10)
         if place == "4":
-            fourthplacelabel = "4th (You) :  " + score
+            fourthplacelabel = "4th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             secondplacelabel = "2nd : " + str(p2)
@@ -246,7 +247,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "5":
-            fifthplacelabel = "5th (You) :  " + score
+            fifthplacelabel = "5th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             fourthplacelabel = "4th : " + str(p4)
@@ -257,7 +258,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "6":
-            sixthplacelabel = "6th (You) :  " + score
+            sixthplacelabel = "6th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             fourthplacelabel = "4th : " + str(p4)
@@ -268,7 +269,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "7":
-            seventhplacelabel = "7th (You) :  " + score
+            seventhplacelabel = "7th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             fourthplacelabel = "4th : " + str(p4)
@@ -279,7 +280,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "8":
-            eightplacelabel = "8th (You) :  " + score
+            eightplacelabel = "8th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             fourthplacelabel = "4th : " + str(p4)
@@ -290,7 +291,7 @@ while not done:
             ninthplacelabel = "9th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "9":
-            ninthplacelabel = "9th (You) :  " + score
+            ninthplacelabel = "9th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             fourthplacelabel = "4th : " + str(p4)
@@ -301,7 +302,7 @@ while not done:
             ninthplacelabel = "8th : " + str(p8)
             tenthplacelabel = "10th : " + str(p9)
         if place == "10":
-            tenthplacelabel = "10th (You) :  " + score
+            tenthplacelabel = "10th ("+ playername + ") :  " + score
             firstplacelabel = "1st : " + str(p1)
             thirdplacelabel = "3rd : " + str(p3)
             fourthplacelabel = "4th : " + str(p4)

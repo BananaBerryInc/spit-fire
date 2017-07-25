@@ -226,6 +226,7 @@ def sendtomain():
     parser.set("options", "car", currentcar)
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "shifting", shifting)
+    parser.set("options", "name", playername)
     parser.set("options", "shifting2", shifting2)
     parser.set("options", "car2", currentcar2)
     parser.set("options", "trackpath", trackpath)
