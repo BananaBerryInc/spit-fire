@@ -20,7 +20,9 @@ If you want, you can run run_main.py.bat in the root of the repo for a quick sta
 
 # Releases/Updates
 
-As of now, stable(ish) releases are planned for Friday of each week. If you want to be on the bleeding edge, or just want an easy way to update, please check out https://github.com/BananaBerryInc/spit-fire-updater for an easy way to update Spit-fire. This is still in Beta stages, though.
+As of now, stable(ish) releases have no plan. This is because we are working really hard on getting Beta 1 finished, no matter how long it takes.
+
+If you want to be on the bleeding edge, or just want an easy way to update, please check out https://github.com/BananaBerryInc/spit-fire-updater for an easy way to update Spit-fire. This is still in Beta stages, though.
 
 # About the font we used.
 
