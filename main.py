@@ -147,6 +147,8 @@ x = 30
 y = 30
 x2 = 60
 y2 = 60
+cup = 1
+cupname = "Beginner Cup"
 parser = SafeConfigParser()
 parser.read("res/options.ini")
 players = int(parser.get("options", "players"))
@@ -237,8 +239,13 @@ def sendtomain():
     parser.set("options", "fulscr", str(fulscr))
     parser.set("options", "levelpoints", str(levelpoints))
     parser.set("options", "players", str(players))
+    if players == 3:
+        parser.set("cupstats", "cup", str(cup))
+        parser.set("cupstats", "track", "0")
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
+    if players == 3:
+        exec(open("cupstats.py").read())
     exec(open("race.py").read())
 
 def carpicker():
@@ -750,54 +757,77 @@ def carpicker2():
 def trackpicker():
     global change
     global track
+    global cup
+    global cupname
     global trackname
     global trackpath
     global level
     parser.read("res/tracks.ini")
     if change == 0:
         change = 10
-        track += 1
-        tracktotalstr = parser.get("info", "tracktotal")
-        tracktotal = int(tracktotalstr)
-        if track >= tracktotal:
-            track = 1
-        if track == 2:
-            trackname = parser.get("track2", "trackname")
-            trackpath = parser.get("track2", "trackpath")
+        if players == 3:
+            cup += 1
+            tracktotalstr = parser.get("info", "cuptotal")
+            tracktotal = int(tracktotalstr)
+            if cup >= tracktotal:
+                cup = 1
+            if cup == 2:
+                if level >= 15:
+                    cupname = parser.get("cup2", "cupname")
+                    trackname = parser.get("track1", "trackname")
+                    trackpath = parser.get("track1", "trackpath")
+                else:
+                    cup = 1
+            if cup == 1:
+                if level >= 10:
+                    cupname = parser.get("cup1", "cupname")
+                    trackname = parser.get("track1", "trackname")
+                    trackpath = parser.get("track1", "trackpath")
+                else:
+                    cup = 1
+        if players <= 2:
+            track += 1
+            tracktotalstr = parser.get("info", "tracktotal")
+            tracktotal = int(tracktotalstr)
+            if track >= tracktotal:
+                track = 1
+            if track == 2:
+                trackname = parser.get("track2", "trackname")
+                trackpath = parser.get("track2", "trackpath")
 
-        if track == 3:
-            if level >= 3:
-                trackname = parser.get("track3", "trackname")
-                trackpath = parser.get("track3", "trackpath")
-            else:
-                track = 1
-        if track == 4:
-            if level >= 10:
-                trackname = parser.get("track4", "trackname")
-                trackpath = parser.get("track4", "trackpath")
-            else:
-                track = 1
-        if track == 5:
-            if level >= 14:
-                trackname = parser.get("track5", "trackname")
-                trackpath = parser.get("track5", "trackpath")
-            else:
-                track = 1
-        if track == 6:
-            if level >= 15:
-                trackname = parser.get("track6", "trackname")
-                trackpath = parser.get("track6", "trackpath")
-            else:
-                track = 1
-        if track == 7:
-            if level >= 18:
-                trackname = parser.get("track7", "trackname")
-                trackpath = parser.get("track7", "trackpath")
-            else:
-                track = 1
-        if track == 1:
-            trackname = parser.get("track1", "trackname")
-            trackpath = parser.get("track1", "trackpath")
+            if track == 3:
+                if level >= 3:
+                    trackname = parser.get("track3", "trackname")
+                    trackpath = parser.get("track3", "trackpath")
+                else:
+                    track = 1
+            if track == 4:
+                if level >= 10:
+                    trackname = parser.get("track4", "trackname")
+                    trackpath = parser.get("track4", "trackpath")
+                else:
+                    track = 1
+            if track == 5:
+                if level >= 14:
+                    trackname = parser.get("track5", "trackname")
+                    trackpath = parser.get("track5", "trackpath")
+                else:
+                    track = 1
+            if track == 6:
+                if level >= 15:
+                    trackname = parser.get("track6", "trackname")
+                    trackpath = parser.get("track6", "trackpath")
+                else:
+                    track = 1
+            if track == 7:
+                if level >= 18:
+                    trackname = parser.get("track7", "trackname")
+                    trackpath = parser.get("track7", "trackpath")
+                else:
+                    track = 1
+            if track == 1:
+                trackname = parser.get("track1", "trackname")
+                trackpath = parser.get("track1", "trackpath")
 
 def spaceaction():
     global inoptions
@@ -977,6 +1007,14 @@ while not done:
                     change = 10
             if players == 2:
                 if change == 0:
+                    if level >= 10:
+                        players = 3
+                        change = 10
+                    else:
+                        players = 1
+                        change = 10
+            if players == 3:
+                if change == 0:
                     players = 1
                     change = 10
         #Change Tracks
@@ -1007,10 +1045,15 @@ while not done:
         carlabel = cartext + currentcar
         carlabel2 = font.render(carlabel, 10, white)
         tracklabel = "Track " + str(track) + ": " + trackname
+        if players == 3:
+            tracklabel = "Cup " + str(cup) + ": " + cupname
         tracklabel2 = font.render(tracklabel, 10 ,white)
         clockspeedlabel = str(clockspeed) + " CC"
         clockspeedlabel2 = font.render(clockspeedlabel, 10 ,white)
-        playerlabel = "Players : " + str(players)
+        if players <= 2:
+            playerlabel = "Mode: " + "Single Race (" + str(players) + " Player)"
+        if players == 3:
+            playerlabel = "Mode: " + "Cup (1 Player)"
         playerl = font.render(playerlabel, 10, white)
         pointsl = font.render(str(points) + " / " + str(levelpoints), 10, white)
         levell = font50.render("Level " + str(level), 10, white)

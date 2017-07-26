@@ -421,6 +421,11 @@ while not done:
                 pygame.QUIT
                 quit()
             if pressed[pygame.K_w]:
+                segment =  0
+                segmentneg =  0
+                segspeed = 0
+                amount = 0
+                rot2 = 0
                 curspeed2 = curspeed2 + accel2
                 lastdirection = Up
                 if curspeed2 >= topspeed2:
@@ -930,6 +935,11 @@ while not done:
             pygame.QUIT
             quit()
         if pressed[pygame.K_UP]:
+            segment =  0
+            segmentneg =  0
+            segspeed = 0
+            amount = 0
+            rot2 = 0
             curspeed = curspeed + accel
             lastdirection = Up
             if curspeed >= topspeed:
@@ -1079,6 +1089,11 @@ while not done:
         if pressed[pygame.K_RIGHT]:
             lastdirection = Right
             if not pressed [pygame.K_UP]:
+                segment =  0
+                segmentneg =  0
+                segspeed = 0
+                amount = 0
+                rot2 = 0
                 if rotater <= 90:
                     xnow = x
                     if rot2 <= 0:
@@ -1450,6 +1465,11 @@ while not done:
                 #Passoff scprit goes here
                 finished = True
                 sendtopost()
+        if players == "3":
+            if lapcount >= maxlaps:
+                #Passoff scprit goes here
+                finished = True
+                sendtopost()        
         if players == "2":
             if lapcount >= maxlaps:
                 if lapcount2 >= maxlaps:

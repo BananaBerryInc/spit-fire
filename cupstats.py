@@ -28,96 +28,73 @@ parser.read("res/options.ini")
 carimagepath = parser.get("options", "carimage")
 trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
-score = parser.get("options", "score")
-place = parser.get("options", "place")
-fulscr = parser.get("options", "fulscr")
-if fulscr == "True":
-    screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
-trackimage = pygame.image.load(trackpath)
-level = int(parser.get("options", "level"))
-points = float(parser.get("options", "points"))
-levelpoints = (int(level) + 100) * 202.2
-levelpixels = float(points) / levelpoints * 300
-track = int(trackstring)
-clock = pygame.time.Clock()
-maxpoints = int(points) + int(score)
-trackkey = "track" + str(track)
-car = parser.get("options", "car")
-clockspeedstring = parser.get("options", "speed")
-playername = parser.get("options", "name")
-players = int(parser.get("options", "players"))
-score2 = int(parser.get("options", "score2"))
-clockspeed = int(clockspeedstring)
-trackimage = pygame.image.load(trackpath)
-parser.read("res/tracks.ini")
-maxlap = int(parser.get(trackkey, "laps"))
-startx = parser.get(trackkey, "startlinex")
-starty = parser.get(trackkey, "startliney")
-checkpointy = parser.get(trackkey, "checkpointy")
-checkpointx = parser.get(trackkey, "checkpointx")
-parser.read("res/highscore.ini")
-p1 = int(parser.get(trackkey, "p1"))
-p2 = int(parser.get(trackkey, "p2"))
-p3 = int(parser.get(trackkey, "p3"))
-p4 = int(parser.get(trackkey, "p4"))
-p5 = int(parser.get(trackkey, "p5"))
-p6 = int(parser.get(trackkey, "p6"))
-p7 = int(parser.get(trackkey, "p7"))
-p8 = int(parser.get(trackkey, "p8"))
-p9 = int(parser.get(trackkey, "p9"))
-p10 = parser.get(trackkey, "p10")
-p10 = int(p10)
-if players == 3:
-    parser.read("res/options.ini")
-    points1 = int(parser.get("cupstats", "points1"))
-    points2 = int(parser.get("cupstats", "points2"))
-    points3 = int(parser.get("cupstats", "points3"))
-    points4 = int(parser.get("cupstats", "points4"))
-    points5 = int(parser.get("cupstats", "points5"))
-    points6 = int(parser.get("cupstats", "points6"))
-    points7 = int(parser.get("cupstats", "points7"))
-    points8 = int(parser.get("cupstats", "points8"))
-    points9 = int(parser.get("cupstats", "points9"))
-    points10 = int(parser.get("cupstats", "points10"))
-    playerpoints = int(parser.get("cupstats","playerpoints"))
-    points1 = points1 + p1
-    points2 = points2 + p2
-    points3 = points3 + p3
-    points4 = points4 + p4
-    points5 = points5 + p5
-    points6 = points6 + p6
-    points7 = points7 + p7
-    points8 = points8 + p8
-    points9 = points9 + p9
-    points10 = points10 + p10
-    playerpoints = playerpoints + int(score)
-    parser.set("cupstats", "points1", str(points1))
-    parser.set("cupstats", "points2", str(points2))
-    parser.set("cupstats", "points3", str(points3))
-    parser.set("cupstats", "points4", str(points4))
-    parser.set("cupstats", "points5", str(points5))
-    parser.set("cupstats", "points6", str(points6))
-    parser.set("cupstats", "points7", str(points7))
-    parser.set("cupstats", "points8", str(points8))
-    parser.set("cupstats", "points9", str(points9))
-    parser.set("cupstats", "points10", str(points10))  
-    parser.set("cupstats", "playerpoints", str(playerpoints))
+track = int(parser.get("cupstats", "track"))
+if track == 0:
+    score = 0
+    place = 0
+    p1 = 0
+    p2 = 0
+    p3 = 0
+    p4 =0
+    p5 = 0
+    p6 = 0
+    p7 = 0
+    p8 = 0
+    p9 = 0
+    p10 = 0
+    parser.set("cupstats", "points1"," 0")
+    parser.set("cupstats", "points2", "0")
+    parser.set("cupstats", "points3", "0")
+    parser.set("cupstats", "points4", "0")
+    parser.set("cupstats", "points5", "0")
+    parser.set("cupstats", "points6", "0")
+    parser.set("cupstats", "points7", "0")
+    parser.set("cupstats", "points8", "0")
+    parser.set("cupstats", "points9", "0")
+    parser.set("cupstats", "points10", "0")
+    parser.set("cupstats","playerpoints","0")
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-parser.read("res/names.ini")
-randomplacing = random.sample(range(1, 11), 10)
-name1 = parser.get("Main", str(randomplacing[0]))
-name2 = parser.get("Main", str(randomplacing[1]))
-name3 = parser.get("Main", str(randomplacing[2]))
-name4 = parser.get("Main", str(randomplacing[3]))
-name5 = parser.get("Main", str(randomplacing[4]))
-name6 = parser.get("Main", str(randomplacing[5]))
-name7 = parser.get("Main", str(randomplacing[6]))
-name8 = parser.get("Main", str(randomplacing[7]))
-name9 = parser.get("Main", str(randomplacing[8]))
-name10 = parser.get("Main", str(randomplacing[9]))
-if players == 3:
+    parser.read("res/names.ini")
+    randomplacing = random.sample(range(1, 11), 10)
+    name1 = parser.get("Main", str(randomplacing[0]))
+    name2 = parser.get("Main", str(randomplacing[1]))
+    name3 = parser.get("Main", str(randomplacing[2]))
+    name4 = parser.get("Main", str(randomplacing[3]))
+    name5 = parser.get("Main", str(randomplacing[4]))
+    name6 = parser.get("Main", str(randomplacing[5]))
+    name7 = parser.get("Main", str(randomplacing[6]))
+    name8 = parser.get("Main", str(randomplacing[7]))
+    name9 = parser.get("Main", str(randomplacing[8]))
+    name10 = parser.get("Main", str(randomplacing[9]))
     parser.read("res/options.ini")
+    parser.set("cupstats", "name1", name1)
+    parser.set("cupstats", "name2", name2)
+    parser.set("cupstats", "name3", name3)
+    parser.set("cupstats", "name4", name4)
+    parser.set("cupstats", "name5", name5)
+    parser.set("cupstats", "name6", name6)
+    parser.set("cupstats", "name7", name7)
+    parser.set("cupstats", "name8", name8)
+    parser.set("cupstats", "name9", name9)
+    parser.set("cupstats", "name10", name10)
+    with open('res/options.ini', 'w') as configfile:
+        parser.write(configfile)
+else:
+    parser.read("res/options.ini")
+    score = parser.get("cupstats", "playerpoints")
+    place = parser.get("options", "place")
+    fulscr = parser.get("options", "fulscr")
+    p1 = parser.get("cupstats", "points1")
+    p2 = parser.get("cupstats", "points2")
+    p3 = parser.get("cupstats", "points3")
+    p4 = parser.get("cupstats", "points4")
+    p5 = parser.get("cupstats", "points5")
+    p6 = parser.get("cupstats", "points6")
+    p7 = parser.get("cupstats", "points7")
+    p8 = parser.get("cupstats", "points8")
+    p9 = parser.get("cupstats", "points9")
+    p10 = parser.get("cupstats", "points10")
     name1 = parser.get("cupstats", "name1")
     name2 = parser.get("cupstats", "name2")
     name3 = parser.get("cupstats", "name3")
@@ -128,6 +105,33 @@ if players == 3:
     name8 = parser.get("cupstats", "name8")
     name9 = parser.get("cupstats", "name9")
     name10 = parser.get("cupstats", "name10")
+if fulscr == "True":
+    screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
+trackimage = pygame.image.load(trackpath)
+level = int(parser.get("options", "level"))
+points = float(parser.get("options", "points"))
+levelpoints = (int(level) + 100) * 202.2
+levelpixels = float(points) / levelpoints * 300
+track2 = int(trackstring)
+clock = pygame.time.Clock()
+maxpoints = int(points) + int(score)
+trackkey = "track" + str(track2)
+car = parser.get("options", "car")
+clockspeedstring = parser.get("options", "speed")
+playername = parser.get("options", "name")
+cupnum = parser.get("cupstats", "cup")
+players = int(parser.get("options", "players"))
+score2 = 0
+clockspeed = int(clockspeedstring)
+trackimage = pygame.image.load(trackpath)
+parser.read("res/tracks.ini")
+maxlap = int(parser.get(trackkey, "laps"))
+startx = parser.get(trackkey, "startlinex")
+starty = parser.get(trackkey, "startliney")
+checkpointy = parser.get(trackkey, "checkpointy")
+checkpointx = parser.get(trackkey, "checkpointx")
+
+
 
 #Colours (Thanks to atmatm6 for the code in this section!)
 black = (0,0,0)
@@ -203,11 +207,20 @@ def backtostart():
     global trackname
     global clockspeed
     global points
+    global cupnum
     global level
+    global track2
     #send off the settings
+    track += 1
+    parser.read("res/tracks.ini")
+    tracktogoto2 = parser.get("cup" + str(cupnum), "track" + str(track))
+    tracktogoto = "track" + tracktogoto2
+    trackpath = parser.get(tracktogoto,"trackpath")
+    trackname = parser.get(tracktogoto, "trackname")
     parser.read("res/options.ini")
-    parser.set("options", "track", str(track))
-    parser.set("options", "trackpath", trackpath)
+    parser.set("cupstats","track", str(track))
+    parser.set("options", "track", str(tracktogoto2))
+    parser.set("options", "trackpath", str(trackpath))
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))
     parser.set("options", "racefinsihed", "No")
@@ -215,9 +228,7 @@ def backtostart():
     parser.set("options", "level", str(level))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-    if players == 3:
-        exec(open("cupstats.py").read())
-    exec(open("main.py").read())
+    exec(open("race.py").read())
 
 
 #Exit Control
@@ -248,11 +259,11 @@ while not done:
         if pressed[pygame.K_RETURN]:
             backtostart()
         #Setting up the labels
-        resultsl = font.render("Results: ", 30, black)
+        resultsl = font.render("Cup Standings: ", 30, black)
         if players == 2:
             scorelabel2 = "Player 2's score: " + str(score2)
             scorel2 = font.render(scorelabel2, 30, black)
-        scorelabel = "Your Score: " + score
+        scorelabel = "Your Current Score: " + str(score)
         scorel = fontbig.render(scorelabel, 30, black)
         firstplacelabel = "1st (" + name1 + ") : " + str(p1)
         secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
@@ -386,7 +397,7 @@ while not done:
         eightplacel = font.render(eightplacelabel, 30, black)
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
-        startl = fontsmall.render("Press enter to start a new race", 30, black)
+        startl = fontsmall.render("Press enter to go to the new race", 30, black)
         donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
         if players == 2:
             highl = fontsmall.render("Please note: highscore table is for player 1 ONLY!", 30, black)
