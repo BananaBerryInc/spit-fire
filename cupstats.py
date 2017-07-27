@@ -273,19 +273,6 @@ while not done:
                 if event.type == pygame.QUIT:
                         done = True
         wait -= 1
-        #Leveling
-        if points <= maxpoints - 2000:
-            points += 10.1
-        if points <= maxpoints - 500:
-            points -= 5.1
-        if points <= maxpoints:
-            points += 10.1
-        if points >= levelpoints:
-            level += 1
-            maxpoints = maxpoints - points
-            points = 0
-        levelpoints = (int(level) + 100) * 202.2
-        levelpixels = int(points) / levelpoints * 300
         #Key detection!
         pressed = pygame.key.get_pressed()
         #Quit With the escape key
@@ -298,12 +285,13 @@ while not done:
                 backtostart()
         #Setting up the labels
         resultsl = font.render("Cup Standings (" + str(track)  + "/4) : ", 30, black)
+        scorelabel = "Your Current Score: " + str(score)
         if track == 4:
             resultsl = font.render("Final Results: ", 30, black)
+            scorelabel = "Your Final Score: " + str(score)
         if players == 2:
             scorelabel2 = "Player 2's score: " + str(score2)
             scorel2 = font.render(scorelabel2, 30, black)
-        scorelabel = "Your Current Score: " + str(score)
         scorel = fontbig.render(scorelabel, 30, black)
         firstplacelabel = "1st (" + name1 + ") : " + str(p1)
         secondplacelabel = "2nd (" + name2 + ") : " + str(p2)

@@ -88,7 +88,7 @@ welcometo = "Welcome to "
 helplabel = "Help"
 helplabel1 = "On the Menu screen:"
 helplabel2 = "Press C to change cars (for the first player)"
-helplabel3 = "Press T to change tracks"
+helplabel3 = "Press T to change tracks/cups"
 helplabel4 = "Press B to change the clockspeed/difficulty"
 helplabel5 = "During a race:"
 helplabel6 = "Left and Right steer"
@@ -96,8 +96,8 @@ helplabel7 = "Up is the gas pedal/accelleration"
 helplabel8 = "Down is the brake"
 helplabel9 = "Space will use your nos"
 helplabel10 = "Press escape to get rid of this message"
-helplabel11 = "Press P to change amount of players (Up to 2)"
-helplabel12 = "The W,A,S,D,Q Keys control player 2 in the same way as player 1"
+helplabel11 = "Press P to change the mode (Single Race, Cup, multiplayer)"
+helplabel12 = "The W,A,S,D,Q Keys control player 2"
 helplabel13 = "About Leveling:"
 helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
 helplabel15 = "(They will be automatically added to the Menu screen.)"
@@ -257,7 +257,7 @@ def carpicker():
     global carimage2
     if currentcar == "Dodge Challenger":
                 if change == 0:
-                    if level >= 4:
+                    if level >= 5:
                         currentcar = "Koenigsegg One"
                         carimagepath = "res/Koenigsegg_One.png"
                         carimage2 = pygame.image.load("res/Koenigsegg_One.png")
@@ -271,7 +271,7 @@ def carpicker():
                         change = 10
     if currentcar == "Ferrari F40":
         if change == 0:
-            if level >= 5:
+            if level >= 4:
                 currentcar = "Dodge Challenger"
                 carimagepath = "res/Dodge_Challenger.png"
                 carimage2 = pygame.image.load("res/Dodge_Challenger.png")
@@ -1105,24 +1105,24 @@ while not done:
             screen.blit(carimage4, (x2,y2))
         if inhelp:
             screen.blit(helpl, (565, 10))
-            screen.blit(helpl1, (50, 40))
-            screen.blit(helpl2, (50, 70))
-            screen.blit(helpl3, (50, 100))
-            screen.blit(helpl4, (50, 130))
-            screen.blit(helpl5, (580, 40))
-            screen.blit(helpl6, (580, 70))
-            screen.blit(helpl7, (580, 100))
-            screen.blit(helpl8, (580, 130))
-            screen.blit(helpl9, (580, 160))
+            screen.blit(helpl1, (5, 40))
+            screen.blit(helpl2, (5, 70))
+            screen.blit(helpl3, (5, 100))
+            screen.blit(helpl4, (5, 130))
+            screen.blit(helpl5, (680, 40))
+            screen.blit(helpl6, (680, 70))
+            screen.blit(helpl7, (680, 100))
+            screen.blit(helpl8, (680, 130))
+            screen.blit(helpl9, (680, 160))
             screen.blit(helpl10, (430, 450))
-            screen.blit(helpl11, (50, 160))
-            screen.blit(helpl12, (580, 190))
+            screen.blit(helpl11, (5, 160))
+            screen.blit(helpl12, (680, 190))
             screen.blit(helpl13, (400, 310))
             screen.blit(helpl14, (400, 350))
             screen.blit(helpl15, (400, 380))
-            screen.blit(helpl16, (50, 190))
-            screen.blit(helpl17, (580, 220))
-            screen.blit(helpl18, (580, 250))
+            screen.blit(helpl16, (5, 190))
+            screen.blit(helpl17, (680, 220))
+            screen.blit(helpl18, (680, 250))
         if inoptions:
             pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
             pygame.draw.rect(screen, gray, pygame.Rect(100,50, 210, 55))

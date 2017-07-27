@@ -31,6 +31,7 @@ trackpath = parser.get("options", "trackpath")
 score = parser.get("options", "score")
 place = parser.get("options", "place")
 fulscr = parser.get("options", "fulscr")
+inlevelup = False
 if fulscr == "True":
     screen = pygame.display.set_mode((1280, 720), pygame.FULLSCREEN)
 trackimage = pygame.image.load(trackpath)
@@ -234,6 +235,7 @@ while not done:
             points += 10.1
         if points >= levelpoints:
             level += 1
+            inlevelup = True
             maxpoints = maxpoints - points
             points = 0
         levelpoints = (int(level) + 100) * 202.2
@@ -244,6 +246,9 @@ while not done:
         if pressed[pygame.K_ESCAPE]:
             exitthegame()
             reallydonewiththis = True
+        if pressed[pygame.K_SPACE]:
+            if inlevelup:
+                inlevelup = False
         #backtostart
         if pressed[pygame.K_RETURN]:
             backtostart()
@@ -429,6 +434,85 @@ while not done:
         screen.blit(scorel, (430, 600))
         screen.blit(donel, (700, 400))
         screen.blit(startl, (700, 430))
+        if inlevelup:
+            s2 = pygame.Surface((1300,1300))
+            s2.set_alpha(125)
+            s2.fill((0,0,0))
+            screen.blit(s2, (0,0))           
+            leveluptext = fontbig.render("Level Up!", 10, white)
+            dismiss = font.render("Press space to dismiss this message", 10, white)
+            levelutext = font.render("Level " + str(level) , 10, white)
+            if level >= 23:
+                unlocktext = font.render("No new items unlocked.", 10, white)
+            if level <= 22:
+                unlocktext = font.render("? Unlocked!!", 10, white)
+            if level == 2:
+                unlocktext = font.render("Ferrari F40 Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Ferrari_F40.png")
+            if level == 3:
+                unlocktext = font.render("The Original Track Unlocked!!", 10, white)
+            if level == 4:
+                unlocktext = font.render("Dodge Challenger Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Dodge_Challenger.png")
+            if level == 5:
+                unlocktext = font.render("Koenigsegg One Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Koenigsegg_One.png")
+            if level == 6:
+                unlocktext = font.render("Bugatti Vision GT Gran Turismo Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Bugatti Vision GT Gran Turismo.png")
+            if level == 7:
+                unlocktext = font.render("Camaro ZL1 1LE Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Camaro ZL1 1LE.png")
+            if level == 8:
+                unlocktext = font.render("Mclaren P1 Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res//Mclaren P1.png")
+            if level == 9:
+                unlocktext = font.render("Nissan 240SX Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Nissan 240SX.png")
+            if level == 10:
+                unlocktext = font.render("Nissan GTR R35 + Camelback Pass Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Nissan GTR R35.png")
+            if level == 11:
+                unlocktext = font.render("Porsche 918 Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Porsche 918.png")
+            if level == 12:
+                unlocktext = font.render("Nitro Cart Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("resNitro Cart.png/")
+            if level ==13:
+                unlocktext = font.render("Limited Gold Koenigsegg One Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Limited Gold Koenigsegg One.png")
+            if level == 14:
+                unlocktext = font.render("The Dual Ring Unlocked!!", 10, white)
+            if level == 15:
+                unlocktext = font.render("Totally Not An Animal This Time Unlocked!!", 10, white)
+            if level == 16:
+                unlocktext = font.render("Toyota Supra Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Toyota Supra.png")
+            if level == 17:
+                unlocktext = font.render("WMotors Fenyr SuperSport Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/WMotors Fenyr SuperSport.png")
+            if level == 18:
+                unlocktext = font.render("Drag Race Unlocked!!", 10, white)
+            if level == 19:
+                unlocktext = font.render("1998 Ferrari F355 Spider Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/1998 Ferrari F355 Spider.png")
+            if level == 20:
+                unlocktext = font.render("Dodge Viper ACR Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Dodge Viper ACR.png")
+            if level == 21:
+                unlocktext = font.render("2016 Lamborghini Huracan LP610-4 Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/2016 Lamborghini Huracan LP610-4.png")
+            if level == 22:
+                unlocktext = font.render("Porsche Mission E Concept Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/porsche mission e concept.png")
+            try:
+                screen.blit(unlockimage, (540, 360))
+            except:
+                pass
+            screen.blit(levelutext, (510, 55))
+            screen.blit(unlocktext, (380, 300))
+            screen.blit(leveluptext, (485, 0))
+            screen.blit(dismiss, (355, 660))
         #ANND, GO!
         pygame.display.flip()
         clock.tick(clockspeed)
