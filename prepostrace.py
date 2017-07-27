@@ -387,6 +387,8 @@ while not done:
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
         startl = fontsmall.render("Press enter to start a new race", 30, black)
+        if players == 3:
+            startl = fontsmall.render("Press enter to continue", 30, black)
         donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
         if players == 2:
             highl = fontsmall.render("Please note: highscore table is for player 1 ONLY!", 30, black)

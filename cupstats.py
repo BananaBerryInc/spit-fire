@@ -23,6 +23,7 @@ pygame.display.flip()
 
 #Re-collecting those settings!
 reallydonewiththis = False
+wait = 60
 parser = SafeConfigParser()
 parser.read("res/options.ini")
 carimagepath = parser.get("options", "carimage")
@@ -30,7 +31,7 @@ trackstring = parser.get("options", "track")
 trackpath = parser.get("options", "trackpath")
 track = int(parser.get("cupstats", "track"))
 if track == 0:
-    score = 0
+    score = "0"
     place = 0
     p1 = 0
     p2 = 0
@@ -130,7 +131,40 @@ startx = parser.get(trackkey, "startlinex")
 starty = parser.get(trackkey, "startliney")
 checkpointy = parser.get(trackkey, "checkpointy")
 checkpointx = parser.get(trackkey, "checkpointx")
-
+#Getting the placing
+if int(score) <= int(p10):
+    place = "11"
+    
+if int(score) >= int(p10 ):
+    place = "10"
+    
+if int(score) >= int(p9 ):
+    place = "9"
+    
+if int(score) >= int(p8 ):
+    place = "8"
+    
+if int(score) >= int(p7 ):
+    place = "7"
+    
+if int(score) >= int(p6 ):
+    place = "6"
+    
+if int(score) >= int(p5 ):
+    place = "5"
+    
+if int(score) >= int(p4 ):
+    place = "4"
+    
+if int(score) >= int(p3 ):
+    place = "3"
+    
+if int(score) >= int(p2 ):
+    place = "2"
+    
+if int(score) >= int(p1 ):
+    place = "1"
+    
 
 
 #Colours (Thanks to atmatm6 for the code in this section!)
@@ -212,6 +246,8 @@ def backtostart():
     global track2
     #send off the settings
     track += 1
+    if track == 5:
+        exec(open("main.py").read())
     parser.read("res/tracks.ini")
     tracktogoto2 = parser.get("cup" + str(cupnum), "track" + str(track))
     tracktogoto = "track" + tracktogoto2
@@ -236,6 +272,7 @@ while not done:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         done = True
+        wait -= 1
         #Leveling
         if points <= maxpoints - 2000:
             points += 10.1
@@ -257,9 +294,12 @@ while not done:
             reallydonewiththis = True
         #backtostart
         if pressed[pygame.K_RETURN]:
-            backtostart()
+            if wait <= 0:
+                backtostart()
         #Setting up the labels
-        resultsl = font.render("Cup Standings: ", 30, black)
+        resultsl = font.render("Cup Standings (" + str(track)  + "/4) : ", 30, black)
+        if track == 4:
+            resultsl = font.render("Final Results: ", 30, black)
         if players == 2:
             scorelabel2 = "Player 2's score: " + str(score2)
             scorel2 = font.render(scorelabel2, 30, black)
@@ -397,7 +437,9 @@ while not done:
         eightplacel = font.render(eightplacelabel, 30, black)
         ninthplacel = font.render(ninthplacelabel, 30, black)
         tenthplacel = font.render(tenthplacelabel, 30, black)
-        startl = fontsmall.render("Press enter to go to the new race", 30, black)
+        startl = fontsmall.render("Press enter to go to the next race", 30, black)
+        if track == 4:
+            startl = fontsmall.render("Press enter to go to the title screen", 30, black)
         donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
         if players == 2:
             highl = fontsmall.render("Please note: highscore table is for player 1 ONLY!", 30, black)
@@ -421,7 +463,7 @@ while not done:
         pygame.draw.rect(screen, blue, pygame.Rect(700, 300, int(levelpixels), 40))
         screen.blit(levell, (700, 250))
         screen.blit(pointsl, (700, 350))
-        screen.blit(resultsl, (585, 10))
+        screen.blit(resultsl, (485, 10))
         screen.blit(firstplacel, (100, 80))
         screen.blit(secondplacel, (100, 130))
         screen.blit(thirdplacel, (100, 180))
@@ -435,7 +477,7 @@ while not done:
         if players == 2:
             screen.blit(scorel2, (430, 660))
             screen.blit(highl, (680, 460))
-        screen.blit(scorel, (430, 600))
+        screen.blit(scorel, (400, 600))
         screen.blit(donel, (700, 400))
         screen.blit(startl, (700, 430))
         #ANND, GO!

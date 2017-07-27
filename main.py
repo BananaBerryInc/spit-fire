@@ -778,6 +778,13 @@ def trackpicker():
                     trackpath = parser.get("track1", "trackpath")
                 else:
                     cup = 1
+            if cup == 3:
+                if level >= 18:
+                    cupname = parser.get("cup3", "cupname")
+                    trackname = parser.get("track1", "trackname")
+                    trackpath = parser.get("track1", "trackpath")
+                else:
+                    cup = 1
             if cup == 1:
                 if level >= 10:
                     cupname = parser.get("cup1", "cupname")
