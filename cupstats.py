@@ -111,7 +111,7 @@ if fulscr == "True":
 trackimage = pygame.image.load(trackpath)
 level = int(parser.get("options", "level"))
 points = float(parser.get("options", "points"))
-levelpoints = (int(level) + 100) * 202.2
+levelpoints = (int(level) + 40) * 487.89
 levelpixels = float(points) / levelpoints * 300
 track2 = int(trackstring)
 clock = pygame.time.Clock()

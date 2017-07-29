@@ -37,7 +37,7 @@ if fulscr == "True":
 trackimage = pygame.image.load(trackpath)
 level = int(parser.get("options", "level"))
 points = float(parser.get("options", "points"))
-levelpoints = (int(level) + 100) * 202.2
+levelpoints = (int(level) + 40) * 487.89
 levelpixels = float(points) / levelpoints * 300
 track = int(trackstring)
 clock = pygame.time.Clock()
@@ -129,6 +129,9 @@ if players == 3:
     name8 = parser.get("cupstats", "name8")
     name9 = parser.get("cupstats", "name9")
     name10 = parser.get("cupstats", "name10")
+
+alphalevel = 0
+
 
 #Colours (Thanks to atmatm6 for the code in this section!)
 black = (0,0,0)
@@ -238,7 +241,7 @@ while not done:
             inlevelup = True
             maxpoints = maxpoints - points
             points = 0
-        levelpoints = (int(level) + 100) * 202.2
+        levelpoints = (int(level) + 40) * 487.89
         levelpixels = int(points) / levelpoints * 300
         #Key detection!
         pressed = pygame.key.get_pressed()
@@ -436,7 +439,9 @@ while not done:
         screen.blit(startl, (700, 430))
         if inlevelup:
             s2 = pygame.Surface((1300,1300))
-            s2.set_alpha(125)
+            if alphalevel <= 150:
+                alphalevel += 2
+            s2.set_alpha(alphalevel)
             s2.fill((0,0,0))
             screen.blit(s2, (0,0))           
             leveluptext = fontbig.render("Level Up!", 10, white)
