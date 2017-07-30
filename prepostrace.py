@@ -456,6 +456,7 @@ while not done:
                 unlockimage = pygame.image.load("res/Ferrari_F40.png")
             if level == 3:
                 unlocktext = font.render("The Original Track Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Original_small.png")
             if level == 4:
                 unlocktext = font.render("Dodge Challenger Unlocked!!", 10, white)
                 unlockimage = pygame.image.load("res/Dodge_Challenger.png")
@@ -488,8 +489,10 @@ while not done:
                 unlockimage = pygame.image.load("res/Limited Gold Koenigsegg One.png")
             if level == 14:
                 unlocktext = font.render("The Dual Ring Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/The Dual Ring_small.png")
             if level == 15:
                 unlocktext = font.render("Totally Not An Animal This Time Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Not An Animal This Time (1)_small.png")
             if level == 16:
                 unlocktext = font.render("Toyota Supra Unlocked!!", 10, white)
                 unlockimage = pygame.image.load("res/Toyota Supra.png")
@@ -498,6 +501,7 @@ while not done:
                 unlockimage = pygame.image.load("res/WMotors Fenyr SuperSport.png")
             if level == 18:
                 unlocktext = font.render("Drag Race Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/Drag Race_small.png")
             if level == 19:
                 unlocktext = font.render("1998 Ferrari F355 Spider Unlocked!!", 10, white)
                 unlockimage = pygame.image.load("res/1998 Ferrari F355 Spider.png")

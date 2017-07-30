@@ -112,6 +112,8 @@ the1080plabel = "1920x1080 (Full HD) - BETA FEATURE!!!!"
 the720plabel = "1280x720 (HD)"
 shiftinglabel = "Shifting:"
 changelabel = "Change"
+trpick = font.render("Track", 10, white)
+trpick2 = font.render("Picker", 10, white)
 help10 = font.render(help, 10 ,white)
 optionsl1 = font.render(optionslabel1, 10, white)
 resl = font.render(reslabel, 10, white)
@@ -142,6 +144,7 @@ fullscrl = font.render(fullscrlabel, 10, white)
 fullscrl2 = font.render(fullscrlabel2, 10, white)
 welcomel = font.render(welcometo, 10 ,white)
 clock = pygame.time.Clock()
+intrackpick = False
 screenres = "720p"
 x = 30
 y = 30
@@ -186,6 +189,13 @@ cartext = "Car: "
 track = int(parser.get("options", "track"))
 playername = parser.get("options", "name")
 parser.read("res/tracks.ini")
+t1thumb = pygame.image.load( "res/PolarBear Roundoff_upscaled_thumb.png")
+t2thumb = pygame.image.load("res/Fishy Slide_thumb.png")
+t3thumb = pygame.image.load("res/Original_thumb.png")
+t4thumb = pygame.image.load("res/Camelback Pass (3)_thumb.png")
+t5thumb = pygame.image.load("res/The Dual Ring_thumb.png")
+t6thumb = pygame.image.load("res/Not An Animal This Time (2)_thumb.png")
+t7thumb = pygame.image.load("res/Drag Race_thumb.png")
 trackname = trackname = parser.get("track" + str(track), "trackname")
 change = 0
 carimage3 = pygame.image.load(parser.get("options", "carimage2"))
@@ -773,6 +783,7 @@ def trackpicker():
                 cup = 1
             if cup == 2:
                 if level >= 15:
+                    track = 1
                     cupname = parser.get("cup2", "cupname")
                     trackname = parser.get("track1", "trackname")
                     trackpath = parser.get("track1", "trackpath")
@@ -780,13 +791,15 @@ def trackpicker():
                     cup = 1
             if cup == 3:
                 if level >= 18:
+                    track = 1
                     cupname = parser.get("cup3", "cupname")
-                    trackname = parser.get("track1", "trackname")
-                    trackpath = parser.get("track1", "trackpath")
+                    trackname = parser.get("track7", "trackname")
+                    trackpath = parser.get("track7", "trackpath")
                 else:
                     cup = 1
             if cup == 1:
                 if level >= 10:
+                    track = 1
                     cupname = parser.get("cup1", "cupname")
                     trackname = parser.get("track1", "trackname")
                     trackpath = parser.get("track1", "trackpath")
@@ -852,6 +865,7 @@ def spaceaction():
     global shifting2
     global playername
     global explainl
+    global intrackpick
     if inoptions:
             if x <= 160:
                 if y >= 640:
@@ -887,6 +901,15 @@ def spaceaction():
                                     fulscr = True
                                     change = 20
     if not inoptions:
+        if x <= 450:
+            if x >= 280:
+                if y <= 100:
+                    if intrackpick:
+                        intrackpick = False
+                        change = 10
+                    if not intrackpick:
+                        intrackpick = True
+                        change = 10
         if x >= 1175:
             if y >= 615:
                 done = True
@@ -1074,30 +1097,34 @@ while not done:
         screen.fill((0,0,0))
         if not inoptions:
             if not inhelp:
-                screen.blit(back, (0,0))
-                pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
-                pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
-                pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
-                pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
-                pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
-                pygame.draw.rect(screen, gray, pygame.Rect(800, 300, 300, 40))
-                pygame.draw.rect(screen, blue, pygame.Rect(800, 300, int(levelpixels), 40))
-                screen.blit(levell, (800, 250))
-                screen.blit(shiftingtitle, (201, 631))
-                screen.blit(shiftingl, (201, 661))
-                screen.blit(pointsl, (800, 350))
-                screen.blit(helpl, (1180, 0))
-                screen.blit(fullscrl, (0, 670))
-                screen.blit(fullscrl2, (0, 640))
-                screen.blit(tracklabel2, (150,200))
-                screen.blit(clockspeedlabel2, (150, 250))
-                screen.blit(label, (1185, 625))
-                screen.blit(labelstart, (1, 1))
-                screen.blit(carlabel2, (150, 150))
-                screen.blit(help10, (470, 580))
-                screen.blit(logo, (630, 0))
-                screen.blit(welcomel, (500, 40))
-                screen.blit(playerl, (150, 300))
+                if not intrackpick:
+                    screen.blit(back, (0,0))
+                    pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
+                    pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
+                    pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
+                    pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
+                    pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
+                    pygame.draw.rect(screen, gray, pygame.Rect(800, 300, 300, 40))
+                    pygame.draw.rect(screen, gray, pygame.Rect(300, 0, 150, 85))
+                    pygame.draw.rect(screen, blue, pygame.Rect(800, 300, int(levelpixels), 40))
+                    screen.blit(trpick,(300,0))
+                    screen.blit(trpick2, (300,30))
+                    screen.blit(levell, (800, 250))
+                    screen.blit(shiftingtitle, (201, 631))
+                    screen.blit(shiftingl, (201, 661))
+                    screen.blit(pointsl, (800, 350))
+                    screen.blit(helpl, (1180, 0))
+                    screen.blit(fullscrl, (0, 670))
+                    screen.blit(fullscrl2, (0, 640))
+                    screen.blit(tracklabel2, (150,200))
+                    screen.blit(clockspeedlabel2, (150, 250))
+                    screen.blit(label, (1185, 625))
+                    screen.blit(labelstart, (1, 1))
+                    screen.blit(carlabel2, (150, 150))
+                    screen.blit(help10, (470, 580))
+                    screen.blit(logo, (630, 0))
+                    screen.blit(welcomel, (500, 40))
+                    screen.blit(playerl, (150, 300))
         if players == 2:
             screen.blit(shifting2l, (201, 685))
         screen.blit(carimage2, (x,y))
@@ -1135,6 +1162,11 @@ while not done:
             screen.blit(carimage2, (x,y))
             screen.blit(nametextl, (500,100))
             screen.blit(changel,(500,50))
+        if intrackpick:
+            pygame.draw.rect(screen, gray, pygame.Rect(300, 0, 150, 85))
+            screen.blit(trpick,(300,0))
+            screen.blit(trpick2, (300,30))
+            screen.blit(t1thumb, (0,0))
         #ANND, GO
         pygame.display.flip()
         clock.tick(clockspeed)
