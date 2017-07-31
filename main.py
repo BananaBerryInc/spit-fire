@@ -88,7 +88,7 @@ welcometo = "Welcome to "
 helplabel = "Help"
 helplabel1 = "On the Menu screen:"
 helplabel2 = "Press C to change cars (for the first player)"
-helplabel3 = "Press T to change tracks/cups"
+helplabel3 = "Use the Track Picker to change tracks/cups"
 helplabel4 = "Press B to change the clockspeed/difficulty"
 helplabel5 = "During a race:"
 helplabel6 = "Left and Right steer"
@@ -96,7 +96,7 @@ helplabel7 = "Up is the gas pedal/accelleration"
 helplabel8 = "Down is the brake"
 helplabel9 = "Space will use your nos"
 helplabel10 = "Press escape to get rid of this message"
-helplabel11 = "Press P to change the mode (Single Race, Cup, multiplayer)"
+helplabel11 = "Press M to change the mode (Single Race, Cup, multiplayer)"
 helplabel12 = "The W,A,S,D,Q Keys control player 2"
 helplabel13 = "About Leveling:"
 helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
@@ -112,6 +112,7 @@ the1080plabel = "1920x1080 (Full HD) - BETA FEATURE!!!!"
 the720plabel = "1280x720 (HD)"
 shiftinglabel = "Shifting:"
 changelabel = "Change"
+backl = font.render("Back", 10, white)
 trpick = font.render("Track", 10, white)
 trpick2 = font.render("Picker", 10, white)
 help10 = font.render(help, 10 ,white)
@@ -196,6 +197,9 @@ t4thumb = pygame.image.load("res/Camelback Pass (3)_thumb.png")
 t5thumb = pygame.image.load("res/The Dual Ring_thumb.png")
 t6thumb = pygame.image.load("res/Not An Animal This Time (2)_thumb.png")
 t7thumb = pygame.image.load("res/Drag Race_thumb.png")
+cup1thumb = pygame.image.load("res/begcup_thumb.png")
+cup2thumb = pygame.image.load("res/anicup_thumb.png")
+cup3thumb = pygame.image.load("res/dragcup_thumb.png")
 trackname = trackname = parser.get("track" + str(track), "trackname")
 change = 0
 carimage3 = pygame.image.load(parser.get("options", "carimage2"))
@@ -866,6 +870,107 @@ def spaceaction():
     global playername
     global explainl
     global intrackpick
+    global track
+    global trackname
+    global trackpath
+    global cup
+    global cupname
+    if intrackpick:
+        if x <= 450:
+            if x >= 280:
+                if y <= 100:
+                    if change == 0:
+                        intrackpick = False
+                        change = 30
+        parser.read("res/tracks.ini")
+        if players == 3:
+            if y >= 100:
+                if y <= 299:
+                    if x <= 299:
+                        track = 1
+                        cup = 1
+                        cupname = parser.get("cup1", "cupname")
+                        trackname = parser.get("track1", "trackname")
+                        trackpath = parser.get("track1", "trackpath")
+                        intrackpick = False
+                    if x >= 300:
+                        if  x >= 600:
+                            if x >= 900:
+                                if level <= 0:
+                                    track = 4
+                                    cup = 4
+                                    cupname = parser.get("cup4", "cupname")
+                                    trackname = parser.get("track4", "trackname")
+                                    trackpath = parser.get("track4", "trackpath")
+                                    intrackpick = False
+                            else:
+                                if level >= 3:
+                                    track = 3
+                                    cup = 3
+                                    cupname = parser.get("cup3", "cupname")
+                                    trackname = parser.get("track7", "trackname")
+                                    trackpath = parser.get("track7", "trackpath")
+                                    intrackpick = False
+                        else:
+                            track = 2
+                            cup = 2
+                            cupname = parser.get("cup2", "cupname")
+                            trackname = parser.get("track1", "trackname")
+                            trackpath = parser.get("track1", "trackpath")
+                            intrackpick = False
+        if players <= 2:
+            if y >= 100:
+                if y <= 299:
+                    if x <= 299:
+                        track = 1
+                        trackname = parser.get("track1", "trackname")
+                        trackpath = parser.get("track1", "trackpath")
+                        intrackpick = False
+                    if x >= 300:
+                        if  x >= 600:
+                            if x >= 900:
+                                if level >= 10:
+                                    track = 4
+                                    trackname = parser.get("track4", "trackname")
+                                    trackpath = parser.get("track4", "trackpath")
+                                    intrackpick = False
+                            else:
+                                if level >= 3:
+                                    track = 3
+                                    trackname = parser.get("track3", "trackname")
+                                    trackpath = parser.get("track3", "trackpath")
+                                    intrackpick = False
+                        else:
+                            track = 2
+                            trackname = parser.get("track2", "trackname")
+                            trackpath = parser.get("track2", "trackpath")
+                            intrackpick = False
+                else:
+                    if x <= 299:
+                        trackname = parser.get("track5", "trackname")
+                        trackpath = parser.get("track5", "trackpath")
+                        track = 5
+                        intrackpick = False
+                    if x >= 300:
+                        if x >= 600:
+                            if x >= 900:
+                                if level <= 0:
+                                    track = 8
+                                    intrackpick = False
+                            else:
+                                if level >= 18:
+                                    trackname = parser.get("track7", "trackname")
+                                    trackpath = parser.get("track7", "trackpath")
+                                    track = 7
+                                    intrackpick = False
+                        else:
+                            if level >= 15:
+                                track = 6
+                                trackname = parser.get("track6", "trackname")
+                                trackpath = parser.get("track6", "trackpath")
+                                intrackpick = False
+
+        
     if inoptions:
             if x <= 160:
                 if y >= 640:
@@ -904,12 +1009,13 @@ def spaceaction():
         if x <= 450:
             if x >= 280:
                 if y <= 100:
-                    if intrackpick:
-                        intrackpick = False
-                        change = 10
-                    if not intrackpick:
-                        intrackpick = True
-                        change = 10
+                    if change == 0:
+                        if intrackpick:
+                            intrackpick = False
+                            change = 30
+                        if not intrackpick:
+                            intrackpick = True
+                            change = 30
         if x >= 1175:
             if y >= 615:
                 done = True
@@ -1030,23 +1136,23 @@ while not done:
             if pressed[pygame.K_v]:
                 carpicker2()
         #Change Players
-        if pressed[pygame.K_p]:
+        if pressed[pygame.K_m]:
             if players == 1:
                 if change == 0:
                     players = 2
-                    change = 10
+                    change = 15
             if players == 2:
                 if change == 0:
                     if level >= 10:
                         players = 3
-                        change = 10
+                        change = 15
                     else:
                         players = 1
-                        change = 10
+                        change = 15
             if players == 3:
                 if change == 0:
                     players = 1
-                    change = 10
+                    change = 15
         #Change Tracks
         if pressed[pygame.K_t]:
             trackpicker()
@@ -1127,6 +1233,29 @@ while not done:
                     screen.blit(playerl, (150, 300))
         if players == 2:
             screen.blit(shifting2l, (201, 685))
+        if intrackpick:
+            pygame.draw.rect(screen, gray, pygame.Rect(300, 0, 150, 85))
+            screen.blit(backl,(300,0))
+            if players <= 2:
+                screen.blit(t1thumb, (0,100))
+                screen.blit(t2thumb, (300,100))
+                if level >= 3:
+                    screen.blit(t3thumb, (600, 100))
+                if level >= 10:
+                    screen.blit(t4thumb, (900, 100))
+                if level >= 14:
+                    screen.blit(t5thumb, (0, 300))
+                if level >= 15:
+                    screen.blit(t6thumb, (300, 300))
+                if level >= 18:
+                    screen.blit(t7thumb, (600, 300))
+            if players == 3:
+                if level >= 10:
+                    screen.blit(cup1thumb, (0,100))
+                if level >= 15:
+                    screen.blit(cup2thumb, (300,100))
+                if level >= 18:
+                    screen.blit(cup3thumb, (600,100))
         screen.blit(carimage2, (x,y))
         if players == 2:
             screen.blit(carimage4, (x2,y2))
@@ -1162,11 +1291,6 @@ while not done:
             screen.blit(carimage2, (x,y))
             screen.blit(nametextl, (500,100))
             screen.blit(changel,(500,50))
-        if intrackpick:
-            pygame.draw.rect(screen, gray, pygame.Rect(300, 0, 150, 85))
-            screen.blit(trpick,(300,0))
-            screen.blit(trpick2, (300,30))
-            screen.blit(t1thumb, (0,0))
         #ANND, GO
         pygame.display.flip()
         clock.tick(clockspeed)
