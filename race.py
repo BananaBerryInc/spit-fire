@@ -11,6 +11,7 @@ from random import randint
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
+fontbig = pygame.font.Font("res/Saira-Regular.ttf", 100)
 font = pygame.font.Font("res/Saira-Regular.ttf", 20)
 screen = pygame.display.set_mode((1280, 720))
 done = False
@@ -218,6 +219,7 @@ if trackkey != "track4":
         if trackkey != "track6":
             if trackkey != "track7":
                 startneg80x = startlinex
+gol = fontbig.render("Go!", 10, white)
 start80x = startlinex + 80
 passstart = startliney + 10
 rotater = 0
@@ -269,6 +271,7 @@ score2 = 0
 trackkey2 = trackkey
 curspeed2 = 0
 rot2 = 0
+racestartbol = True
 
 #Passoff to the postrace Python script
 def sendtopost():
@@ -294,6 +297,7 @@ def sendtopost():
     global p8
     global p9
     global p10
+    global gol
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "racefinsihed", "Yes")
@@ -316,6 +320,167 @@ def sendtopost():
     with open('res/highscore.ini', 'w') as configfile:
         parser.write(configfile)
     exec(open("prepostrace.py").read())
+
+def racestart():
+    global fontbig
+    global trackimage
+    global placel
+    global scorel
+    global nosl
+    global lapl
+    global curspeedl
+    global playerl
+    global shiftl
+    global shift2l
+    global player2l
+    global place2l
+    global score2l
+    global nosll
+    global lapl2
+    global curspeedl2
+    global carimage4
+    global carimage2
+    global donel
+    global trackkey
+    global players
+    global finished
+    global shifting
+    global shifting2
+    global x
+    global y
+    global x2
+    global y2
+    three = fontbig.render("3", 10, white)
+    two = fontbig.render("2", 10, white)
+    one = fontbig.render("1", 10, white)
+    time = 0
+    for time in range(0,50):
+        #Drawing and rendering
+        screen.blit(trackimage, (0,0))
+        screen.blit(placel, (10, 160))
+        screen.blit(scorel, (10, 130))
+        screen.blit(nosl, (10, 40))
+        screen.blit(lapl, (10, 70))
+        screen.blit(curspeedl, (10, 100))
+        screen.blit(playerl, (10, 10))
+        if trackkey == "track7":
+            screen.blit(shiftl, (10, 190))
+            if players == "2":
+                screen.blit(shiftl2, (205, 190))
+        if shifting == "Manual":
+            screen.blit(shiftl, (10, 190))
+        if shifting2 == "Manual":
+            screen.blit(shiftl2, (205, 190))
+        if players == "2":
+            screen.blit(player2l, (205, 10))
+            screen.blit(placel2, (205, 160))
+            screen.blit(scorel2, (205, 130))
+            screen.blit(nosl2, (205, 40))
+            screen.blit(lapl2, (205, 70))
+            screen.blit(curspeedl2, (205, 100))
+            screen.blit(carimage4, (x2,y2))
+        screen.blit(carimage2, (x,y))
+        if finished:
+            screen.blit(donel, (620, 7340))
+        screen.blit(three, (600,315))
+        pygame.display.flip()
+        time +=1
+    time = 0
+    for time in range(0,50):
+        #Drawing and rendering
+        screen.blit(trackimage, (0,0))
+        screen.blit(placel, (10, 160))
+        screen.blit(scorel, (10, 130))
+        screen.blit(nosl, (10, 40))
+        screen.blit(lapl, (10, 70))
+        screen.blit(curspeedl, (10, 100))
+        screen.blit(playerl, (10, 10))
+        if trackkey == "track7":
+            screen.blit(shiftl, (10, 190))
+            if players == "2":
+                screen.blit(shiftl2, (205, 190))
+        if shifting == "Manual":
+            screen.blit(shiftl, (10, 190))
+        if shifting2 == "Manual":
+            screen.blit(shiftl2, (205, 190))
+        if players == "2":
+            screen.blit(player2l, (205, 10))
+            screen.blit(placel2, (205, 160))
+            screen.blit(scorel2, (205, 130))
+            screen.blit(nosl2, (205, 40))
+            screen.blit(lapl2, (205, 70))
+            screen.blit(curspeedl2, (205, 100))
+            screen.blit(carimage4, (x2,y2))
+        screen.blit(carimage2, (x,y))
+        if finished:
+            screen.blit(donel, (620, 7340))
+        screen.blit(two, (600,315))
+        pygame.display.flip()
+        time +=1
+    time = 0
+    for time in range(0,50):
+        #Drawing and rendering
+        screen.blit(trackimage, (0,0))
+        screen.blit(placel, (10, 160))
+        screen.blit(scorel, (10, 130))
+        screen.blit(nosl, (10, 40))
+        screen.blit(lapl, (10, 70))
+        screen.blit(curspeedl, (10, 100))
+        screen.blit(playerl, (10, 10))
+        if trackkey == "track7":
+            screen.blit(shiftl, (10, 190))
+            if players == "2":
+                screen.blit(shiftl2, (205, 190))
+        if shifting == "Manual":
+            screen.blit(shiftl, (10, 190))
+        if shifting2 == "Manual":
+            screen.blit(shiftl2, (205, 190))
+        if players == "2":
+            screen.blit(player2l, (205, 10))
+            screen.blit(placel2, (205, 160))
+            screen.blit(scorel2, (205, 130))
+            screen.blit(nosl2, (205, 40))
+            screen.blit(lapl2, (205, 70))
+            screen.blit(curspeedl2, (205, 100))
+            screen.blit(carimage4, (x2,y2))
+        screen.blit(carimage2, (x,y))
+        if finished:
+            screen.blit(donel, (620, 7340))
+        screen.blit(one, (600,315))
+        pygame.display.flip()
+        time +=1
+    for time in range(0,10):
+        #Drawing and rendering
+        screen.blit(trackimage, (0,0))
+        screen.blit(placel, (10, 160))
+        screen.blit(scorel, (10, 130))
+        screen.blit(nosl, (10, 40))
+        screen.blit(lapl, (10, 70))
+        screen.blit(curspeedl, (10, 100))
+        screen.blit(playerl, (10, 10))
+        if trackkey == "track7":
+            screen.blit(shiftl, (10, 190))
+            if players == "2":
+                screen.blit(shiftl2, (205, 190))
+        if shifting == "Manual":
+            screen.blit(shiftl, (10, 190))
+        if shifting2 == "Manual":
+            screen.blit(shiftl2, (205, 190))
+        if players == "2":
+            screen.blit(player2l, (205, 10))
+            screen.blit(placel2, (205, 160))
+            screen.blit(scorel2, (205, 130))
+            screen.blit(nosl2, (205, 40))
+            screen.blit(lapl2, (205, 70))
+            screen.blit(curspeedl2, (205, 100))
+            screen.blit(carimage4, (x2,y2))
+        screen.blit(carimage2, (x,y))
+        if finished:
+            screen.blit(donel, (620, 7340))
+        screen.blit(gol, (600,315))
+        pygame.display.flip()
+        time +=1
+        
 
 #Exit Control
 while not done:
@@ -1795,6 +1960,9 @@ while not done:
                 shiftl2 = font.render(shifttext2, 30, white)
         except NameError:
             pass
+        if racestartbol:
+            racestartbol = False
+            racestart()
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 160))

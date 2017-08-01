@@ -31,6 +31,7 @@ from configparser import SafeConfigParser
 #Settin' up the window!
 pygame.init()
 pygame.font.init()
+fontsmall = pygame.font.Font("res/Saira-Regular.ttf", 15)
 font = pygame.font.Font("res/Saira-Regular.ttf", 25)
 font50 = pygame.font.Font("res/Saira-Regular.ttf", 35)
 screen = pygame.display.set_mode((1280, 720))
@@ -112,6 +113,9 @@ the1080plabel = "1920x1080 (Full HD) - BETA FEATURE!!!!"
 the720plabel = "1280x720 (HD)"
 shiftinglabel = "Shifting:"
 changelabel = "Change"
+about = fontsmall.render("Spit-fire 0.0.5 (Alpha 5)", 10, white)
+about2 = fontsmall.render("Spit-fire is lisenced under GPL v3.0", 10, white)
+reset = font.render("Reset the save file", 10, white)
 backl = font.render("Back", 10, white)
 trpick = font.render("Track", 10, white)
 trpick2 = font.render("Picker", 10, white)
@@ -123,6 +127,7 @@ the720pl = font.render(the720plabel, 10, white)
 changel = font.render(changelabel, 10, white)
 helpl = font.render(helplabel, 10 ,white)
 explainl = font.render("Use the terminal window to enter the new name...", 10, white)
+confirml = font.render("Use the terminal window to confirm this...", 10, white)
 helpl1 = font.render(helplabel1, 10 ,white)
 helpl2 = font.render(helplabel2, 10 ,white)
 helpl3 = font.render(helplabel3, 10 ,white)
@@ -856,6 +861,7 @@ def trackpicker():
 def spaceaction():
     global inoptions
     global inhelp
+    global points
     global x
     global y
     global change
@@ -875,6 +881,15 @@ def spaceaction():
     global trackpath
     global cup
     global cupname
+    global level
+    global currentcar
+    global currentcar2
+    global carimage
+    global carimage2
+    global levelpoints
+    global levelpixels
+    global carimagepath
+    global carimage3path2
     if intrackpick:
         if x <= 450:
             if x >= 280:
@@ -982,12 +997,53 @@ def spaceaction():
                         if inoptions:
                             inoptions = False
                             change = 20
+            if x >= 1000:
+                if x <= 1200:
+                    if y >= 45:
+                        if y <= 150:
+                            screen = pygame.display.set_mode((1280, 720))
+                            screen.blit(confirml, (0,0))
+                            pygame.display.flip()
+                            why = str(input("THIS WILL DELETE ALL UNLOCKED ITEMS, YOUR LEVEL, ETC.. Are you sure (y/n)  >"))
+                            if why == "y":
+                                why = str(input("THIS ACTION CANNOT BE UNDONE... Are you sure (y/n)  >"))
+                                if why == "y":
+                                    parser.read("res/options.ini")
+                                    parser.set("options", "level" ,"1")
+                                    parser.set("options", "points", "0")
+                                    parser.set("options", "car", "Ford GT")
+                                    parser.set("options", "track", "1")
+                                    parser.set("options", "carimage", "res/ford_gt.png")
+                                    parser.set("options","trackpath", "res/PolarBear Roundoff_upscaled.png")
+                                    parser.set("options", "carimage2", "res/ford_gt.png")
+                                    parser.set("options", "name", "Use the Options Menu to set your name")
+                                    trackname = "PolarBear Roundoff"
+                                    trackpath = "res/PolarBear Roundoff_upscaled.png"
+                                    currentcar = "Ford GT"
+                                    currentcar2 = "Ford GT"
+                                    with open('res/options.ini', 'w') as configfile:
+                                        parser.write(configfile)
+                                    level = 1
+                                    points = 0
+                                    track = 1
+                                    players = 1
+                                    carimagepath = "res/ford_gt.png"
+                                    carimage3path2 = "res/ford_gt.png"
+                                    carimage = pygame.image.load("res/ford_gt.png")
+                                    carimage2 = pygame.image.load("res/ford_gt.png")
+                                    levelpoints = (int(level) + 40) * 487.89
+                                    levelpoints = round(levelpoints, 1)
+                                    levelpixels = float(points) / levelpoints * 300
+                                    playername = "Use the Options Menu to set your name"
+                            if fulscr:
+                                screen = pygame.display.set_mode((1280, 720),pygame.FULLSCREEN)
             if x >= 495:
                 if x <= 795:
                     if y >= 45:
                         if y <= 150:
                             screen = pygame.display.set_mode((1280, 720))
                             screen.blit(explainl, (0,0))
+                            pygame.display.flip()
                             playername = str(input("Enter the new name here >"))
                             if fulscr:
                                 screen = pygame.display.set_mode((1280, 720),pygame.FULLSCREEN)
@@ -1279,10 +1335,16 @@ while not done:
             screen.blit(helpl16, (5, 190))
             screen.blit(helpl17, (680, 220))
             screen.blit(helpl18, (680, 250))
+            screen.blit(about, (1000, 660))
+            screen.blit(about2, (1000, 690))
         if inoptions:
             pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
             pygame.draw.rect(screen, gray, pygame.Rect(100,50, 210, 55))
             pygame.draw.rect(screen, gray, pygame.Rect(500, 50, 210, 55))
+            pygame.draw.rect(screen, gray, pygame.Rect(1000, 50, 220, 55))
+            screen.blit(reset, (1000,50))
+            screen.blit(about, (1000, 660))
+            screen.blit(about2, (1000, 690))
             screen.blit(fullscrl, (0, 670))
             screen.blit(fullscrl2, (0, 640))
             screen.blit(changel , (100, 50))
