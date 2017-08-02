@@ -192,6 +192,7 @@ carimage2 = pygame.image.load(parser.get("options", "carimage"))
 carimagepath = parser.get("options", "carimage")
 currentcar = parser.get("options", "car")
 cartext = "Car: "
+showstartcountdown = parser.get("options", "showstartcountdown")
 track = int(parser.get("options", "track"))
 playername = parser.get("options", "name")
 parser.read("res/tracks.ini")
@@ -241,6 +242,7 @@ def sendtomain():
     global car2
     global shifting
     global shifting2
+    global showstartcountdown
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
@@ -258,6 +260,7 @@ def sendtomain():
     parser.set("options", "fulscr", str(fulscr))
     parser.set("options", "levelpoints", str(levelpoints))
     parser.set("options", "players", str(players))
+    parser.set("options", "showstartcountdown", str(showstartcountdown))
     if players == 3:
         parser.set("cupstats", "cup", str(cup))
         parser.set("cupstats", "track", "0")
@@ -862,6 +865,7 @@ def spaceaction():
     global inoptions
     global inhelp
     global points
+    global showstartcountdown
     global x
     global y
     global change
@@ -1060,6 +1064,18 @@ def spaceaction():
                                 if change == 0:
                                     screen = pygame.display.set_mode((1280, 720),pygame.FULLSCREEN)
                                     fulscr = True
+                                    change = 20
+            if x >= 95:
+                if x <= 375:
+                    if y >= 195:
+                        if y <= 250:
+                            if showstartcountdown:
+                                if change == 0:
+                                    showstartcountdown = False
+                                    change = 20
+                            if not showstartcountdown:
+                                if change == 0:
+                                    showstartcountdown = True
                                     change = 20
     if not inoptions:
         if x <= 450:
@@ -1338,10 +1354,14 @@ while not done:
             screen.blit(about, (1000, 660))
             screen.blit(about2, (1000, 690))
         if inoptions:
+            startcountdownl = font.render("Race start countdown :" + str(showstartcountdown), 10, white)
             pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
             pygame.draw.rect(screen, gray, pygame.Rect(100,50, 210, 55))
             pygame.draw.rect(screen, gray, pygame.Rect(500, 50, 210, 55))
             pygame.draw.rect(screen, gray, pygame.Rect(1000, 50, 220, 55))
+            pygame.draw.rect(screen, gray, pygame.Rect(100, 200, 220, 55))
+            screen.blit(changel ,(100,200))
+            screen.blit(startcountdownl, (100,250))
             screen.blit(reset, (1000,50))
             screen.blit(about, (1000, 660))
             screen.blit(about2, (1000, 690))

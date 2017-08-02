@@ -38,6 +38,7 @@ car = parser.get("options", "car")
 car2 = parser.get("options", "car2")
 clockspeedstring = parser.get("options", "speed")
 playername = parser.get("options", "name")
+showstartcountdown = parser.get("options", "showstartcountdown")
 clockspeed = int(clockspeedstring)
 trackimage = pygame.image.load(trackpath)
 tim = Image.open(trackpath)
@@ -1960,9 +1961,10 @@ while not done:
                 shiftl2 = font.render(shifttext2, 30, white)
         except NameError:
             pass
-        if racestartbol:
-            racestartbol = False
-            racestart()
+        if showstartcountdown =="True":
+            if racestartbol:
+                racestartbol = False
+                racestart()
         #Drawing and rendering
         screen.blit(trackimage, (0,0))
         screen.blit(placel, (10, 160))
