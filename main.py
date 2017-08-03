@@ -1109,7 +1109,7 @@ def spaceaction():
                         change = 20
         if x >= 200:
             if x <= 362:
-                if players == 1:
+                if players != 2:
                     if y >= 620:
                         if change == 0:
                             if shifting == "Automatic":
