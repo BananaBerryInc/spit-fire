@@ -4,8 +4,10 @@ import sys
 import os.path as osp
 import io
 import subprocess
-import urllib
+import urllib.request
 from subprocess import call
+
+printerror = False
 
 try:
     import pygame
@@ -13,20 +15,25 @@ except ImportError:
     print("You don't have Pygame installed; I'll install it for you")
     print("Downloading pip, incase you don't have it")
     url = "https://bootstrap.pypa.io/get-pip.py"
-    urllib.urlretrieve(url, "get-pip.py")
+    urllib.request.urlretrieve(url, "get-pip.py")
     print("Now installing pip")
     call(["python3", "get-pip.py"])
     print("Now installing Pygame")
     call(["python3", "-m", "pip","install","pygame","--user"])
-    import pygame
+    try:
+        import pygame
+    except ImportError:
+        printerror = True
 try:
     from PIL import Image
 except ImportError:
     print("You don't have PIL installed; I'll install it for you")
     call(["python3", "-m", "pip","install","Pillow","--user"])
-    from PIL import Image
 from configparser import SafeConfigParser
 
+if printerror:
+        print("Pygame and/or PIL are now installed, but you will need to restart Spit-fire for them to work")
+        quit()
 
 #Settin' up the window!
 pygame.init()
