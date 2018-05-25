@@ -208,6 +208,10 @@ def backtostart():
     global clockspeed
     global points
     global level
+    if players == "3":
+        nextrace = True
+    else:
+        nextrace = False
     #send off the settings
     parser.read("res/options.ini")
     parser.set("options", "track", str(track))
@@ -219,9 +223,11 @@ def backtostart():
     parser.set("options", "level", str(level))
     with open('res/options.ini', 'w') as configfile:
         parser.write(configfile)
-    if players == 3:
+    if nextrace:
         exec(open("cupstats.py").read())
-    exec(open("main.py").read())
+    if not nextrace:
+        exec(open("main.py").read())
+
 
 
 #Exit Control
