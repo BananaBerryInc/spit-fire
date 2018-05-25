@@ -1,3 +1,7 @@
+# A Message to our players......
+
+We (or at least I) are back! After almost a year of radio silence, I will be refocicing on this and hopefully Beta 1 (I know, we've teased this before!) will be out soon! Please stay tuned!
+
 # spit-fire
 
 Spit-fire is a top down racing game that is built in Python and Pygame (and PIL) . You can race solo, with a friend, or in a drag race. There is a leveling system and hours of content in the game! Races are in a "time trial" format, with a score determining how you do! Download or fork it now!
