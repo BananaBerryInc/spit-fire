@@ -9,6 +9,13 @@ from subprocess import call
 
 printerror = False
 
+#Detect Python version and give an error if too old
+if sys.version_info[0] < 3:
+    print("You need Python3 to run spit-fire!")
+    quit()
+    
+
+#Install pip, pygame, and PIL if nessary
 try:
     import pygame
 except ImportError:
@@ -90,6 +97,7 @@ pink = (255,0,128)
 lightred = (255,0,64)
 
 
+#Variables
 frame = 2
 help = "Drive to a box, and press space to go!"
 welcometo = "Welcome to "
@@ -190,6 +198,7 @@ shifting = parser.get("options", "shifting")
 shifting2 = parser.get("options", "shifting2")
 points = parser.get("options", "points")
 clockspeed = int(parser.get("options", "speed"))
+newgame = parser.get("options","newgame")
 level = int(level)
 levelpoints = (int(level) + 40) * 487.89
 levelpoints = round(levelpoints, 1)
@@ -225,6 +234,16 @@ if level == 1:
 logo = pygame.image.load("res/Game Logo.png")
 
 
+#If new game, set it up
+if newgame == "True":
+    print("Welcome to Spit-fire! Let's get you setup")
+    name = input(str("Please enter your name >"))
+    print("Okay, you're good to go!")
+    print("You can enable fullscreen in settings if you want")
+    newgame = False
+    wait = 50
+    for wait in range(0,100):
+        wait -= 1
 
 
 #Labels that don't change will go here
@@ -268,6 +287,7 @@ def sendtomain():
     parser.set("options", "levelpoints", str(levelpoints))
     parser.set("options", "players", str(players))
     parser.set("options", "showstartcountdown", str(showstartcountdown))
+    parser.set("options", "newgame", "False")
     if players == 3:
         parser.set("cupstats", "cup", str(cup))
         parser.set("cupstats", "track", "0")
@@ -1028,6 +1048,7 @@ def spaceaction():
                                     parser.set("options","trackpath", "res/PolarBear Roundoff_upscaled.png")
                                     parser.set("options", "carimage2", "res/ford_gt.png")
                                     parser.set("options", "name", "Use the Options Menu to set your name")
+                                    parser.set("options","newgame", "True")
                                     trackname = "PolarBear Roundoff"
                                     trackpath = "res/PolarBear Roundoff_upscaled.png"
                                     currentcar = "Ford GT"
