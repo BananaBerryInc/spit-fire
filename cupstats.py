@@ -218,7 +218,10 @@ def exitthegame():
     global level
     #send off the settings
     parser.read("res/options.ini")
-    parser.set("options", "track", str(track))
+    if track >= 1:
+        parser.set("options", "track", str(track))
+    else:
+        parser.set("options", "track", str(1))
     parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
     parser.set("options", "speed", str(clockspeed))

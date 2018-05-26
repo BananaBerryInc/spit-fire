@@ -1124,32 +1124,24 @@ def spaceaction():
                 sendtomain()
         if x >= 1180:
             if y <= 100:
-                inhelp = True
+                if not intrackpick:
+                    inhelp = True
         if x <= 160:
             if y >= 640:
-                if change == 0:
-                    if not inoptions:
-                        inoptions = True
-                        change = 20
-                if change == 0:
-                    if inoptions:
-                        inoptions = False
-                        change = 20
+                if not intrackpick:
+                    if change == 0:
+                        if not inoptions:
+                            inoptions = True
+                            change = 20
+                    if change == 0:
+                        if inoptions:
+                            inoptions = False
+                            change = 20
         if x >= 200:
             if x <= 362:
-                if players != 2:
-                    if y >= 620:
-                        if change == 0:
-                            if shifting == "Automatic":
-                                shifting = "Manual"
-                                change = 10
-                        if change == 0:
-                            if shifting == "Manual":
-                                shifting = "Automatic"
-                                change = 10
-                if players == 2:
-                    if y >= 620:
-                        if y <= 679:
+                if not intrackpick:
+                    if players != 2:
+                        if y >= 620:
                             if change == 0:
                                 if shifting == "Automatic":
                                     shifting = "Manual"
@@ -1158,15 +1150,26 @@ def spaceaction():
                                 if shifting == "Manual":
                                     shifting = "Automatic"
                                     change = 10
-                    if y >= 680:
-                        if change == 0:
-                            if shifting2 == "Automatic":
-                                shifting2 = "Manual"
-                                change = 10
-                        if change == 0:
-                            if shifting2 == "Manual":
-                                shifting2 = "Automatic"
-                                change = 10
+                    if players == 2:
+                        if y >= 620:
+                            if y <= 679:
+                                if change == 0:
+                                    if shifting == "Automatic":
+                                        shifting = "Manual"
+                                        change = 10
+                                if change == 0:
+                                    if shifting == "Manual":
+                                        shifting = "Automatic"
+                                        change = 10
+                        if y >= 680:
+                            if change == 0:
+                                if shifting2 == "Automatic":
+                                    shifting2 = "Manual"
+                                    change = 10
+                            if change == 0:
+                                if shifting2 == "Manual":
+                                    shifting2 = "Automatic"
+                                    change = 10
 
 
 #Exit Control
@@ -1306,7 +1309,6 @@ while not done:
                 if not intrackpick:
                     screen.blit(back, (0,0))
                     pygame.draw.rect(screen, gray, pygame.Rect(1180, 620, 100, 100))
-                    pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
                     pygame.draw.rect(screen, gray, pygame.Rect(1180, 0, 160, 85))
                     pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
                     pygame.draw.rect(screen, gray, pygame.Rect(200, 640, 160, 85))
@@ -1325,12 +1327,13 @@ while not done:
                     screen.blit(tracklabel2, (150,200))
                     screen.blit(clockspeedlabel2, (150, 250))
                     screen.blit(label, (1185, 625))
-                    screen.blit(labelstart, (1, 1))
                     screen.blit(carlabel2, (150, 150))
                     screen.blit(help10, (470, 580))
                     screen.blit(logo, (630, 0))
                     screen.blit(welcomel, (500, 40))
                     screen.blit(playerl, (150, 300))
+                pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
+                screen.blit(labelstart, (1, 1))
         if players == 2:
             screen.blit(shifting2l, (201, 685))
         if intrackpick:
