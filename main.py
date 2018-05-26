@@ -115,7 +115,7 @@ helplabel10 = "Press escape to get rid of this message"
 helplabel11 = "Press M to change the mode (Single Race, Cup, multiplayer)"
 helplabel12 = "The W,A,S,D,Q Keys control player 2"
 helplabel13 = "About Leveling:"
-helplabel14 = "At each new level (up to level 22) you will unlock a new car or track"
+helplabel14 = "At each new level (up to level 23) you will unlock a new car or track"
 helplabel15 = "(They will be automatically added to the Menu screen.)"
 helplabel16 = "Press V to change the second player vehicle"
 helplabel17 = "Press Right Shift or E to shift gears"
@@ -128,6 +128,7 @@ the1080plabel = "1920x1080 (Full HD) - BETA FEATURE!!!!"
 the720plabel = "1280x720 (HD)"
 shiftinglabel = "Shifting:"
 changelabel = "Change"
+about3 = fontsmall.render("GitHub version",10, white)
 about = fontsmall.render("Spit-fire 0.0.5 (Alpha 5)", 10, white)
 about2 = fontsmall.render("Spit-fire is lisenced under GPL v3.0", 10, white)
 reset = font.render("Reset the save file", 10, white)
@@ -219,6 +220,7 @@ t4thumb = pygame.image.load("res/Camelback Pass (3)_thumb.png")
 t5thumb = pygame.image.load("res/The Dual Ring_thumb.png")
 t6thumb = pygame.image.load("res/Not An Animal This Time (2)_thumb.png")
 t7thumb = pygame.image.load("res/Drag Race_thumb.png")
+t8thumb = pygame.image.load("res/The Egg_thumb.png")
 cup1thumb = pygame.image.load("res/begcup_thumb.png")
 cup2thumb = pygame.image.load("res/anicup_thumb.png")
 cup3thumb = pygame.image.load("res/dragcup_thumb.png")
@@ -884,6 +886,12 @@ def trackpicker():
                     trackpath = parser.get("track7", "trackpath")
                 else:
                     track = 1
+            if track == 8:
+                if level >= 23:
+                    trackname = parser.get("track8", "trackname")
+                    trackpath = parser.get("track8", "trackpath")
+                else:
+                    track = 1
             if track == 1:
                 trackname = parser.get("track1", "trackname")
                 trackpath = parser.get("track1", "trackpath")
@@ -1000,7 +1008,9 @@ def spaceaction():
                     if x >= 300:
                         if x >= 600:
                             if x >= 900:
-                                if level <= 0:
+                                if level >= 23:
+                                    trackname = parser.get("track8", "trackname")
+                                    trackpath = parser.get("track8", "trackpath")
                                     track = 8
                                     intrackpick = False
                             else:
@@ -1352,6 +1362,8 @@ while not done:
                     screen.blit(t6thumb, (300, 300))
                 if level >= 18:
                     screen.blit(t7thumb, (600, 300))
+                if level >= 23:
+                    screen.blit(t8thumb, (900, 300))
             if players == 3:
                 if level >= 10:
                     screen.blit(cup1thumb, (0,100))
@@ -1382,8 +1394,9 @@ while not done:
             screen.blit(helpl16, (5, 190))
             screen.blit(helpl17, (680, 220))
             screen.blit(helpl18, (680, 250))
-            screen.blit(about, (1000, 660))
+            screen.blit(about, (1000, 630))
             screen.blit(about2, (1000, 690))
+            screen.blit(about3, (1000, 660))
         if inoptions:
             startcountdownl = font.render("Race start countdown :" + str(showstartcountdown), 10, white)
             pygame.draw.rect(screen, gray, pygame.Rect(0, 640, 160, 85))
@@ -1394,8 +1407,9 @@ while not done:
             screen.blit(changel ,(100,200))
             screen.blit(startcountdownl, (100,250))
             screen.blit(reset, (1000,50))
-            screen.blit(about, (1000, 660))
+            screen.blit(about, (1000, 630))
             screen.blit(about2, (1000, 690))
+            screen.blit(about3, (1000, 660))
             screen.blit(fullscrl, (0, 670))
             screen.blit(fullscrl2, (0, 640))
             screen.blit(changel , (100, 50))

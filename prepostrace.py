@@ -453,7 +453,7 @@ while not done:
             leveluptext = fontbig.render("Level Up!", 10, white)
             dismiss = font.render("Press space to dismiss this message", 10, white)
             levelutext = font.render("Level " + str(level) , 10, white)
-            if level >= 23:
+            if level >= 24:
                 unlocktext = font.render("No new items unlocked.", 10, white)
             if level <= 22:
                 unlocktext = font.render("? Unlocked!!", 10, white)
@@ -520,6 +520,9 @@ while not done:
             if level == 22:
                 unlocktext = font.render("Porsche Mission E Concept Unlocked!!", 10, white)
                 unlockimage = pygame.image.load("res/porsche mission e concept.png")
+            if level == 23:
+                unlocktext = font.render("The Egg Unlocked!!", 10, white)
+                unlockimage = pygame.image.load("res/The Egg_small.jpg")
             try:
                 screen.blit(unlockimage, (540, 360))
             except:

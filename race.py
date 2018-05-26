@@ -204,6 +204,19 @@ checkplus40x3 = checkx3 + 80
 checkminus40x3 = checkx3 - 80
 checkplus40y3 = checky3 + 80
 checkminus40y3 = checky3 - 80
+if trackkey == "track8":
+    checkplus40x = checkx + 120
+    checkminus40x = checkx - 120
+    checkplus40y = checky + 120
+    checkminus40y = checky - 120
+    checkplus40x2 = checkx2 + 120
+    checkminus40x2 = checkx2 - 120
+    checkplus40y2 = checky2 + 120
+    checkminus40y2 = checky2 - 120
+    checkplus40x3 = checkx3 + 200
+    checkminus40x3 = checkx3 - 200
+    checkplus40y3 = checky3 + 200
+    checkminus40y3 = checky3 - 200
 x = startliney
 y = startlinex
 y2 = startlinex - 10
@@ -1035,6 +1048,9 @@ while not done:
                     atstart2 = False
             if trackkey2 == "track7":
                     atstart = False
+            if trackkey == "track8":
+                if y <= passstart:
+                    atstart = False
         if not atstart:
             if not newlap:
                 if not checklap:
@@ -1065,16 +1081,25 @@ while not done:
                                         atstart = False
                                         checklap = True
                                         lapcheck = True
+                                if trackkey == "track8":
+                                    if x >= startliney - 20:
+                                        score += 2000
+                                        lapcount += 1
+                                        newlap = True
+                                        atstart = False
+                                        checklap = True
+                                        lapcheck = True
                                 if trackkey != "track4":
                                     if trackkey != "track3":
                                         if trackkey != "track6":
-                                            if x <= startliney:
-                                                score += 2000
-                                                lapcount += 1
-                                                newlap = True
-                                                atstart = False
-                                                checklap = True
-                                                lapcheck = True
+                                            if trackkey != "track8":
+                                                if x <= startliney:
+                                                    score += 2000
+                                                    lapcount += 1
+                                                    newlap = True
+                                                    atstart = False
+                                                    checklap = True
+                                                    lapcheck = True
         if not atstart:
             laptime += 1
             if y >= checkminus40y:
