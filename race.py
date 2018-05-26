@@ -227,6 +227,8 @@ if trackkey != "track4":
             if trackkey != "track7":
                 x2 = startliney - 61
                 y2 = startlinex
+if trackkey == "track8":
+    x2 = startliney + 55
 startneg80x = startlinex - 80
 if trackkey != "track4":
     if trackkey != "track3":
@@ -347,9 +349,9 @@ def racestart():
     global shiftl
     global shift2l
     global player2l
-    global place2l
-    global score2l
-    global nosll
+    global placel2
+    global scorel2
+    global nosl2
     global lapl2
     global curspeedl2
     global carimage4
@@ -534,6 +536,9 @@ while not done:
                 if trackkey2 == "track4":
                     if x2 >= passstart:
                         atstart2 = False
+                if trackkey2 == "track8":
+                    if y2 <= passstart:
+                        atstart2 = False
             if not atstart2:
                 if not newlap2:
                     if not checklap2:
@@ -564,16 +569,25 @@ while not done:
                                             atstart2 = False
                                             checklap2 = True
                                             lapcheck2 = True
+                                    if trackkey == "track8":
+                                        if x2 >= startliney - 20:
+                                            score2 += 2000
+                                            lapcount2 += 1
+                                            newlap2 = True
+                                            atstart2 = False
+                                            checklap2 = True
+                                            lapcheck2 = True
                                     if trackkey != "track4":
                                         if trackkey != "track3":
                                             if trackkey != "track6":
-                                                if x2 <= startliney:
-                                                    score2 += 2000
-                                                    lapcount2 += 1
-                                                    newlap2 = True
-                                                    atstart2 = False
-                                                    checklap2 = True
-                                                    lapcheck2 = True
+                                                if trackkey != "track8":
+                                                    if x2 <= startliney:
+                                                        score2 += 2000
+                                                        lapcount2 += 1
+                                                        newlap2 = True
+                                                        atstart2 = False
+                                                        checklap2 = True
+                                                        lapcheck2 = True
             if not atstart2:
                 laptime += 1
                 if y2 >= checkminus40y:
@@ -846,6 +860,8 @@ while not done:
                     if not nosinuse2:
                         if nosleft2 <= mostnos2:
                             nosleft2 += 0.1
+                            if trackkey == "track8":
+                                nosleft2 += 0.2
             else:
                 nosinuse2 = False
                 if topspeed2 >= cartopspeed2:
@@ -1379,6 +1395,8 @@ while not done:
                if not nosinuse:
                    if nosleft <= mostnos:
                        nosleft += 0.1
+                       if trackkey == "track8":
+                           nosleft += 0.2
         if pressed[pygame.K_DOWN]:
             curspeed = curspeed - braking
             if curspeed >= -1.6:
@@ -1728,6 +1746,10 @@ while not done:
                 placel2 = font.render(placelabel, 30, white)
                 curspeedl2 = font.render(currentlabel, 30, white)
                 scorel2 = font.render(scorelabel, 30 , white)
+            if trackkey == "track8":
+                placel2 = font.render(placelabel, 30, white)
+                curspeedl2 = font.render(currentlabel, 30, white)
+                scorel2 = font.render(scorelabel, 30 , white)
         donelabel = "Finsihed!  ANd more because this is cool!"
         donel = font.render(donelabel, 30, black)
         if trackkey == "track4":
@@ -2011,7 +2033,10 @@ while not done:
             screen.blit(scorel2, (205, 130))
             screen.blit(nosl2, (205, 40))
             screen.blit(lapl2, (205, 70))
-            screen.blit(curspeedl2, (205, 100))
+            if trackkey != "track8":
+                screen.blit(curspeedl2, (205, 100))
+            if trackkey == "track8":
+                screen.blit(curspeedl2, (215, 100))
             screen.blit(carimage4, (x2,y2))
         screen.blit(carimage2, (x,y))
         if finished:

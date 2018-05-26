@@ -1342,10 +1342,10 @@ while not done:
                     screen.blit(logo, (630, 0))
                     screen.blit(welcomel, (500, 40))
                     screen.blit(playerl, (150, 300))
+                    if players == 2:
+                        screen.blit(shifting2l, (201, 685))
                 pygame.draw.rect(screen, gray, pygame.Rect(0, 0, 180, 85))
                 screen.blit(labelstart, (1, 1))
-        if players == 2:
-            screen.blit(shifting2l, (201, 685))
         if intrackpick:
             pygame.draw.rect(screen, gray, pygame.Rect(300, 0, 150, 85))
             screen.blit(backl,(300,0))
