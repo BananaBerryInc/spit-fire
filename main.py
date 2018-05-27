@@ -257,7 +257,7 @@ def sendtomain():
     global parser
     global carimage
     global carimagepath
-    global carimagepath2
+    global carimage3path2
     global currentcar
     global currentcar2
     global tracktotal
@@ -282,7 +282,7 @@ def sendtomain():
     parser.set("options", "car2", currentcar2)
     parser.set("options", "trackpath", trackpath)
     parser.set("options", "carimage", carimagepath)
-    parser.set("options", "carimage2", carimagepath2)
+    parser.set("options", "carimage2", carimage3path2)
     parser.set("options", "speed", str(clockspeed))
     parser.set("options", "racefinsihed", "No")
     parser.set("options", "fulscr", str(fulscr))
@@ -306,6 +306,7 @@ def carpicker():
     global carimagepath
     global carimage
     global carimage2
+    global carimage3path2
     if currentcar == "Dodge Challenger":
                 if change == 0:
                     if level >= 5:
@@ -556,7 +557,7 @@ def carpicker2():
     global currentcar2
     global change
     global level
-    global carimagepath2
+    global carimage3path2
     global carimage3
     global carimage4
     if currentcar2 == "Dodge Challenger":

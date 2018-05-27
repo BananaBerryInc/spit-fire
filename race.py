@@ -347,7 +347,7 @@ def racestart():
     global curspeedl
     global playerl
     global shiftl
-    global shift2l
+    global shiftl2
     global player2l
     global placel2
     global scorel2

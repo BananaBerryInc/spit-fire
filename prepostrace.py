@@ -268,44 +268,10 @@ while not done:
             scorel2 = font.render(scorelabel2, 30, black)
         scorelabel = "Your Score: " + score
         scorel = fontbig.render(scorelabel, 30, black)
-        firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-        secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-        thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-        fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-        fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
-        sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
-        seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
-        eightplacelabel = "8th (" + name8 + ") : " + str(p8)
-        ninthplacelabel = "9th (" + name9 + ") : " + str(p9)
-        tenthplacelabel = "10th (" + name10 + ") : " + str(p10)
-        if place == "11":
-            hi = "hi"
-        if place == "1":
-            firstplacelabel = "1st ("+ playername + ") :  " + score
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p2)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p3)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p4)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "2":
-            secondplacelabel = "2nd ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p2)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p3)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p4)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "3":
-            thirdplacelabel = "3rd ("+ playername + ") :  " + score
+        if players != 2:
             firstplacelabel = "1st (" + name1 + ") : " + str(p1)
             secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
             fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
             fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
             sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
@@ -313,99 +279,144 @@ while not done:
             eightplacelabel = "8th (" + name8 + ") : " + str(p8)
             ninthplacelabel = "9th (" + name9 + ") : " + str(p9)
             tenthplacelabel = "10th (" + name10 + ") : " + str(p10)
-        if place == "4":
-            fourthplacelabel = "4th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p4)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "5":
-            fifthplacelabel = "5th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "6":
-            sixthplacelabel = "6th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "7":
-            seventhplacelabel = "7th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "8":
-            eightplacelabel = "8th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
-            ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "9":
-            ninthplacelabel = "9th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
-            ninthplacelabel = "8th (" + name8 + ") : " + str(p8)
-            tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
-        if place == "10":
-            tenthplacelabel = "10th ("+ playername + ") :  " + score
-            firstplacelabel = "1st (" + name1 + ") : " + str(p1)
-            thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
-            fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
-            fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
-            secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
-            sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
-            seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
-            eightplacelabel = "8th (" + name8 + ") : " + str(p8)
-            nineplacelabel = "9th (" + name9 + ") : " + str(p9)
+        if place == "11":
+            hi = "hi"
+        if players != 2:
+            if place == "1":
+                firstplacelabel = "1st ("+ playername + ") :  " + score
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p2)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p3)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p4)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "2":
+                secondplacelabel = "2nd ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p2)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p3)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p4)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "3":
+                thirdplacelabel = "3rd ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p8)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p9)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p10)
+            if place == "4":
+                fourthplacelabel = "4th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p4)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "5":
+                fifthplacelabel = "5th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p5)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "6":
+                sixthplacelabel = "6th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p6)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "7":
+                seventhplacelabel = "7th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "8":
+                eightplacelabel = "8th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
+                ninthplacelabel = "9th (" + name9 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "9":
+                ninthplacelabel = "9th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
+                ninthplacelabel = "8th (" + name8 + ") : " + str(p8)
+                tenthplacelabel = "10th (" + name10 + ") : " + str(p9)
+            if place == "10":
+                tenthplacelabel = "10th ("+ playername + ") :  " + score
+                firstplacelabel = "1st (" + name1 + ") : " + str(p1)
+                thirdplacelabel = "3rd (" + name3 + ") : " + str(p3)
+                fourthplacelabel = "4th (" + name4 + ") : " + str(p4)
+                fifthplacelabel = "5th (" + name5 + ") : " + str(p5)
+                secondplacelabel = "2nd (" + name2 + ") : " + str(p2)
+                sixthplacelabel = "6th (" + name6 + ") : " + str(p6)
+                seventhplacelabel = "7th (" + name7 + ") : " + str(p7)
+                eightplacelabel = "8th (" + name8 + ") : " + str(p8)
+                nineplacelabel = "9th (" + name9 + ") : " + str(p9)
+        if players == 2:
+            if int(score) >= score2:
+                firstplacelabel = "1st (" + playername + ") :" + score
+                secondplacelabel = "2nd (Player 2) :" + str(score2)
+            if score2 >= int(score):
+                secondplacelabel = "2nd (" + playername + ") :" + str(score2)
+                firstplacelabel = "1st (Player 2) :" + score
+            if int(score) == score2:
+                secondplacelabel = "1st (" + playername + ") :" + score
+                firstplacelabel = "1st (Player 2) :" + str(score2)                   
         firstplacel = font.render(firstplacelabel, 30, black)
         secondplacel = font.render(secondplacelabel, 30, black)
-        thirdplacel = font.render(thirdplacelabel, 30, black)
-        fourthplacel = font.render(fourthplacelabel, 30, black)
-        fifthplacel = font.render(fifthplacelabel, 30, black)
-        sixthplacel = font.render(sixthplacelabel, 30, black)
-        seventhplacel = font.render(seventhplacelabel, 30, black)
-        eightplacel = font.render(eightplacelabel, 30, black)
-        ninthplacel = font.render(ninthplacelabel, 30, black)
-        tenthplacel = font.render(tenthplacelabel, 30, black)
+        if players != 2:
+            thirdplacel = font.render(thirdplacelabel, 30, black)
+            fourthplacel = font.render(fourthplacelabel, 30, black)
+            fifthplacel = font.render(fifthplacelabel, 30, black)
+            sixthplacel = font.render(sixthplacelabel, 30, black)
+            seventhplacel = font.render(seventhplacelabel, 30, black)
+            eightplacel = font.render(eightplacelabel, 30, black)
+            ninthplacel = font.render(ninthplacelabel, 30, black)
+            tenthplacel = font.render(tenthplacelabel, 30, black)
         startl = fontsmall.render("Press enter to start a new race", 30, black)
         if players == 3:
             startl = fontsmall.render("Press enter to continue", 30, black)
         donel = fontsmall.render("Press escape to exit Spitfire", 30, black)
-        if players == 2:
-            highl = fontsmall.render("Please note: highscore table is for player 1 ONLY!", 30, black)
         pointsl = font.render(str(round(points, 1)) + " / " + str(round(levelpoints, 1)), 10, black)
         levell = font.render("Level " + str(round(level, 1)), 10, black)
         # Rendering and drawing
@@ -429,17 +440,17 @@ while not done:
         screen.blit(resultsl, (585, 10))
         screen.blit(firstplacel, (100, 80))
         screen.blit(secondplacel, (100, 130))
-        screen.blit(thirdplacel, (100, 180))
-        screen.blit(fourthplacel, (100, 230))
-        screen.blit(fifthplacel, (100, 280))
-        screen.blit(sixthplacel, (100, 330))
-        screen.blit(seventhplacel, (100, 380))
-        screen.blit(eightplacel, (100, 430))
-        screen.blit(ninthplacel, (100, 480))
-        screen.blit(tenthplacel, (100, 530))
+        if players != 2:
+            screen.blit(thirdplacel, (100, 180))
+            screen.blit(fourthplacel, (100, 230))
+            screen.blit(fifthplacel, (100, 280))
+            screen.blit(sixthplacel, (100, 330))
+            screen.blit(seventhplacel, (100, 380))
+            screen.blit(eightplacel, (100, 430))
+            screen.blit(ninthplacel, (100, 480))
+            screen.blit(tenthplacel, (100, 530))
         if players == 2:
             screen.blit(scorel2, (430, 660))
-            screen.blit(highl, (680, 460))
         screen.blit(scorel, (430, 600))
         screen.blit(donel, (700, 400))
         screen.blit(startl, (700, 430))
